@@ -1,0 +1,27 @@
+.home-container {
+    text-align: center;
+    margin-top: 80px;
+    font-family: "Arial", sans-serif;
+}
+
+.home-title {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: #2c3e50;
+}
+
+.home-buttons button {
+    margin: 10px;
+    padding: 12px 24px;
+    font-size: 1rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.home-buttons button:hover {
+    background-color: #2980b9;
+}
