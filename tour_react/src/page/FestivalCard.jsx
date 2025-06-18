@@ -1,5 +1,5 @@
 import React from 'react';
-import './Component/FestivalCard.css';
+import './css/FestivalCard.css';
 
 
 const FestivalCard = ({ festival }) => {

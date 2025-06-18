@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { imageData } from "./Component/ImageData";
+import { imageData } from "./css/ImageData";
 import ImageCard from "./ImageCard";
-import './Component/ImageGallery.css';
+import './css/ImageGallery.css';
 
 export default function ImageGallery() {
   const [selectedCategory, setSelectedCategory] = useState("전체");

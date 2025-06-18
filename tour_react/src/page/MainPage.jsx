@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import ImageSlider from './ImageSlider'; // 경로 맞게 조정
-import './Component/MainPage.css';
+import './css/MainPage.css';
 
 const MainPage = () => {
   const navigate = useNavigate();

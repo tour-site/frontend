@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Component/FestivalList.css';
+import './css/FestivalList.css';
 
 const FestivalList = ({ data, onTabClick, activeTab }) => {
   return (

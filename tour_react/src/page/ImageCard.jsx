@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import './Component/ImageGallery.css';
+import './css/ImageGallery.css';
 
 export default function ImageCard({ image }) {
   const navigate = useNavigate();
