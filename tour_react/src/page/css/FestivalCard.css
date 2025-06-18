@@ -1,0 +1,49 @@
+.festival-card {
+  display: block;
+  width: 280px;
+  height: 360px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  margin-right: 16px;
+  position: relative;
+  color: white;
+  text-decoration: none;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.festival-card:hover {
+  transform: scale(1.03);
+}
+
+.festival-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 16px;
+  background: none;
+  color: white; /* 폴백 색상 */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); /* ✅ 텍스트 가독성 향상 */
+}
+
+/* 상태 배지 */
+.festival-status {
+  display: inline-block;
+  background-color: #a48bff;
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 12px;
+  margin-bottom: 8px;
+  color: white;
+  font-weight: 600;
+}
+
+/* 제목/날짜/위치 - inherit로 두되 가독성을 위해 그림자만 추가 */
+.festival-title,
+.festival-date,
+.festival-location {
+  color: inherit;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
