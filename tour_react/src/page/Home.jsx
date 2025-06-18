@@ -11,6 +11,7 @@ const Home = () => {
         <button onClick={() => navigate("/member")}>회원 관리</button>
         <button onClick={() => navigate("/hello")}>Hello 테스트</button>
         <button onClick={() => navigate("/bye")}>Bye 테스트</button>
+        <button onClick={() => navigate("/map")}>지도화면</button>
       </div>
     </div>
   );
