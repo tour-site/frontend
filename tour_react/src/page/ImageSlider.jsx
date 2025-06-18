@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './css/ImageSlider.css';
+import '../assets/css/ImageSlider.css';
 
 const images = [
   {

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "./css/Home.css"; // Assuming you have a CSS file for styling
+import "../assets/css/Home.css"; // Assuming you have a CSS file for styling
 
 const Home = () => {
   const navigate = useNavigate();
@@ -11,6 +11,7 @@ const Home = () => {
         <button onClick={() => navigate("/member")}>회원 관리</button>
         <button onClick={() => navigate("/hello")}>Hello 테스트</button>
         <button onClick={() => navigate("/bye")}>Bye 테스트</button>
+        <button onClick={() => navigate("/mainpage")}>메인</button>
       </div>
     </div>
   );
