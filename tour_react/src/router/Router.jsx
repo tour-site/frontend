@@ -1,21 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Hello from "../page/Hello";
-import Bye from "../page/Bye";
 import Home from "../page/Home";
 import Member from "../page/Member";
-import Main from "../page/MainPage";
+import Hello from "../page/Hello";
+import Bye from "../page/Bye";
+import MainPage from "../page/MainPage"; // ✅ 반드시 import
 
 const AppRouter = () => {
   return (
-    <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/member" element={<Member />} />
-        <Route path="/hello" element={<Hello />} />
-        <Route path="/bye" element={<Bye />} />
-        <Route path="/mainpage" element={<Main />} />
+        <Route path="/" element={<MainPage />} />
+        <Route path="member" element={<Member />} />
+        <Route path="hello" element={<Hello />} />
+        <Route path="bye" element={<Bye />} />
       </Routes>
-    </BrowserRouter>
   );
 };
 
