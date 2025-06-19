@@ -1,6 +1,6 @@
 // FestivalFilter.jsx
 import React from 'react';
-import './css/Filter.css';
+import '../assets/css/Filter.css';
 
 const FestivalFilter = ({ filters, setFilters, onSearch, onReset }) => {
   const handleChange = (e) => {

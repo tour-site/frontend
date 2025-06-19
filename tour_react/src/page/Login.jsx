@@ -1,5 +1,5 @@
 import React from 'react';
-import './css/Login.css'; // CSS 분리 추천
+import '../assets/css/Login.css'; // CSS 분리 추천
 
 const Login = () => {
   return (

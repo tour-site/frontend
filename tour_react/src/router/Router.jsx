@@ -1,19 +1,24 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "../page/Home";
-import Member from "../page/Member";
-import Hello from "../page/Hello";
-import Bye from "../page/Bye";
-import MainPage from "../page/MainPage"; // ✅ 반드시 import
+// 📁 src/router/Router.jsx
+import { Routes, Route } from 'react-router-dom';
+import Layout from '../components/Layout';
+import MainPage from '../page/MainPage';
+import Login from '../page/Login';
+import Signup from '../page/Signup';
+import DetailPage from '../page/DetailPage';
+import Map from '../page/Map';
+import FestivalPage from '../page/FestivalPage';
 
-const AppRouter = () => {
+export default function AppRouter() {
   return (
-      <Routes>
+    <Routes>
+      <Route element={<Layout />}>
         <Route path="/" element={<MainPage />} />
-        <Route path="member" element={<Member />} />
-        <Route path="hello" element={<Hello />} />
-        <Route path="bye" element={<Bye />} />
-      </Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/festival" element={<FestivalPage />} />
+        <Route path="/map" element={<Map />} />
+      </Route>
+    </Routes>
   );
-};
-
-export default AppRouter;
+}

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { imageData } from "./Component/ImageData";
-import './css/ImageGallery.css';
+import { imageData } from "../assets/js/imageData.js";
+import '../assets/css/ImageGallery.css';
 
 export default function DetailPage() {
   const { id } = useParams();
