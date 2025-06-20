@@ -3,6 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import ImageSlider from './ImageSlider'; // 경로 맞게 조정
 import '../assets/css/MainPage.css';
 
+const festivals = [
+  {
+    id: 1,
+    name: "진주 유등축제",
+    location: "경상남도 진주시",
+    imageUrl: "https://www.jeonmae.co.kr/news/photo/202210/917936_608653_5327.jpg",
+  },
+  {
+    id: 2,
+    name: "강릉 단오제",
+    location: "강원도 강릉시",
+    imageUrl: "https://flexible.img.hani.co.kr/flexible/normal/970/647/imgdb/original/2024/0604/20240604502490.jpg",
+  },
+  {
+    id: 3,
+    name: "부산 불꽃축제",
+    location: "부산광역시",
+    imageUrl: "https://i.namu.wiki/i/GWkA8XibIU1diA9DhHh3boGKvqxIVeLxDX-JEYD-TDExaLq1EnWL3ZPpMQL9PmuV8c-4OCQ2RKoLNwE3nlWizQ.webp",
+  },
+];
+
 const MainPage = () => {
   const navigate = useNavigate();
 
