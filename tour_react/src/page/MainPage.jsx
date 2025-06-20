@@ -53,7 +53,7 @@ const MainPage = () => {
           <li className="card">전주 한옥마을 코스</li>
           <li className="card">부산 바다길 코스</li>
         </ul>
-        <div class="button-container">
+        <div className="button-container">
           <button onClick={() => navigate('/recommend')} className="more-btn">더보기</button>
         </div>
       </section>

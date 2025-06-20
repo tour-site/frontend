@@ -11,6 +11,14 @@ const Header = () => {
   const [pw, setPw] = useState('');
   const [error, setError] = useState('');
 
+  const [signupForm, setSignupForm] = useState({
+          username: "",
+          password: "",
+          confirm: "",
+          email: ""
+  });
+
+
   const handleLogin = () => {
     if (!id || !pw) {
       setError('아이디와 비밀번호 모두 입력해주세요');
@@ -86,29 +94,49 @@ const Header = () => {
                 <>
                   <h2>회원가입</h2>
                   <input
-                    type="text"
-                    className="input-field"
-                    placeholder="아이디"
-                    required
-                  />
-                  <input
-                    type="password"
-                    className="input-field"
-                    placeholder="비밀번호"
-                    required
-                  />
-                  <input
-                    type="password"
-                    className="input-field"
-                    placeholder="비밀번호 확인"
-                    required
-                  />
-                  <input
-                    type="email"
-                    className="input-field"
-                    placeholder="이메일"
-                    required
-                  />
+                      type="text"
+                      className="input-field"
+                      placeholder="아이디"
+                      required
+                      value={signupForm.username}
+                      onChange={(e) =>
+                        setSignupForm(prev => ({ ...prev, username: e.target.value }))
+                      }
+                    />
+
+                    <input
+                      type="password"
+                      className="input-field"
+                      placeholder="비밀번호"
+                      required
+                      value={signupForm.password}
+                      onChange={(e) =>
+                        setSignupForm(prev => ({ ...prev, password: e.target.value }))
+                      }
+                    />
+
+                    <input
+                      type="password"
+                      className="input-field"
+                      placeholder="비밀번호 확인"
+                      required
+                      value={signupForm.confirm}
+                      onChange={(e) =>
+                        setSignupForm(prev => ({ ...prev, confirm: e.target.value }))
+                      }
+                    />
+
+                    <input
+                      type="email"
+                      className="input-field"
+                      placeholder="이메일"
+                      required
+                      value={signupForm.email}
+                      onChange={(e) =>
+                        setSignupForm(prev => ({ ...prev, email: e.target.value }))
+                      }
+                    />
+
                   <div className="button-group">
                     <button>가입하기</button>
                     <button onClick={() => setModalMode(null)}>닫기</button>

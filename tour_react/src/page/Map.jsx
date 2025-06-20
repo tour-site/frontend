@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/Place.css';
+import '../assets/css/Modal.css';
+import places from '../assets/js/places.js';
 
 const Map = () => {
   return (
