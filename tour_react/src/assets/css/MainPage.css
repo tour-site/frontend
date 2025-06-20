@@ -36,19 +36,62 @@
 
 .card-list {
   display: flex;
-  gap: 16px;
-  list-style: none;
-  padding: 0;
-  margin: 0 0 12px;
+  flex-wrap: nowrap; /* 한 줄로 가로 정렬 */
+  gap: 20px;
+  overflow-x: auto;
+  justify-content: flex-start;
+  padding-bottom: 10px;
+  scrollbar-width: none; /* Firefox */
+}
+
+.card-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }
 
 .card {
-  background-color: #f2f2f2;
-  padding: 12px 16px;
-  border-radius: 6px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   flex: 1;
-  text-align: center;
+  min-width: 200px;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.card.active {
+  flex: 2; /* 클릭 시 가로로 확장 */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.card-image {
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  border-radius: 10px;
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+.card-info p {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+.heart {
+  font-size: 1.5rem;
+  align-self: flex-end;
 }
 
 .more-btn {
