@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import { imageData } from "./Component/ImageData";
-import './Component/ImageGallery.css';
+import { imageData } from "../assets/js/imageData.js";
+import '../assets/css/ImageGallery.css';
 
-export default function DetailPage() {
+
+export default function ImagePOP() {
   const { id } = useParams();
   const image = imageData.find(img => img.id === Number(id));
 
