@@ -1,80 +1,54 @@
-.place-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.gallery-container {
+  max-width: 900px;
   margin: 0 auto;
-  width: 70%;
-  font-family: sans-serif;
+  padding: 20px;
 }
 
-.title {
-  font-size: 42px;
-  margin-top: 30px;
+.gallery-title {
   text-align: center;
-  /* border: 1px solid red; */
-  width: 100%;
-  height: 80px;
-  line-height: 80px;
+  margin-bottom: 20px;
+  font-size: 24px;
 }
 
-.category-box {
-  margin: 10px 0;
-  width: 700px;
-  height: 50px;
-  border: 2px solid #999;
-  padding: 10px 20px;
-  background-color: #f3f3f3; /* 밝은 회색 */
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4칸 그리드 */
+  gap: 15px;
 }
 
-.middle-box {
+.menu-box {
   display: flex;
-  justify-content: center;
-  gap: 20px;
-  width: 80%;
-  margin: 20px 0;
-}
-
-.map-card {
-  border: 2px solid #4caf50;
-  width: 500px;
-  height: 500px;
-  /* display: flex; */
   justify-content: center;
   align-items: center;
-  background-color: #e8f5e9; /* 연한 초록 계열 */
-}
-
-.tour-card {
-  border: 2px solid #2196f3;
-  width: 360px;
-  height: 440px;
-  padding: 30px;
-  background-color: #e3f2fd;
-}
-
-.tour-grid {
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.tour-list {
-  border: 1px solid #bbb;
-  background-color: #fff;
-  width: 48%; /* 가로 두 개씩 */
-  padding: 10px;
+  background-color: #f2f2f2;
+  padding: 16px 24px;
+  font-weight: bold;
+  border-radius: 8px;
+  margin: 0 auto 20px auto;
+  width: 100%;
+  max-width: 1000px; /* ✅ gallery-container와 잘 맞게 */
+  border: 1px solid black;
   box-sizing: border-box;
 }
 
 
-.data-box {
-  border: 2px solid #f44336;
-  width: 950px;
-  height: 200px;
-  margin: 20px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #ffebee; /* 연한 빨강 계열 */
+.menu-title {
+  margin: 0 auto; /* 선택적으로 추가 */
+  font-size: 18px;
+  text-align: center;
+}
+
+.image-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+  background-color: #fafafa;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.image-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
 }

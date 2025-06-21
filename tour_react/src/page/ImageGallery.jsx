@@ -1,35 +1,25 @@
 import { useState } from "react";
-import { imageData } from "./css/ImageData";
-import ImageCard from "./ImageCard";
-import './css/ImageGallery.css';
+import '../assets/css/ImageGallery.css';
 
-export default function ImageGallery() {
-  const [selectedCategory, setSelectedCategory] = useState("전체");
-  const categories = ["전체", ...new Set(imageData.map(img => img.category))];
-
-  const filteredImages = selectedCategory === "전체"
-    ? imageData
-    : imageData.filter(img => img.category === selectedCategory);
+const ImageGallery = () => {
+  const images = [1, 2, 3, 4, 5, 6, 7, 8]; // 예시 이미지 8개
 
   return (
-    <div className="image-gallery-wrapper" style={{ padding: "24px" }}>
-      <div className="category-buttons">
-        {categories.map(category => (
-          <button
-            key={category}
-            onClick={() => setSelectedCategory(category)}
-            className={`category-button ${selectedCategory === category ? "active" : ""}`}
-          >
-            {category}
-          </button>
-        ))}
+    <div className="gallery-container">
+      <h2 className="gallery-title">이미지로 보기</h2>
+      <div className="menu-box">
+        <label className="menu-title" htmlFor="menu-select">카테고리</label>
       </div>
-
-      <div className="image-gallery">
-        {filteredImages.map(image => (
-          <ImageCard key={image.id} image={image} />
+      <div className="image-grid">
+        {images.map((img, index) => (
+          <div key={index} className="image-card">
+            <img src={`image${img}.jpg`} alt={`Image ${img}`} />
+            <p>이미지 {img}</p>
+          </div>
         ))}
       </div>
     </div>
   );
-}
+};
+
+export default ImageGallery;
