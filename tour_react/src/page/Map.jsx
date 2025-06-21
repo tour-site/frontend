@@ -4,7 +4,9 @@ import '../assets/css/Place.css';
 import '../assets/css/Modal.css';
 import places from '../assets/js/places.js';
 
+
 const Map = () => {
+  const navigate = useNavigate();
   return (
     <div className="place-list">
       <h2 className="title">지도로 보기</h2>
@@ -21,10 +23,17 @@ const Map = () => {
         <p>관광지 리스트</p>
         <div className="tour-grid">
           {places.slice(0, 2).map((place, index) => (
-            <div key={place.id || index} className="tour-list">
+            <div key={place.id || index} className="tour-list"
+            onClick={() => navigate(`/detail/${place.id}`)}
+            style={{ cursor: 'pointer' }}
+            >
               <h4>{place.name}</h4>
               <p>{place.location}</p>
-              <img src={place.image} alt={place.name} width="100%" />
+              <img 
+                src={place.image}
+                alt={place.name} 
+                width="100%"
+             />
             </div>
           ))}
         </div>

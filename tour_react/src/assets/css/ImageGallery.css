@@ -1,54 +1,161 @@
+/* ImageGallery.css */
+
 .gallery-container {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #333;
+  background-color: white;
 }
 
 .gallery-title {
+  font-size: 2.4rem;
+  font-weight: 700;
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
+  margin-bottom: 30px;
+  color: #222;
+  user-select: none;
 }
 
-.image-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4칸 그리드 */
-  gap: 15px;
+.category-slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px;
+  position: relative;
+  gap: 10px; /* 버튼 간 간격 균일하게 */
 }
 
 .menu-box {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f2f2f2;
-  padding: 16px 24px;
-  font-weight: bold;
-  border-radius: 8px;
-  margin: 0 auto 20px auto;
-  width: 100%;
-  max-width: 1000px; /* ✅ gallery-container와 잘 맞게 */
-  border: 1px solid black;
-  box-sizing: border-box;
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE, Edge */
+  max-width: 90%;
+  gap: 10px;
 }
 
+.menu-box::-webkit-scrollbar {
+  display: none;
+}
 
-.menu-title {
-  margin: 0 auto; /* 선택적으로 추가 */
-  font-size: 18px;
-  text-align: center;
+.menu-btn {
+  flex: 0 0 auto;
+  padding: 10px 18px;
+  border: 1.5px solid #bbb;
+  border-radius: 25px;
+  background: white;
+  color: #555;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.menu-btn:hover {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.menu-btn.active {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+  font-weight: 700;
+}
+
+.arrow-btn {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-size: 24px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  display: flex;           /* 추가 */
+  align-items: center;     /* 추가 */
+  justify-content: center; /* 추가 */
+  margin: 0;
+}              
+
+.arrow-btn:hover {
+  background-color: #0056b3;
+}
+
+.arrow-btn.left {
+  margin-right: 10px; /* 오른쪽 마진만 줘서 균일 */
+}
+
+.arrow-btn.right {
+  margin-left: 10px; /* 왼쪽 마진만 줘서 균일 */
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4개 고정 */
+  gap: 18px;
+  margin-top: 20px;
 }
 
 .image-card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: center;
-  background-color: #fafafa;
-  border-radius: 6px;
-  box-sizing: border-box;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid black;
+  background: white;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.image-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 15px rgb(0 0 0 / 0.2);
 }
 
 .image-card img {
   width: 100%;
-  height: auto;
-  border-radius: 4px;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-card p {
+  padding: 10px 12px;
+  font-size: 16px;
+  text-align: center;
+  color: #444;
+  user-select: none;
+}
+
+.load-more-btn {
+  padding: 10px 28px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.load-more-btn:hover {
+  background-color: #0056b3;
+}
+
+/* 반응형 */
+
+@media (max-width: 900px) {
+  .image-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .image-grid {
+    grid-template-columns: 1fr;
+  }
 }

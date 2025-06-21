@@ -9,14 +9,21 @@ const Detailpage = () => {
   const { id } = useParams();
   const place = places.find(p => p.id === parseInt(id));
   const [activeTab, setActiveTab] = useState("photo");
-  const [likes, setLikes] = useState(0);
+  const [likes,setLikes] = useState(0);
+  const [liked, setLiked] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
   const [shares, setShares] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
 
 
   if (!place) return <div>해당 여행지를 찾을 수 없습니다.</div>;
 
-  const handleLike = () => setLikes(prev => prev + 1);
+ const handleLike = () => {
+  setLikes(prev => prev + 1);
+  setShowFeedback(true);
+  setTimeout(() => setShowFeedback(false), 2000);
+};
+
   const handleBookmark = () => alert("즐겨찾기에 추가되었습니다.");
   const handlePrint = () => window.print();
   const handleAddToCourse = () => alert("코스에 담았습니다.");
@@ -132,6 +139,9 @@ const Detailpage = () => {
             <span className="ico">좋아요</span>
             <span className="num" id="conLike">{likes}</span>
             </button>
+            {showFeedback && (
+              <div className="like-feedback">좋아요가 반영됐어요 💗</div>
+            )}
             <span className="rline">
             <button type="button" className="btn_bookmark" onClick={handleBookmark}>
                 <span className="ico">즐겨찾기</span>
