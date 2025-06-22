@@ -77,12 +77,12 @@
 
 
 .data-box {
-  border: 2px solid #f44336;
+  /* border: 2px solid #f44336; */
   width: 950px;
-  height: 200px;
+  height: 100vh;
   margin: 20px 0;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
-  background-color: #ffebee; /* 연한 빨강 계열 */
+  /* background-color: #ffebee; */
 }
