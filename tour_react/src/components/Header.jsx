@@ -51,8 +51,8 @@ const Header = () => {
         <ul className="nav-list">
           <li onClick={() => navigate('/map')}>지도로 보기</li>
           <li onClick={() => navigate('/image-gallery')}>이미지로 보기</li>
-          <li onClick={() => navigate('/festival')}>축제</li>
-          <li onClick={() => navigate('/recommend')}>최적 코스 추천</li>
+          <li onClick={() => navigate('/board')}>게시판</li>
+          {/* <li onClick={() => navigate('/recommend')}>최적 코스 추천</li> */}
         </ul>
       </nav>
 
