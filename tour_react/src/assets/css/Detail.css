@@ -1,0 +1,271 @@
+/* htaml 전반 스크롤  */
+html{
+  scroll-behavior: smooth;
+}
+/* 전체 콘텐츠 박스 */
+#content {
+  max-width: 940px;
+  margin: 0 auto;
+  padding: 30px 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #222;
+  background-color: white;
+  align-content: center;
+}
+
+/* 상단 제목 */
+#topTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* 주소 */
+.area_address {
+  font-size: 1rem;
+  color: #070606;
+  text-align: center;
+}
+
+/* 부제목 */
+.subtitle_marker {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.subtitle_marker span {
+  display: inline;
+  background: linear-gradient(to top, #cdcde5 40%, transparent 40%);
+  color: #2a1e3f;
+  font-size: 1.3rem;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+
+
+/* 카테고리 & 부제목 */
+#topCp {
+  margin: 20px 0;
+}
+
+.titTypeWrap h3 em {
+  display: block;
+  font-size: 0.7rem;
+  color: #0a0303;
+}
+
+.post_area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rline {
+  display: flex;
+  gap: 10px; /* 버튼 간 여유 */
+}
+
+/* 왼쪽 그룹 */
+.post_area .left-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 오른쪽 그룹 */
+.post_area .right-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* 좋아요 버튼 */
+.like-feedback {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: #d63384;
+  animation: fadeInOut 2s ease;
+  /* text-align: center; */
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-5px); }
+  10% { opacity: 1; transform: translateY(0); }
+  90% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-5px); }
+}
+
+
+/* 탭 메뉴 */
+.detail_tab {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  padding: 10px 0;
+  border-bottom: 2px solid #ddd;
+  gap: 20px;
+}
+
+
+.detail_tab ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 30px ;
+  /* border-bottom: 2px solid #ddd; */
+  gap: 30px;
+}
+
+.detail_tab li {
+  position: relative;
+  padding: 0 10px;
+  font-size: 1rem;
+}
+
+.detail_tab li:not(:last-child)::after {
+  content: '|';
+  position: absolute;
+  right: -12px;
+  color: #aaa; /* 파이프 색상 */
+  font-weight: 300;
+}
+
+.detail_tab li a {
+  text-decoration: none;
+  color: #0c0b0b;
+  font-weight: 500;
+  font-size: 1rem;
+  padding: 5px 10px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+/* .detail_tab li.select_tab a, */
+.detail_tab li a:hover {
+  border-bottom: 2px solid #333;
+  color: #000;
+}
+
+
+/* 이미지 슬라이드 */
+.swiper-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.swiper-slide img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+/* 상세 설명 */
+.blind {
+  font-size: 1rem;
+  margin: 20px 0;
+  /* margin-top: 12px; */
+  color: #333;
+  line-height: 1.6;
+  
+}
+
+.description_box {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+  /* margin-top: 3px; */
+  transition: all 0.3s ease;
+}
+
+.btn_more {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 6px 14px;
+  font-size: 0.7rem;
+  color: #333;
+  background: #f4f4f4; /* 밝은 파스텔 느낌 */
+  border: none; /* 테두리 제거 */
+  border-radius: 999px; /* 완전한 알약 형태 */
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  /* transition: background-color 0.3s ease; */
+}
+
+.btn_more:hover {
+  background-color: #e2e2e2;
+}
+
+
+
+/* 정보 영역 */
+.wrap_conView h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+}
+
+.btn_modify {
+  background: none;
+  background-color: white;
+  border: 1px solid #888;
+  padding: 5px 10px ;
+  border-radius: 5px;
+  cursor: pointer;
+  color: black;
+  float: right;
+
+}
+
+.btn_modify:hover {
+  border: 1px solid #2c1fd4;
+}
+
+/* 상세 정보 리스트 */
+.wrap_contview ul {
+  list-style: none;
+  padding: 0;
+  border-top: 2px solid #ddd;
+}
+
+.wrap_contview li {
+  margin: 12px 0;
+}
+
+.wrap_contview strong {
+  display: inline-block;
+  width: 120px;
+  color: #0a0101;
+}
+
+.wrap_contview span {
+  color: #140404;
+}
+
+/* 안내도 섹션 */
+.pamphletWide h3 {
+  margin-top: 40px;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.pamphletWide img {
+  width: 100%;
+  max-width: 600px;
+  border-radius: 10px;
+}

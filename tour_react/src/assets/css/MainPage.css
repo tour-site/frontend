@@ -1,0 +1,109 @@
+.main-page {
+  padding: 24px;
+}
+
+.image-slider {
+  margin-bottom: 40px;
+}
+
+.image-slider h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.slider {
+  display: flex;
+  overflow-x: auto;
+  gap: 16px;
+}
+
+.slider img {
+  width: 300px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.preview-section {
+  margin-bottom: 40px;
+}
+
+.preview-section h2 {
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.card-list {
+  display: flex;
+  flex-wrap: nowrap; /* 한 줄로 가로 정렬 */
+  gap: 20px;
+  overflow-x: auto;
+  justify-content: flex-start;
+  padding-bottom: 10px;
+  scrollbar-width: none; /* Firefox */
+}
+
+.card-list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.card {
+  flex: 1;
+  min-width: 200px;
+  height: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+
+.card.active {
+  flex: 2; /* 클릭 시 가로로 확장 */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  z-index: 5;
+}
+
+.card-image {
+  background-size: cover;
+  background-position: center;
+  height: 200px;
+  border-radius: 10px;
+  position: relative;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-info h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+.card-info p {
+  margin: 0;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+.heart {
+  font-size: 1.5rem;
+  align-self: flex-end;
+}
+
+.more-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.more-btn:hover {
+  background-color: #0056b3;
+}

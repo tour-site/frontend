@@ -1,0 +1,132 @@
+/* 전체 리스트 섹션 */
+.other_list.type2 {
+  padding: 40px 20px;
+  background-color: #f4f6f8;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 내부 정렬 */
+.other_list .inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 탭 버튼 영역 */
+.festival_ul_top .tab_area {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  margin-bottom: 20px;
+  padding: 0;
+}
+
+.festival_ul_top .tab_area li button {
+  padding: 10px 18px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.festival_ul_top .tab_area li button[title="선택됨"],
+.festival_ul_top .tab_area li button:hover {
+  background-color: #0059ff;
+  color: white;
+  border-color: #0059ff;
+}
+
+/* 결과 없음 영역 */
+.no_list {
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+}
+
+.no_list .no_img {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  background: url('https://cdn-icons-png.flaticon.com/512/2748/2748558.png') no-repeat center/contain;
+}
+
+/* 리스트 UL */
+.other_festival_ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* 리스트 아이템 */
+.other_festival_ul li {
+  background-color: white;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.other_festival_ul li:hover {
+  transform: translateY(-5px);
+}
+
+/* 축제 링크 */
+.other_festival_ul li a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 이미지 */
+.other_festival_ul img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-bottom: 1px solid #ddd;
+}
+
+/* 개최중 배지 */
+.open {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: crimson;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+/* 콘텐츠 영역 */
+.other_festival_content {
+  padding: 14px 16px;
+}
+
+.other_festival_content strong {
+  font-size: 16px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.other_festival_content .date,
+.other_festival_content .loc {
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.other_festival_ul li {
+  position: relative; /* 배지 위치 기준 */
+  background-color: white;
+  border: 1px solid #eaeaea;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}

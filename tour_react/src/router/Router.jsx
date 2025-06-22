@@ -1,22 +1,25 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Hello from "../page/Hello";
-import Bye from "../page/Bye";
-import Home from "../page/Home";
-import Member from "../page/Member";
-import Map from "../page/map";
+// 📁 src/router/Router.jsx
+import { Routes, Route } from 'react-router-dom';
+import Layout from '../components/Layout';
+import MainPage from '../page/MainPage';
+import DetailPage from '../page/DetailPage';
+import Map from '../page/Map';
+import FestivalPage from '../page/FestivalPage';
+import ImageGallery from '../page/ImageGallery';
+// import ImagePOP from '../page/ImagePOP';
 
-const AppRouter = () => {
+export default function AppRouter() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/member" element={<Member />} />
-        <Route path="/hello" element={<Hello />} />
-        <Route path="/bye" element={<Bye />} />
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/festival" element={<FestivalPage />} />
         <Route path="/map" element={<Map />} />
-      </Routes>
-    </BrowserRouter>
+        <Route path="/image-gallery" element={<ImageGallery />} />
+        {/* <Route path="/imagePOP/:id" element={<ImagePOP />} />  */}
+        {/* ImagePOP 초반에 이미지 보기 용도로 만들어진거라 추후에 필요하면 쓰기 아님 삭제해도 무방 */}
+      </Route>
+    </Routes>
   );
-};
-
-export default AppRouter;
+}
