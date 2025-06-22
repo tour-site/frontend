@@ -1,0 +1,88 @@
+.place-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 70%;
+  font-family: sans-serif;
+  background-color: white;
+  color: black;
+}
+
+.title {
+  font-size: 42px;
+  margin-top: 30px;
+  text-align: center;
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+}
+
+.category-box {
+  margin: 10px 0;
+  width: 700px;
+  height: 50px;
+  border: 2px solid #999;
+  padding: 10px 20px;
+  background-color: #f3f3f3; /* 밝은 회색 */
+  color:black
+}
+
+.middle-box {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 80%;
+  margin: 20px 0;
+}
+
+.map-card {
+  border: 2px solid #4caf50;
+  width: 500px;
+  height: 500px;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  background-color: #e8f5e9; /* 연한 초록 계열 */
+}
+
+.tour-card {
+  border: 2px solid #2196f3;
+  width: 360px;
+  height: 440px;
+  padding: 30px;
+  background-color: #e3f2fd;
+}
+
+.tour-grid {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.tour-list {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  width: 48%; /* 가로 두 개씩 */
+  padding: 10px;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease;
+}
+
+.tour-list:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.data-box {
+  border: 2px solid #f44336;
+  width: 950px;
+  height: 200px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffebee; /* 연한 빨강 계열 */
+}
