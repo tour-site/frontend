@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "myfont_bold";
+  src: url("../font/MaruBuri-semiBold.ttf");
+}
 .navbar {
   display: flex;
   align-items: center;
@@ -5,6 +9,7 @@
   padding: 12px 24px;
   background-color: #4d5fac;
   border-bottom: 1px solid #ddd;
+  font-family: "myfont_bold";
 }
 
 .logo {

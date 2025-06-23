@@ -1,8 +1,12 @@
+@font-face {
+  font-family: "myfont_bold";
+  src: url("../font/MaruBuri-semiBold.ttf");
+}
 .map-body {
     position: relative;
     width: 100%;
     min-height: 800px;
-    font-family: "Arial", sans-serif;
+    font-family: "myfont_bold";
 }
 .map-title {
     width: 100%;
