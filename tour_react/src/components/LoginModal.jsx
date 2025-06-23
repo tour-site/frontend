@@ -2,11 +2,13 @@
 import React, { useState } from 'react';
 import axiosInstance from '../api/axiosInstance';
 import './css/Modal.css';
+import { useNavigate } from 'react-router-dom';
 
 const LoginModal = ({ closeModal, switchToSignup }) => {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // ⬅️ 추가
 
   const handleLogin = async () => {
     if (!id || !pw) {
@@ -30,10 +32,37 @@ const LoginModal = ({ closeModal, switchToSignup }) => {
     }
   };
 
+  const handleFindId = () => {
+    closeModal();
+    navigate('/find-id');
+  };
+
+  const handleFindPassword = () => {
+    closeModal();
+    navigate('/find-password');
+  };
+
   return (
     <div className="modal-overlay" onClick={closeModal}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>로그인</h2>
+
+        {/* ✅ 아이디/비번 찾기 링크 */}
+        <div style={{ marginBottom: '10px', fontSize: '0.9rem', textAlign: 'right' }}>
+          <span
+            style={{ color: '#007bff', cursor: 'pointer', marginRight: '10px' }}
+            onClick={handleFindId}
+          >
+            아이디 찾기
+          </span>
+          <span
+            style={{ color: '#007bff', cursor: 'pointer' }}
+            onClick={handleFindPassword}
+          >
+            비밀번호 찾기
+          </span>
+        </div>
+
         <input
           type="text"
           className="input-field"

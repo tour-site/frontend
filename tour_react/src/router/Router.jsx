@@ -8,6 +8,8 @@ import FestivalPage from '../page/FestivalPage';
 import ImageGallery from '../page/ImageGallery';
 import KakaoRedirect from '../page/KakaoRedirect';
 import Mypage from '../page/Mypage';
+import FindIdPage from '../page/FindIdPage';
+import FindPasswordPage from '../page/FindPasswordPage';
 // import ImagePOP from '../page/ImagePOP';
 
 
@@ -22,6 +24,8 @@ export default function AppRouter() {
         <Route path="/image-gallery" element={<ImageGallery />} />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/find-id" element={<FindIdPage />} />
+        <Route path="/find-password" element={<FindPasswordPage />} />
 
         {/* <Route path="/imagePOP/:id" element={<ImagePOP />} />  */}
         {/* ImagePOP 초반에 이미지 보기 용도로 만들어진거라 추후에 필요하면 쓰기 아님 삭제해도 무방 */}
