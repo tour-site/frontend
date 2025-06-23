@@ -34,16 +34,18 @@
 .middle-box {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 20px;
   width: 80%;
+  height: 60vh;
   margin: 20px 0;
   /* border: 1px solid green; */
 }
 
 .map-card {
   border: 1px solid #4caf50;
-  width: 500px;
-  height: 500px;
+  width: 550px;
+  height: 550px;
   /* display: flex; */
   justify-content: center;
   align-items: center;
@@ -51,14 +53,15 @@
 
 .tour-card {
   border: 1px solid #2196f3;
-  width: 400px;
-  height: 480px;
+  width: 500px;
+  height: 550px;
+  box-sizing: border-box;
   padding: 10px 20px;
 }
 
 .tour-grid {
   display: flex;
-  gap: 10px;
+  /* gap: 10px; */
   justify-content: space-between;
   flex-wrap: wrap;
   border: 1px solid blue;
@@ -68,7 +71,8 @@
   border: 1px solid #bbb;
   background-color: #fff;
   width: 48%;
-  padding: 10px;
+  /* padding: 10px; */
+  overflow: hidden;
   box-sizing: border-box;
   transition: box-shadow 0.3s ease;
   border-radius: 30px;
@@ -86,7 +90,7 @@
   /* border: 1px solid #f44336; */
   /* display: flex; */
   width: 80%;
-  height: 150vh;
+  height: 140vh;
   margin: 20px 0;
   align-items: center;
   justify-content: center;
