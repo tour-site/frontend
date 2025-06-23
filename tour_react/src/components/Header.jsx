@@ -1,49 +1,42 @@
-// 📁 src/components/Header.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/Header.css';
-import '../assets/css/Modal.css';
+import axiosInstance from '../api/axiosInstance.js';
+import './css/Header.css';
+import './css/Modal.css';
+import LoginModal from './LoginModal.jsx';
+import SignupModal from './SignupModal.jsx';
 
 const Header = () => {
   const navigate = useNavigate();
+  const [modalMode, setModalMode] = useState(null); // 'login', 'signup', null
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [logoutTrigger, setLogoutTrigger] = useState(false); // ✅ 로그아웃 후 재검증 유도
 
-  const [modalMode, setModalMode] = useState(null); // 'login', 'signup', 또는 null
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
-  const [error, setError] = useState('');
+  // ✅ 로그인 상태 확인
+  useEffect(() => {
+    axiosInstance.get('/api/member/mypage')
+      .then(() => setIsLoggedIn(true))
+      .catch(() => setIsLoggedIn(false));
+  }, [modalMode, logoutTrigger]); // 모달 변경 또는 로그아웃 후 트리거로 상태 재확인
 
-  const [signupForm, setSignupForm] = useState({
-    username: '',
-    password: '',
-    confirm: '',
-    email: '',
-  });
+  const closeModal = () => setModalMode(null);
 
-  const handleLogin = () => {
-    if (!id || !pw) {
-      setError('아이디와 비밀번호 모두 입력해주세요');
-      return;
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.post('/api/member/logout');
+      setIsLoggedIn(false); // 즉시 UI 반영
+      setLogoutTrigger(prev => !prev); // 상태 트리거
+      alert('로그아웃 되었습니다.');
+      navigate('/'); // ✅ 로그아웃 후 홈으로 이동
+    } catch {
+      alert('로그아웃 실패');
     }
-    setError('');
-    // 로그인 처리 로직
   };
-
-  const closeModal = () => {
-    setModalMode(null);
-    setId('');
-    setPw('');
-    setError('');
-  };
+  
 
   return (
     <header className="navbar">
-      <div
-        className="logo"
-        onClick={() => navigate('/')}
-        style={{ cursor: 'pointer' }}
-        role="button"
-        tabIndex={0}
-      >
+      <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
         ⛰️ 한길여행
       </div>
 
@@ -57,107 +50,31 @@ const Header = () => {
       </nav>
 
       <div className="auth-buttons">
-        <button className="login-btn" onClick={() => setModalMode('login')}>
-          로그인
-        </button>
-        <button className="signup-btn" onClick={() => setModalMode('signup')}>
-          회원가입
-        </button>
-
-        {modalMode && (
-          <div className="modal-overlay" onClick={closeModal}>
-            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              {modalMode === 'login' ? (
-                <>
-                  <h2>로그인</h2>
-                  <input
-                    type="text"
-                    className="input-field"
-                    placeholder="아이디"
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                  />
-                  <input
-                    type="password"
-                    className="input-field"
-                    placeholder="비밀번호"
-                    value={pw}
-                    onChange={(e) => setPw(e.target.value)}
-                  />
-                  {error && <p className="error-message">{error}</p>}
-                  <div className="button-group">
-                    <button onClick={handleLogin}>로그인</button>
-                    <button onClick={() => setModalMode('signup')}>회원가입</button>
-                  </div>
-
-                  {/* ✅ 카카오 로그인 버튼 */}
-                  <div style={{ marginTop: '10px' }}>
-                    <img
-                      src="../img/kakao_login_medium_narrow.png"
-                      alt="카카오 로그인"
-                      style={{ height: '45px', cursor: 'pointer' }}
-                      onClick={() => {
-                        const REST_API_KEY = '6072eebb0dff3eeffb672644496c0d24';
-                        const REDIRECT_URI = 'http://localhost:5173/oauth/callback/kakao';
-                        const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&prompt=login`;
-                        window.location.href = kakaoURL;
-                      }}
-                    />
-                  </div>
-                </>
-              ) : (
-                <>
-                  <h2>회원가입</h2>
-                  <input
-                    type="text"
-                    className="input-field"
-                    placeholder="아이디"
-                    required
-                    value={signupForm.username}
-                    onChange={(e) =>
-                      setSignupForm((prev) => ({ ...prev, username: e.target.value }))
-                    }
-                  />
-                  <input
-                    type="password"
-                    className="input-field"
-                    placeholder="비밀번호"
-                    required
-                    value={signupForm.password}
-                    onChange={(e) =>
-                      setSignupForm((prev) => ({ ...prev, password: e.target.value }))
-                    }
-                  />
-                  <input
-                    type="password"
-                    className="input-field"
-                    placeholder="비밀번호 확인"
-                    required
-                    value={signupForm.confirm}
-                    onChange={(e) =>
-                      setSignupForm((prev) => ({ ...prev, confirm: e.target.value }))
-                    }
-                  />
-                  <input
-                    type="email"
-                    className="input-field"
-                    placeholder="이메일"
-                    required
-                    value={signupForm.email}
-                    onChange={(e) =>
-                      setSignupForm((prev) => ({ ...prev, email: e.target.value }))
-                    }
-                  />
-                  <div className="button-group">
-                    <button>가입하기</button>
-                    <button onClick={closeModal}>닫기</button>
-                  </div>
-                </>
-              )}
-            </div>
-          </div>
+        {isLoggedIn ? (
+          <>
+            <button onClick={() => navigate('/mypage')}>마이페이지</button>
+            <button onClick={handleLogout}>로그아웃</button>
+          </>
+        ) : (
+          <>
+            <button onClick={() => setModalMode('login')}>로그인</button>
+            <button onClick={() => setModalMode('signup')}>회원가입</button>
+          </>
         )}
       </div>
+
+      {modalMode === 'login' && (
+        <LoginModal
+          closeModal={closeModal}
+          switchToSignup={() => setModalMode('signup')}
+        />
+      )}
+      {modalMode === 'signup' && (
+        <SignupModal
+          closeModal={closeModal}
+          switchToLogin={() => setModalMode('login')}
+        />
+      )}
     </header>
   );
 };
