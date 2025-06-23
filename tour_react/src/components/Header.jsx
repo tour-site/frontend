@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from './UserContext';
+import Signup from './Signup';
 import '../assets/css/Header.css';
 import '../assets/css/Modal.css';
 
-// 테스트용 유저 데이터
 const fakeUsers = [
   { id: 1, username: 'admin', password: '1234', role: 'admin' },
   { id: 2, username: 'guest', password: '1234', role: 'guest' },
@@ -18,12 +18,13 @@ const Header = () => {
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [error, setError] = useState('');
-  const [signupForm, setSignupForm] = useState({
-    username: '',
-    password: '',
-    confirm: '',
-    email: '',
-  });
+
+  const closeModal = () => {
+    setModalMode(null);
+    setId('');
+    setPw('');
+    setError('');
+  };
 
   const handleLogin = () => {
     if (!id || !pw) {
@@ -43,13 +44,6 @@ const Header = () => {
     } else {
       setError('아이디 또는 비밀번호가 올바르지 않습니다');
     }
-  };
-
-  const closeModal = () => {
-    setModalMode(null);
-    setId('');
-    setPw('');
-    setError('');
   };
 
   return (
@@ -117,7 +111,9 @@ const Header = () => {
         {modalMode && (
           <div className="modal-overlay" onClick={closeModal}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-              {modalMode === 'login' ? (
+              {modalMode === 'signup' ? (
+                <Signup closeModal={closeModal} />
+              ) : (
                 <>
                   <h2>로그인</h2>
                   <input
@@ -138,62 +134,6 @@ const Header = () => {
                   <div className="button-group">
                     <button onClick={handleLogin}>로그인</button>
                     <button onClick={() => setModalMode('signup')}>회원가입</button>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <h2>회원가입</h2>
-                  <input
-                    type="text"
-                    className="input-field"
-                    placeholder="아이디"
-                    value={signupForm.username}
-                    onChange={(e) =>
-                      setSignupForm((prev) => ({
-                        ...prev,
-                        username: e.target.value,
-                      }))
-                    }
-                  />
-                  <input
-                    type="password"
-                    className="input-field"
-                    placeholder="비밀번호"
-                    value={signupForm.password}
-                    onChange={(e) =>
-                      setSignupForm((prev) => ({
-                        ...prev,
-                        password: e.target.value,
-                      }))
-                    }
-                  />
-                  <input
-                    type="password"
-                    className="input-field"
-                    placeholder="비밀번호 확인"
-                    value={signupForm.confirm}
-                    onChange={(e) =>
-                      setSignupForm((prev) => ({
-                        ...prev,
-                        confirm: e.target.value,
-                      }))
-                    }
-                  />
-                  <input
-                    type="email"
-                    className="input-field"
-                    placeholder="이메일"
-                    value={signupForm.email}
-                    onChange={(e) =>
-                      setSignupForm((prev) => ({
-                        ...prev,
-                        email: e.target.value,
-                      }))
-                    }
-                  />
-                  <div className="button-group">
-                    <button>가입하기</button>
-                    <button onClick={closeModal}>닫기</button>
                   </div>
                 </>
               )}
