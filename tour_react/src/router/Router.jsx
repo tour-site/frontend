@@ -4,7 +4,7 @@ import { UserProvider } from '../components/UserContext';
 import Layout from '../components/Layout';
 import MainPage from '../page/MainPage';
 import DetailPage from '../page/DetailPage';
-import Map from '../page/Map';
+import Map from '../page/map';
 import ImageGallery from '../page/ImageGallery';
 import Board from '../page/Board';
 import MyPage from '../page/MyPage';

@@ -84,7 +84,7 @@ const Map = () => {
           </div>
         </div>
 
-        {/* <div className="category-container">
+        <div className="category-container">
           <div className="category-buttons">
             {categories.map(cat => (
               <button
@@ -96,7 +96,7 @@ const Map = () => {
               </button>
             ))}
           </div>
-        </div> */}
+        </div>
       </div>
       
       {/* 리스트 카드 */}
@@ -134,12 +134,11 @@ const Map = () => {
               )}
           </div>
 
-          {/* 더보기 버튼 */}
-          {/* {filteredPlaces.length > 4 && (
+          {/* {{filteredPlaces.length > 4 && (
             <button className="btn-more" onClick={handleMoreClick}>
               더보기
             </button>
-          )} */}
+          )}} */}
         </div>
       </div>    
 

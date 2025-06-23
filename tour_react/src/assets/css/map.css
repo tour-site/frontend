@@ -4,13 +4,9 @@
 }
 /* 화면 전체 */
 .place-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  width: 70%;
-  font-family: "myfont_bold";
-  /* border: 1px solid red; */
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
 }
 .title {
   font-size: 42px;
@@ -26,20 +22,17 @@
 .category-box {
   margin: 0;
   width: 100%;
-  /* height: 150px; */
-  /* padding: 10px 20px; */
-  box-sizing: border-box;
 }
 .region-wrapper {
   display: flex;
   width: 100%;
   justify-content: center;
   background:lightgray;
-  padding: 10px;
+  /* padding: 10px; */
   border-radius: 10px;
-  box-sizing: border-box;
-  margin-top: 20px;
-  margin-bottom: 30px;
+  /* box-sizing: border-box; */
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 .region-container {
   display: flex;
@@ -91,49 +84,48 @@
   color: white;
   border-color: #ff7f50;
 }
+.filter-btn {
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  color: black;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+}
+.filter-btn.active {
+  background-color: #3498db;
+  color: white;
+  border-color: #3498db;
+}
 
 /* 이미지 카드 */
 .middle-box {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   gap: 20px;
-  width: 80%;
-  height: 60vh;
+  width: 100%;
+  height: auto; /* 고정 높이 제거 */
   margin: 20px 0;
-  border: 1px solid green;
 }
-.map-card {
-  border: 1px solid #4caf50;
-  width: 550px;
-  height: 550px;
-  /* display: flex; */
-  justify-content: center;
-  align-items: center;
-}
+.map-card,
 .tour-card {
-  border: 1px solid #2196f3;
-  width: 500px;
+  flex: 1;
   height: 550px;
-  box-sizing: border-box;
-  padding: 10px 20px;
+  overflow-y: auto;
 }
 .tour-grid {
   display: flex;
-  /* gap: 10px; */
-  justify-content: space-between;
   flex-wrap: wrap;
-  border: 1px solid blue;
+  gap: 10px;
+  justify-content: flex-start;
 }
 .tour-list {
-  border: 1px solid #bbb;
-  background-color: #fff;
-  width: 48%;
-  /* padding: 10px; */
-  overflow: hidden;
-  box-sizing: border-box;
-  transition: box-shadow 0.3s ease;
-  border-radius: 30px;
+  width: calc(50% - 10px);
+  margin-bottom: 10px;
+  flex: 0 0 250px;
 }
 .tour-list:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
