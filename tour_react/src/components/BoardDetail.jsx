@@ -46,15 +46,15 @@ const BoardDetail = () => {
           postId={post.id}
           onDelete={() => navigate('/board')} // 삭제 후 목록으로 이동
         />
-       <button
+        <button className="detail-back-button" onClick={() => navigate(-1)}>
+          목록으로
+        </button>
+        <button
           className="detail-back-button"
           style={{ marginLeft: '10px', backgroundColor: '#999' }}
           onClick={() => setIsEditing(true)}
         >
           수정
-        </button>
-        <button className="detail-back-button" onClick={() => navigate(-1)}>
-          목록으로
         </button>
         </div>
     </div>
