@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import BoardList from "../components/BoardList";
-import '../assets/css/Board.css'
+import { UserContext } from '../components/UserContext';
+import '../assets/css/Board.css';
 
 const Board = () => {
   const [posts, setPosts] = useState([]);
+  const { currentUser } = useContext(UserContext);
 
   const handleWriteClick = () => {
-    window.open('/boardwrite', '_blank');
+    if (!currentUser) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+
+    const authorName = encodeURIComponent(currentUser.username); // username 대신 name 등 필요한 필드명으로!
+    const url = `/boardwrite?author=${authorName}`;
+    window.open(url, '_blank');
   };
 
   useEffect(() => {
@@ -29,14 +38,14 @@ const Board = () => {
   return (
     <div className="board-container">
       <h2 className="board-title">📝 게시판</h2>
-
       <BoardList posts={posts} />
-      
-      <div className="write-button-area">
-        <button type="button" onClick={handleWriteClick}>
-          ✍️ 작성하기
-        </button>
-      </div>
+      {currentUser && (
+        <div className="write-button-area">
+          <button type="button" onClick={handleWriteClick}>
+            ✍️ 작성하기
+          </button>
+        </div>
+      )}
     </div>
   );
 };
