@@ -1,5 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext,useEffect, useState,useRef } from 'react';
+import { UserContext } from '../components/UserContext';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../assets/css/MyPage.css';
 
 const initialUserData = {
@@ -21,23 +22,28 @@ const MyPage = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+  const location = useLocation();
+  const { id, password } = location.state || {};
+  // useContext 적용
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+
+
 
   useEffect(() => {
-    setUser(initialUserData);
-    setForm(initialUserData);
-  }, []);
+  if (currentUser) {
+    const prefilledData = {
+      ...initialUserData,
+      id: currentUser.username || '',
+      password: currentUser.password || '',
+    };
+    setUser(prefilledData);
+    setForm(prefilledData);
+  }
+  }, [currentUser]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setForm((prev) => ({ ...prev, profileImage: imageUrl }));
-    }
   };
 
   const validateForm = () => {
@@ -93,6 +99,7 @@ const MyPage = () => {
 
   const handleLogout = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
+      setCurrentUser(null); // 전역 로그인 정보 초기화
       navigate('/');
     }
   };
@@ -107,29 +114,12 @@ const MyPage = () => {
 
       <h2>개인 정보 입력</h2>
       <form onSubmit={handleSubmit} className="mypage-form">
-        <div className="profile-image-wrapper">
-          <img
-            src={form.profileImage || 'https://via.placeholder.com/100'}
-            className="profile-image"
-            alt="프로필 이미지"
-          />
-          <button type="button" onClick={() => fileInputRef.current?.click()} className="upload-btn">
-            이미지 변경
-          </button>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            ref={fileInputRef}
-            style={{ display: 'none' }}
-          />
-        </div>
 
         <label>아이디</label>
         <input type="text" name="id" value={form.id} onChange={handleChange} />
 
         <label>비밀번호</label>
-        <input type="password" name="password" value={form.password} onChange={handleChange} />
+        <input type="text" name="password" value={form.password} onChange={handleChange} />
 
         <label>이름</label>
         <input

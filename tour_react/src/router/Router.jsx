@@ -1,20 +1,24 @@
 // 📁 src/router/Router.jsx
 import { Routes, Route } from 'react-router-dom';
+import { UserProvider } from '../components/UserContext';
 import Layout from '../components/Layout';
 import MainPage from '../page/MainPage';
 import DetailPage from '../page/DetailPage';
 import Map from '../page/Map';
 import ImageGallery from '../page/ImageGallery';
 import Board from '../page/Board';
+import MyPage from '../page/MyPage';
 import BoardList from '../components/BoardList';
 import BoardWrite from '../components/BoardWrite';
 import BoardDetail from '../components/BoardDetail';
+
 // import FestivalPage from '../page/FestivalPage';
 // import ImagePOP from '../page/ImagePOP';
 
 
 export default function AppRouter() {
   return (
+    <UserProvider>
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<MainPage />} />
@@ -22,6 +26,7 @@ export default function AppRouter() {
         <Route path="/map" element={<Map />} />
         <Route path="/image-gallery" element={<ImageGallery />} />
         <Route path="/board" element={<Board/>} />
+        <Route path="/mypage" element={<MyPage/>} />
         <Route path="/boardlist" element={<BoardList/>} />
         <Route path="/boardwrite" element={<BoardWrite />} />
         <Route path="/board/:id" element={<BoardDetail />} />
@@ -33,5 +38,6 @@ export default function AppRouter() {
       </Route>
 
     </Routes>
+    </UserProvider>
   );
 }

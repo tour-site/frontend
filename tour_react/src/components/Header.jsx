@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from './UserContext';
 import '../assets/css/Header.css';
 import '../assets/css/Modal.css';
 
+// 테스트용 유저 데이터
+const fakeUsers = [
+  { id: 1, username: 'admin', password: '1234', role: 'admin' },
+  { id: 2, username: 'guest', password: '1234', role: 'guest' },
+];
+
 const Header = () => {
   const navigate = useNavigate();
+  const { currentUser, setCurrentUser } = useContext(UserContext);
 
-  const [modalMode, setModalMode] = useState(null); // 'login', 'signup', 또는 null
+  const [modalMode, setModalMode] = useState(null);
   const [id, setId] = useState('');
   const [pw, setPw] = useState('');
   const [error, setError] = useState('');
-
   const [signupForm, setSignupForm] = useState({
-          username: "",
-          password: "",
-          confirm: "",
-          email: ""
+    username: '',
+    password: '',
+    confirm: '',
+    email: '',
   });
-
 
   const handleLogin = () => {
     if (!id || !pw) {
       setError('아이디와 비밀번호 모두 입력해주세요');
       return;
     }
-    setError('');
-    // 로그인 처리
+
+    const matchedUser = fakeUsers.find(
+      (user) => user.username === id && user.password === pw
+    );
+
+    if (matchedUser) {
+      setCurrentUser(matchedUser);
+      setError('');
+      closeModal();
+      navigate('/');
+    } else {
+      setError('아이디 또는 비밀번호가 올바르지 않습니다');
+    }
   };
 
   const closeModal = () => {
@@ -52,17 +69,50 @@ const Header = () => {
           <li onClick={() => navigate('/map')}>지도로 보기</li>
           <li onClick={() => navigate('/image-gallery')}>이미지로 보기</li>
           <li onClick={() => navigate('/board')}>게시판</li>
-          {/* <li onClick={() => navigate('/recommend')}>최적 코스 추천</li> */}
         </ul>
       </nav>
 
       <div className="auth-buttons">
-        <button className="login-btn" onClick={() => setModalMode('login')}>
-          로그인
-        </button>
-        <button className="signup-btn" onClick={() => setModalMode('signup')}>
-          회원가입
-        </button>
+        {currentUser ? (
+          <div className="user-info">
+            <span>{currentUser.username}님 환영합니다!</span>
+            {currentUser?.role === 'guest' && (
+              <button
+                className="mypage-btn"
+                onClick={() =>
+                  navigate('/mypage', {
+                    state: {
+                      id: currentUser.username,
+                      password: currentUser.password,
+                    },
+                  })
+                }
+              >
+                마이페이지
+              </button>
+            )}
+            <button
+              onClick={() => {
+                const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
+                if (confirmLogout) {
+                  setCurrentUser(null);
+                  navigate('/');
+                }
+              }}
+            >
+              로그아웃
+            </button>
+          </div>
+        ) : (
+          <>
+            <button className="login-btn" onClick={() => setModalMode('login')}>
+              로그인
+            </button>
+            <button className="signup-btn" onClick={() => setModalMode('signup')}>
+              회원가입
+            </button>
+          </>
+        )}
 
         {modalMode && (
           <div className="modal-overlay" onClick={closeModal}>
@@ -94,52 +144,56 @@ const Header = () => {
                 <>
                   <h2>회원가입</h2>
                   <input
-                      type="text"
-                      className="input-field"
-                      placeholder="아이디"
-                      required
-                      value={signupForm.username}
-                      onChange={(e) =>
-                        setSignupForm(prev => ({ ...prev, username: e.target.value }))
-                      }
-                    />
-
-                    <input
-                      type="password"
-                      className="input-field"
-                      placeholder="비밀번호"
-                      required
-                      value={signupForm.password}
-                      onChange={(e) =>
-                        setSignupForm(prev => ({ ...prev, password: e.target.value }))
-                      }
-                    />
-
-                    <input
-                      type="password"
-                      className="input-field"
-                      placeholder="비밀번호 확인"
-                      required
-                      value={signupForm.confirm}
-                      onChange={(e) =>
-                        setSignupForm(prev => ({ ...prev, confirm: e.target.value }))
-                      }
-                    />
-
-                    <input
-                      type="email"
-                      className="input-field"
-                      placeholder="이메일"
-                      required
-                      value={signupForm.email}
-                      onChange={(e) =>
-                        setSignupForm(prev => ({ ...prev, email: e.target.value }))
-                      }
-                    />
-
+                    type="text"
+                    className="input-field"
+                    placeholder="아이디"
+                    value={signupForm.username}
+                    onChange={(e) =>
+                      setSignupForm((prev) => ({
+                        ...prev,
+                        username: e.target.value,
+                      }))
+                    }
+                  />
+                  <input
+                    type="password"
+                    className="input-field"
+                    placeholder="비밀번호"
+                    value={signupForm.password}
+                    onChange={(e) =>
+                      setSignupForm((prev) => ({
+                        ...prev,
+                        password: e.target.value,
+                      }))
+                    }
+                  />
+                  <input
+                    type="password"
+                    className="input-field"
+                    placeholder="비밀번호 확인"
+                    value={signupForm.confirm}
+                    onChange={(e) =>
+                      setSignupForm((prev) => ({
+                        ...prev,
+                        confirm: e.target.value,
+                      }))
+                    }
+                  />
+                  <input
+                    type="email"
+                    className="input-field"
+                    placeholder="이메일"
+                    value={signupForm.email}
+                    onChange={(e) =>
+                      setSignupForm((prev) => ({
+                        ...prev,
+                        email: e.target.value,
+                      }))
+                    }
+                  />
                   <div className="button-group">
                     <button>가입하기</button>
-                    <button onClick={() => setModalMode(null)}>닫기</button>
+                    <button onClick={closeModal}>닫기</button>
                   </div>
                 </>
               )}

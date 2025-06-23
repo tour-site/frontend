@@ -1,43 +1,111 @@
-import React from 'react';
+import React ,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/Place.css';
+import '../assets/css/PlaceList.css';
 import '../assets/css/Modal.css';
 import places from '../assets/js/places.js';
 
+const regions = [
+  '부산진구', '해운대구', '수영구', '동래구',
+  '영도구', '중구', '서구', '남구', '북구',
+  '사하구', '금정구', '강서구', '기장군'
+];
+
+const categories = ['여행지', '맛집', '숙소'];
+
+const imageData = regions.flatMap((region) =>
+  categories.flatMap((category) =>
+    Array.from({ length: 5 }, (_, i) => ({
+      id: `${region}-${category}-${i + 1}`,
+      src: `image_${region}_${category}_${i + 1}.jpg`,
+      region,
+      category,
+      name: `${region}의 ${category} ${i + 1}번`,
+      location: `${region} / ${category}`
+    }))
+  )
+);
 
 const Map = () => {
+  const [selectedRegion, setSelectedRegion] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const navigate = useNavigate();
+
+  const filteredPlaces = imageData.filter(place => {
+    return (
+      (selectedRegion ? place.region === selectedRegion : true) &&
+      (selectedCategory ? place.category === selectedCategory : true)
+    );
+  });
+
+  const handleMoreClick = () => {
+    navigate('/image-gallery', {
+      state: { selectedRegion, selectedCategory }  // 선택된 값 전달
+    });
+  };
+
   return (
     <div className="place-list">
       <h2 className="title">지도로 보기</h2>
 
-      <div className="category-box">
-        <label htmlFor="category-select" className="category-title">카테고리</label>
+       {/* 지역구 버튼 */}
+      <div className="region-wrapper">
+        <div className="region-container">
+          {regions.map((region) => (
+            <button
+              key={region}
+              className={`filter-btn ${selectedRegion === region ? 'active' : ''}`}
+              onClick={() => setSelectedRegion(region === selectedRegion ? '' : region)}
+            >
+              {region}
+            </button>
+          ))}
+        </div>
       </div>
 
+      {/* 카테고리 버튼 */}
+      <div className="category-container">
+        <div className="category-buttons">
+          {categories.map(cat => (
+            <button
+              key={cat}
+              className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(cat === selectedCategory ? '' : cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      {/* 리스트 카드 */}
       <div className="middle-box">
         <div className="map-card">
           <p>지도</p>
         </div>
         <div className="tour-card">
-        <p>관광지 리스트</p>
         <div className="tour-grid">
-          {places.slice(0, 2).map((place, index) => (
-            <div key={place.id || index} className="tour-list"
-            onClick={() => navigate(`/detail/${place.id}`)}
-            style={{ cursor: 'pointer' }}
-            >
-              <h4>{place.name}</h4>
-              <p>{place.location}</p>
-              <img 
-                src={place.image}
-                alt={place.name} 
-                width="100%"
-             />
-            </div>
-          ))}
+          {filteredPlaces.length === 0 ? (
+              <p>선택한 조건에 맞는 관광지가 없습니다.</p>
+            ) : (
+              filteredPlaces.slice(0, 4).map((place) => (
+                <div key={place.id} className="tour-list">
+                  <h4>{place.name}</h4>
+                  <p>{place.location}</p>
+                  <img src={place.src} alt={place.name} width="100%" />
+                </div>
+              ))
+            )}
         </div>
+
+        {/* 더보기 버튼 */}
+          {filteredPlaces.length > 4 && (
+            <button className="btn-more" onClick={handleMoreClick}>
+              더보기
+            </button>
+          )}
+
       </div>
+      
     </div>
 
       <div className="data-box">
