@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom"; // ✅ 추가
+import { useLocation } from "react-router-dom";
 import '../assets/css/ImageGallery.css';
 
 const regions = [
-  '부산진구', '해운대구', '수영구', '동래구',
-  '영도구', '중구', '서구', '남구', '북구',
-  '사하구', '금정구', '강서구', '기장군'
+  '강서구', '금정구', '기장군', '남구', '동구',
+  '동래구', '부산진구', '북구', '사상구', '사하구',
+  '서구', '수영구', '연제구', '영도구', '중구', '해운대구'
 ];
 
 const categories = ['여행지', '맛집', '숙소'];
@@ -61,33 +61,33 @@ const ImageGallery = () => {
     <div className="gallery-container">
       <h2 className="gallery-title">이미지로 보기</h2>
 
-        <div className="region-wrapper">
-          <div className="region-container">
-              {regions.map(region => (
-                <button
-                  key={region}
-                  className={`region-btn ${selectedRegion === region ? 'active' : ''}`}
-                  onClick={() => setSelectedRegion(region)}
-                >
-                  {region}
-                </button>
-              ))}
-            </div>
-          </div>
-
-        <div className="category-container">
-          <div className="category-buttons">
-            {categories.map(cat => (
-              <button
-                key={cat}
-                className={`menu-btn ${selectedCategory === cat ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat === selectedCategory ? '' : cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
+      <div className="region-wrapper">
+        <div className="region-container">
+          {regions.map(region => (
+            <button
+              key={region}
+              className={`region-btn ${selectedRegion === region ? 'active' : ''}`}
+              onClick={() => setSelectedRegion(region)}
+            >
+              {region}
+            </button>
+          ))}
         </div>
+      </div>
+
+      <div className="category-container">
+        <div className="category-buttons">
+          {categories.map(cat => (
+            <button
+              key={cat}
+              className={`menu-btn ${selectedCategory === cat ? 'active' : ''}`}
+              onClick={() => setSelectedCategory(cat === selectedCategory ? '' : cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {filteredImages.length === 0 ? (
         <p style={{ textAlign: 'center', marginTop: 40, fontSize: 18, color: '#666' }}>

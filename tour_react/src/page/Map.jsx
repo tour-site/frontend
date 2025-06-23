@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'; // useEffect 추가
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/Place.css';
+import '../assets/css/Map.css';
 // import '../assets/css/Modal.css';
 import places from '../assets/js/places.js';
 import BarLineChar from './BarLineChart.jsx'; 
 import DistrictCategoryChart from './InfraPieChart.jsx';
 
 const regions = [
-  '부산진구', '해운대구', '수영구', '동래구',
-  '영도구', '중구', '서구', '남구', '북구',
-  '사하구', '금정구', '강서구', '기장군'
+  '강서구', '금정구', '기장군', '남구', '동구',
+  '동래구', '부산진구', '북구', '사상구', '사하구',
+  '서구', '수영구', '연제구', '영도구', '중구', '해운대구'
 ];
 
 const categories = ['여행지', '맛집', '숙소'];
@@ -31,8 +31,10 @@ const Map = () => {
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const navigate = useNavigate();
+  /* 년, 월 선택 */
   const [year, setYear] = useState(2024);
   const [month, setMonth] = useState(12);
+  /* 구 선택 */
   const [districtList, setDistrictList] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState('부산진구'); // 변수명 수정
 
@@ -67,34 +69,34 @@ const Map = () => {
     <div className="place-list">
       <h2 className="title">지도로 보기</h2>
 
-       {/* 지역구 버튼 */}
-      <div className="region-wrapper">
-        <div className="region-container">
-          {regions.map((region) => (
-            <button
-              key={region}
-              className={`filter-btn ${selectedRegion === region ? 'active' : ''}`}
-              onClick={() => setSelectedRegion(region === selectedRegion ? '' : region)}
-            >
-              {region}
-            </button>
-          ))}
+      <div className="category-box">
+        <div className="region-wrapper">
+          <div className="region-container">
+            {regions.map((region) => (
+              <button
+                key={region}
+                className={`filter-btn ${selectedRegion === region ? 'active' : ''}`}
+                onClick={() => setSelectedRegion(region === selectedRegion ? '' : region)}
+              >
+                {region}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      {/* 카테고리 버튼 */}
-      <div className="category-container">
-        <div className="category-buttons">
-          {categories.map(cat => (
-            <button
-              key={cat}
-              className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
-              onClick={() => setSelectedCategory(cat === selectedCategory ? '' : cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        {/* <div className="category-container">
+          <div className="category-buttons">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(cat === selectedCategory ? '' : cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+        </div> */}
       </div>
       
       {/* 리스트 카드 */}
@@ -118,7 +120,7 @@ const Map = () => {
               </li>
             ))}
           </ul>
-          {/* <div className="tour-grid">
+          <div className="tour-grid">
             {filteredPlaces.length === 0 ? (
                 <p>선택한 조건에 맞는 관광지가 없습니다.</p>
               ) : (
@@ -130,51 +132,51 @@ const Map = () => {
                   </div>
                 ))
               )}
-          </div> */}
+          </div>
 
           {/* 더보기 버튼 */}
-          {filteredPlaces.length > 4 && (
+          {/* {filteredPlaces.length > 4 && (
             <button className="btn-more" onClick={handleMoreClick}>
               더보기
             </button>
-          )}
-        </div>      
+          )} */}
+        </div>
+      </div>    
 
-        <div className="DataBox">
-          <div className="DataArea">
-            <div className="Data_select">
-              <label>
-                <select value={year} onChange={(e) => setYear(Number(e.target.value))}>
-                  {years.map((y) => (
-                    <option key={y} value={y}>{y}</option>
-                  ))}
-                </select> 년&ensp;
-              </label>
-              <label>
-                <select value={month} onChange={(e) => setMonth(Number(e.target.value))}>
-                  {months.map((m) => (
-                    <option key={m} value={m}>{m}</option>
-                  ))}
-                </select>
-              </label> 월
-            </div>
-            <div className="DataChart">
-              <BarLineChar year={year} month={month} />
-            </div>
+      <div className="DataBox">
+        <div className="DataArea">
+          <div className="Data_select">
+            <label>
+              <select value={year} onChange={(e) => setYear(Number(e.target.value))}>
+                {years.map((y) => (
+                  <option key={y} value={y}>{y}</option>
+                ))}
+              </select> 년&ensp;
+            </label>
+            <label>
+              <select value={month} onChange={(e) => setMonth(Number(e.target.value))}>
+                {months.map((m) => (
+                  <option key={m} value={m}>{m}</option>
+                ))}
+              </select>
+            </label> 월
           </div>
-          <div className="DataArea">
-            <div className="Data_select">
-              <label>
-                <select value={selectedDistrict} onChange={(e) => setSelectedDistrict(e.target.value)}>
-                  {districtList.map((d, i) => (
-                    <option key={i} value={d}>{d}</option>
-                  ))}
-                </select>
-              </label>
-            </div>
-            <div className="DataChart">
-              <DistrictCategoryChart city={selectedDistrict} />
-            </div>
+          <div className="DataChart">
+            <BarLineChar year={year} month={month} />
+          </div>
+        </div>
+        <div className="DataArea">
+          <div className="Data_select">
+            <label>
+              <select value={selectedDistrict} onChange={(e) => setSelectedDistrict(e.target.value)}>
+                {districtList.map((d, i) => (
+                  <option key={i} value={d}>{d}</option>
+                ))}
+              </select>
+            </label>
+          </div>
+          <div className="DataChart">
+            <DistrictCategoryChart city={selectedDistrict} />
           </div>
         </div>
       </div>
