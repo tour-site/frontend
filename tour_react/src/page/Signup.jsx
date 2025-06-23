@@ -23,6 +23,7 @@ const Signup = () => {
   const [emailSent, setEmailSent] = useState(false);
   const [emailVerified, setEmailVerified] = useState(false);
   const [serverCode, setServerCode] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -30,6 +31,19 @@ const Signup = () => {
 
     if (id === 'password') {
       checkPasswordStrength(value);
+      if (form.passwordConfirm && value !== form.passwordConfirm) {
+        setPasswordError('비밀번호가 다릅니다.');
+      } else {
+        setPasswordError('');
+      }
+    }
+
+    if (id === 'passwordConfirm') {
+      if (value !== form.password) {
+        setPasswordError('비밀번호가 다릅니다.');
+      } else {
+        setPasswordError('');
+      }
     }
   };
 
@@ -53,7 +67,6 @@ const Signup = () => {
       return;
     }
 
-    // 서버와 연동해 아이디 중복 확인
     if (form.username === 'existingUser') {
       alert('이미 존재하는 아이디입니다.');
       setIsIdChecked(false);
@@ -69,7 +82,6 @@ const Signup = () => {
       return;
     }
 
-    // 이메일로 인증코드 전송 (여기선 테스트용 고정 코드)
     const code = '123456';
     setServerCode(code);
     setEmailSent(true);
@@ -103,7 +115,7 @@ const Signup = () => {
       return;
     }
 
-    alert('회원가입이 완료되었습니다.\n회원가입 하신 아이디와 비밀번호로 로그인해주세요.\n로그인 창으로 이동합니다.');
+    alert('회원가입이 완료되었습니다.\n로그인 창으로 이동합니다.');
     navigate('/login-window');
   };
 
@@ -121,8 +133,10 @@ const Signup = () => {
       <form className="signup-form" onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="username">아이디</label>
-          <input id="username" type="text" value={form.username} onChange={handleChange} required />
-          <button type="button" onClick={handleCheckId}>중복 확인</button>
+          <div className="input-row">
+            <input id="username" type="text" value={form.username} onChange={handleChange} required />
+            <button type="button" onClick={handleCheckId}>중복 확인</button>
+          </div>
         </div>
 
         <div className="form-group">
@@ -136,6 +150,7 @@ const Signup = () => {
         <div className="form-group">
           <label htmlFor="passwordConfirm">비밀번호 확인</label>
           <input id="passwordConfirm" type="password" value={form.passwordConfirm} onChange={handleChange} required />
+          {passwordError && <small style={{ color: 'red' }}>{passwordError}</small>}
         </div>
 
         <div className="form-group">
@@ -150,15 +165,19 @@ const Signup = () => {
 
         <div className="form-group">
           <label htmlFor="email">이메일</label>
-          <input id="email" type="email" value={form.email} onChange={handleChange} required />
-          <button type="button" onClick={handleSendEmail}>인증 코드 발송</button>
+          <div className="input-row">
+            <input id="email" type="email" value={form.email} onChange={handleChange} required />
+            <button type="button" onClick={handleSendEmail}>인증 코드 발송</button>
+          </div>
         </div>
 
         {emailSent && (
           <div className="form-group">
             <label htmlFor="emailCode">인증 코드 입력</label>
-            <input id="emailCode" type="text" value={form.emailCode} onChange={handleChange} required />
-            <button type="button" onClick={handleVerifyEmail}>인증 확인</button>
+            <div className="input-row">
+              <input id="emailCode" type="text" value={form.emailCode} onChange={handleChange} required />
+              <button type="button" onClick={handleVerifyEmail}>인증 확인</button>
+            </div>
           </div>
         )}
 
