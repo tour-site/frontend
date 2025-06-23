@@ -29,6 +29,8 @@
   border-top: 1px solid #eee;
   padding-top: 16px;
   color: black;
+  max-height: 300px;       /* 🔹 최대 높이 제한 */
+  overflow-y: auto;        /* 🔹 넘치면 스크롤 표시 */
 }
 
 .detail-back-button {
