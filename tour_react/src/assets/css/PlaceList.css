@@ -1,0 +1,175 @@
+.place-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 70%;
+  font-family: sans-serif;
+}
+
+.title {
+  font-size: 42px;
+  margin-top: 30px;
+  text-align: center;
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+}
+
+.category-box {
+  margin: 10px 0;
+  width: 700px;
+  height: 50px;
+  border: 2px solid #999;
+  padding: 10px 20px;
+  background-color: #f3f3f3; /* 밝은 회색 */
+}
+
+.middle-box {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  width: 80%;
+  margin: 20px 0;
+}
+
+.map-card {
+  border: 2px solid #4caf50;
+  width: 500px;
+  height: 500px;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  background-color: #e8f5e9; /* 연한 초록 계열 */
+}
+
+.tour-card {
+  border: 2px solid #2196f3;
+  width: 360px;
+  height: 440px;
+  padding: 30px;
+  background-color: #e3f2fd;
+}
+
+.tour-grid {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.tour-list {
+  border: 1px solid #bbb;
+  background-color: #fff;
+  width: 48%; /* 가로 두 개씩 */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+
+.data-box {
+  border: 2px solid #f44336;
+  width: 950px;
+  height: 200px;
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffebee; /* 연한 빨강 계열 */
+}
+
+/* 지역구 박스 전체 */
+.region-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  background:lightgray;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%; /* 전체 너비 */
+  box-sizing: border-box; /* 패딩과 보더를 포함한 너비 계산 */
+  margin-top: 20px; /* 상단 여백 추가 */
+  margin-bottom: 30px; /* 하단 여백 추가 */
+}
+
+/* 지역구 버튼 가운데 정렬 */
+.region-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* 버튼 스타일 */
+.region-btn {
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f2f2f2;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 14px;
+}
+
+.region-btn:hover {
+  background-color: #ddd;
+}
+
+.region-btn.active {
+  background-color: #3498db;
+  color: white;
+  border-color: #3498db;
+}
+
+/* 카테고리 왼쪽 정렬 */
+.category-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.category-buttons {
+  display: inline-flex;
+  gap: 12px;
+}
+
+/* 버튼 스타일 */
+/* 지도로 보기 - 지역/카테고리 버튼 공통 스타일 */
+.filter-btn {
+  padding: 8px 16px;
+  margin: 6px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.filter-btn:hover {
+  background-color: #ddd;
+}
+
+.filter-btn.active {
+  background-color: #3498db;
+  color: white;
+  border-color: #3498db;
+}
+
+
+.btn-more {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 20px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  margin: 10px auto;      /* ✅ 수직 여백 + 가운데 정렬 */
+  display: block;         /* ✅ block 요소로 만들어야 margin auto 적용됨 */
+  transition: background-color 0.3s;
+}
+
+.btn-more:hover {
+  background-color: #388e3c;
+}
