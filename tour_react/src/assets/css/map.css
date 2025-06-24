@@ -32,19 +32,37 @@
   /* padding: 50px 0; */
   gap: 20px;
   width: 1200px;
-  height: 630px;
-  margin: 20px 0;
-  border: 1px solid purple;
+  height: 550px;
+  /* margin: 20px 0; */
+  /* border: 1px solid purple; */
 }
 
 /* 지도 영역 */
 .map-card {
-  border: 1px solid #4caf50;
+  /* border: 1px solid #4caf50; */
   width: 550px;
   height: 550px;
+  box-sizing: border-box;
+  padding-top: 30px;
   /* display: flex; */
   justify-content: center;
   align-items: center;
+}
+.allclean-btn {
+  align-items: center;
+  padding: 15px 25px;
+  font-size: 14px;
+  border: none;
+  border-radius: 30px;
+  background-color: #aaa;
+  color: white;
+  cursor: pointer;
+  margin: 10px auto;      
+  display: block;         
+  transition: background-color 0.3s;
+}
+.allclean-btn:hover {
+  background-color: #777;
 }
 
 /* 이미지 카드 */
@@ -72,10 +90,13 @@
   background-color: #fff;
   width: 48%;
   /* padding: 10px; */
+  height: 201px;
   overflow: hidden;
   box-sizing: border-box;
   transition: box-shadow 0.3s ease;
   border-radius: 30px;
+  cursor: pointer; 
+  list-Style: none;
 }
 .tour-list:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
