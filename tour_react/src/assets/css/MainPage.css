@@ -1,4 +1,9 @@
+@font-face {
+  font-family: "myfont_bold";
+  src: url("../font/MaruBuri-semiBold.ttf");
+}
 .main-page {
+  font-family: "myfont_bold";
   padding: 24px;
 }
 

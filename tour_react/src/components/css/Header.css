@@ -1,3 +1,7 @@
+@font-face {
+  font-family: "myfont_bold";
+  src: url("../font/MaruBuri-semiBold.ttf");
+}
 .navbar {
   display: flex;
   align-items: center;
@@ -5,6 +9,7 @@
   padding: 12px 24px;
   background-color: #4d5fac;
   border-bottom: 1px solid #ddd;
+  font-family: "myfont_bold";
 }
 
 .logo {
@@ -55,4 +60,33 @@
 .login-btn:hover,
 .signup-btn:hover {
   background-color: #0056b3;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  background-color: #ffffff20; /* 약간 투명한 흰 배경 */
+  color: white;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.user-info span {
+  font-weight: 500;
+}
+
+.user-info button {
+  padding: 4px 10px;
+  background-color: #5196e5b5;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-info button:hover {
+  background-color: #41239aaa;
 }

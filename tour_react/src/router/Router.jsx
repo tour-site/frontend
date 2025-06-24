@@ -1,32 +1,40 @@
 // 📁 src/router/Router.jsx
 import { Routes, Route } from 'react-router-dom';
+import { UserProvider } from '../components/UserContext';
 import Layout from '../components/Layout';
 import MainPage from '../page/MainPage';
 import DetailPage from '../page/DetailPage';
-import Map from '../page/Map';
-import FestivalPage from '../page/FestivalPage';
+import Map from '../page/map';
 import ImageGallery from '../page/ImageGallery';
 import KakaoRedirect from '../page/KakaoRedirect';
 import Mypage from '../page/Mypage';
-// import ImagePOP from '../page/ImagePOP';
-
+import FindIdPage from '../page/FindIdPage';
+import FindPasswordPage from '../page/FindPasswordPage';
+import BoardWritePage from '../page/Board/BoardWritePage';
+import BoardDetailPage from '../page/Board/BoardDetailPage';
+import BoardPage from '../page/Board/BoardPage';
 
 export default function AppRouter() {
   return (
+    <UserProvider>
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<MainPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
-        <Route path="/festival" element={<FestivalPage />} />
         <Route path="/map" element={<Map />} />
         <Route path="/image-gallery" element={<ImageGallery />} />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/find-id" element={<FindIdPage />} />
+        <Route path="/find-password" element={<FindPasswordPage />} />
 
-        {/* <Route path="/imagePOP/:id" element={<ImagePOP />} />  */}
-        {/* ImagePOP 초반에 이미지 보기 용도로 만들어진거라 추후에 필요하면 쓰기 아님 삭제해도 무방 */}
+        <Route path="/board" element={<BoardPage />} />
+        <Route path="/board/write" element={<BoardWritePage />} />
+        <Route path="/board/:id" element={<BoardDetailPage />} />
+
+        {/* <Route path="/imagePOP/:id" element={<ImagePOP />} /> */}
       </Route>
-
     </Routes>
+    </UserProvider>
   );
 }
