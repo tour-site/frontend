@@ -1,10 +1,7 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import '../assets/css/Signup.css'
+import React, { useState } from 'react';
+import '../assets/css/Signup.css';
 
-const Signup = () => {
-  const navigate = useNavigate();
-
+const Signup = ({ closeModal }) => {
   const [form, setForm] = useState({
     username: '',
     password: '',
@@ -48,13 +45,13 @@ const Signup = () => {
   };
 
   const checkPasswordStrength = (password) => {
-    let strength = '약함';
     const hasUpper = /[A-Z]/.test(password);
     const hasLower = /[a-z]/.test(password);
     const hasNumber = /\d/.test(password);
     const hasLength = password.length >= 8;
 
     const score = [hasUpper, hasLower, hasNumber].filter(Boolean).length;
+    let strength = '약함';
     if (hasLength && score >= 2) strength = '보통';
     if (hasLength && score === 3) strength = '강함';
 
@@ -120,11 +117,7 @@ const Signup = () => {
   };
 
   const handleClose = () => {
-    if (window.opener) {
-      window.close();
-    } else {
-      navigate(-1);
-    }
+    closeModal();
   };
 
   return (

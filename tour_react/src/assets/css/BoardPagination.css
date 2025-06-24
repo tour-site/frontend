@@ -1,0 +1,28 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  padding: 8px 14px;
+  border: none;
+  background-color: #f1f1f1;
+  color: #333;
+  border-radius: 20px; /* 🔵 둥근 버튼 */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 14px;
+}
+
+.pagination button:hover {
+  background-color: #e0e0e0;
+}
+
+.pagination .active {
+  background-color: #444;
+  color: white;
+  font-weight: bold;
+}

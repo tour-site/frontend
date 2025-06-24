@@ -1,67 +1,50 @@
 const places = [
   {
     id: 1,
-    name: "아홉산숲",
-    subtitle: "400년간 지켜온 자연의 원형",
-    category: "대나무의 집, 기장의 산책로",
-    location: "부산광역시 기장군 철마면 미동길 37-1",
-    contact: "051-721-9183",
-    homepage: "http://ahopsan.com",
-    transportation: "도시철도 동해선 기장역 → 버스 환승",
-    operating_days: "상시",
+    name: "해운대 해수욕장",
+    gu: "Haeundae", // ✅ 추가
+    subtitle: "사시사철 젊은 열기로 뜨거운 해수욕장",
+    location: "부산 해운대구 우동",
+    contact: "051-123-4567",
+    homepage: "https://www.haeundae.go.kr",
+    hours: "09:00 ~ 18:00",
     closed_days: "연중무휴",
-    hours: "상시",
+    park: "공영주차장 이용 가능",
+    transportation: "지하철 2호선 해운대역 도보 10분",
     fee: "무료",
-    facility: "휠체어 접근 가능",
-    park: "주차 가능 (30대)",
-    images: [
-      "https://www.visitbusan.net/uploadImgs/files/cntnts/20191222185647445_wufrotr",
+    facility: "샤워장, 화장실, 파라솔 대여",
+    image: [
+      "https://image.fnnews.com/resource/media/image/2024/04/27/202404271230342872_l.jpg",
     ],
-    map_image: "https://appassets.mvtdev.com/map/91/s/3241/43949335.jpg",
-    description: "400년간 보존된 자연 대숲을 걸으며 사계절을 느낄 수 있는 부산의 숨은 명소."
+    map_image: [
+      "https://simg.pstatic.net/static.map/v2/map/staticmap.bin?caller=smarteditor&markers=size%3Amid|color%3A0x11cc73|type%3Ad|viewSizeRatio%3A0.7|pos%3A129.1664972%2035.1619703&w=700&h=315&scale=2&dataversion=174.22",
+    ],
+    description:
+      "맑은 바다와 부드러운 백사장이 인상적인 해운대는 국내외 관광객들에게 사랑받는 명소입니다.",
   },
   {
     id: 2,
-    name: "감천문화마을",
-    subtitle: "부산의 마추픽추",
-    category: "문화예술 골목길",
-    location: "부산광역시 사하구 감천2동",
-    contact: "051-204-1444",
-    homepage: "https://gamcheon.or.kr",
-    transportation: "도시철도 토성역 하차 → 버스 환승",
-    operating_days: "상시",
-    closed_days: "연중무휴",
-    hours: "상시",
-    fee: "무료",
-    facility: "포토존, 기념품점, 카페",
-    park: "인근 공영주차장 이용",
-    images: [
-      "https://www.telltrip.com/wp-content/uploads/2025/05/Gamcheon-Culture-Village1.jpg",
+    name: "아홉산숲",
+    gu: "Gijang", // ✅ 추가
+    subtitle: "부산 속 대나무 힐링 명소",
+    location: "부산광역시 기장군 철마면 웅천리 산20-1",
+    contact: "051-721-9183",
+    homepage: "https://ahopsan.com",
+    hours: "09:00 ~ 18:00 (입장마감 17:00)",
+    closed_days: "연중무휴 (우천 시 일부 제한)",
+    park: "전용 주차장 완비",
+    transportation: "부산역 → 기장역 하차 후 택시 이용 (약 15분)",
+    fee: "성인 5,000원 / 어린이 3,000원",
+    facility: "산책로, 전망대, 휴게소, 촬영장소",
+    image: [
+      "https://th.bing.com/th/id/OIP.2Hq6uIoQbqAwAwLLVQVmQwHaE8?r=0&rs=1&pid=ImgDetMain&cb=idpwebp2&o=7&rm=3",
     ],
-    map_image: "https://cdn.pacer.cc/route/screenshot/wy5x_20200401_23.png",
-    description: "형형색색의 건물과 예술작품이 어우러진 부산의 대표 골목 관광지."
+    map_image: [
+      "https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FqGTJ4%2FbtsFD5mU6tk%2F9k2DJx8W5zxwvVc8ukD67K%2Fimg.png",
+    ],
+    description:
+      "400년 역사의 대숲이 우거진 아홉산숲은 수많은 영화와 드라마의 촬영지로 유명하며, 자연 속에서 힐링을 즐길 수 있는 명소입니다.",
   },
-  {
-    id: 3,
-    name: "해동용궁사",
-    subtitle: "바다 위 절경 사찰",
-    category: "사찰, 힐링명소",
-    location: "부산광역시 기장군 기장읍 용궁길 86",
-    contact: "051-722-7744",
-    homepage: "http://www.yongkungsa.or.kr",
-    transportation: "도시철도 해운대역 → 버스 181번 환승",
-    operating_days: "상시",
-    closed_days: "연중무휴",
-    hours: "05:00 ~ 일몰",
-    fee: "무료",
-    facility: "계단, 음수대, 기념품점",
-    park: "무료주차 가능",
-    images: [
-      "https://mblogthumb-phinf.pstatic.net/MjAyMTA0MTZfMjQ4/MDAxNjE4NTAxOTkwMTky.eQGrn2YkAReD9zssuEAd5NFmEI8tx0XLceZ__Ny83xwg.legzIWFvwzCdCrx0iVKvptQpL-V9na7TPpNJciidWVwg.PNG.kizaki56/00.png?type=w800",
-    ],
-    map_image: "https://mts.daumcdn.net/api/v1/tile/PNG02/v10_453ky/latest/4/489/842.png",
-    description: "파도소리와 함께 명상과 사색을 즐길 수 있는 바닷가의 절경 사찰."
-  }
 ];
 
 export default places;
