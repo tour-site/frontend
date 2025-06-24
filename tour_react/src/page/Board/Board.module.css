@@ -1,0 +1,67 @@
+.boardcontainer {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: black;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.boardtitle {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.boardform {
+  display: flex;
+  flex-direction: column; /* 세로 정렬 */
+  gap: 12px;
+  margin-bottom: 20px;
+  justify-content: center;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.boardform label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 14px;
+  gap: 6px;
+}
+
+
+.boardform input {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: rgba(116, 116, 104, 0.363);
+  flex: 1;
+}
+
+.boardform textarea{
+  background-color:rgba(116, 116, 104, 0.363);
+}
+
+.writebuttonarea {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.boardform button {
+  align-self: flex-end; /* 버튼을 오른쪽 아래로 정렬 */
+  padding: 8px 16px;
+  background-color: #0066cc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.boardform button:hover {
+  background-color: #004999;
+}

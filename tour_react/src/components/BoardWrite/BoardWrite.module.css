@@ -1,0 +1,74 @@
+.writecontainer {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #fff;
+  color: black;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.writetitle {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+.writeform {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.writeform label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.writeform input,
+.writeform textarea {
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 15px;
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+/* 버튼 정렬 및 스타일 */
+.buttonrow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.submitbuttonwrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.2rem;
+}
+
+.detailbackbutton,
+.submitbutton {
+  padding: 10px 16px;
+  background-color: #e0e0e0;
+  color: black;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.detailbackbutton:hover,
+.submitbutton:hover {
+  background-color: #cfcfcf;
+}

@@ -1,0 +1,66 @@
+.editform {
+  max-width: 700px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  background-color: #f9f9f9;
+  color:black;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.06);
+}
+
+.editform label {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+  gap: 6px;
+}
+
+.editform input,
+.editform textarea {
+  padding: 10px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  color:black
+}
+
+.buttongroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.buttongroup button {
+  padding: 8px 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.buttongroup button[type='submit'] {
+  background-color: #0078d4;
+  color: white;
+}
+
+.buttongroup button[type='submit']:hover {
+  background-color: #005fa3;
+}
+
+.buttongroup button[type='button'] {
+  background-color: #ccc;
+}
+
+.buttongroup button[type='button']:hover {
+  background-color: #999;
+}

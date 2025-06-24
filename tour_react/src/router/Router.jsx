@@ -1,16 +1,16 @@
 // 📁 src/router/Router.jsx
 import { Routes, Route } from 'react-router-dom';
-import { UserProvider } from '../components/UserContext';
-import Layout from '../components/Layout';
-import MainPage from '../page/MainPage';
-import DetailPage from '../page/DetailPage';
-import Map from '../page/map';
-import ImageGallery from '../page/ImageGallery';
-import Board from '../page/Board';
-import MyPage from '../page/MyPage';
-import BoardList from '../components/BoardList';
-import BoardWrite from '../components/BoardWrite';
-import BoardDetail from '../components/BoardDetail';
+import { UserProvider } from '../components/UserContext/UserContext';
+import Layout from '../components/Layout/Layout';
+import MainPage from '../page/MainPage/MainPage';
+import DetailPage from '../page/DetailPage/DetailPage';
+import Map from '../page/map/map';
+import ImageGallery from '../components/ImageGallery/ImageGallery';
+import Board from '../page/Board/Board';
+import MyPage from '../page/MyPage/MyPage';
+import BoardList from '../components/BoardList/BoardList';
+import BoardWrite from '../components/BoardWrite/BoardWrite';
+import BoardDetail from '../components/BoardDetail/BoardDetail';
 
 // import FestivalPage from '../page/FestivalPage';
 // import ImagePOP from '../page/ImagePOP';
