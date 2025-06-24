@@ -1,226 +1,259 @@
-/* 전체 레이아웃 */
+/* MyPage.css */
+
 .page-layout {
   display: flex;
-  align-items: flex-start;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
-  box-sizing: border-box;
+  min-height: 100vh;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fafafa;
+  color: #333;
 }
 
 /* 사이드 메뉴 */
 .side-menu {
-  width: 260px;
-  background-color: #1771e6;
-  color: white;
+  width: 240px;
+  background-color: #2f3e46;
+  color: #fff;
   padding: 20px;
-  border-radius: 10px;
-  margin-right: 30px;
-  flex-shrink: 0;
   box-sizing: border-box;
+  flex-shrink: 0;
 }
 
 .side-menu h2 {
-  font-size: 18px;
-  margin-bottom: 18px;
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid #52796f;
+  padding-bottom: 0.5rem;
 }
 
-.side-menu ul {
+.side-menu nav ul {
   list-style: none;
   padding-left: 0;
+  margin: 0;
 }
 
-.side-menu details {
-  margin-bottom: 12px;
-}
-
-.side-menu summary {
-  font-weight: bold;
-  cursor: pointer;
-  padding: 6px 0;
-}
-
-.side-menu li ul li {
-  margin-left: 15px;
-  font-size: 14px;
-  margin-top: 5px;
+.side-menu nav li {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
   cursor: pointer;
 }
 
-.side-menu details[open] summary {
-  color: #00c3ff;
+.side-menu nav details summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 0.4rem 0;
+  outline: none;
 }
 
-/* 마이페이지 본문 */
+.side-menu nav details[open] > summary {
+  color: #84a98c;
+}
+
+.side-menu nav ul ul {
+  padding-left: 1rem;
+  margin-top: 0.3rem;
+  color: #cad2c5;
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+.side-menu nav ul ul li {
+  margin-bottom: 0.4rem;
+}
+
+/* 메인 컨텐츠 */
 .mypage-main {
   flex-grow: 1;
+  padding: 40px 60px;
+  background-color: #fff;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* 마이페이지 컨테이너 */
 .mypage-container {
   width: 100%;
-  padding: 40px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
+  max-width: 650px;
   background-color: #ffffff;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
+  padding: 30px;
 }
 
 /* 로그아웃 버튼 */
 .logout-button-area {
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 25px;
 }
 
 .logout-btn {
-  background-color: #e74c3c;
-  color: white;
+  background-color: #e63946;
+  color: #fff;
   border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 15px;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
 .logout-btn:hover {
-  background-color: #c0392b;
+  background-color: #d62828;
 }
 
-/* 폼 */
+/* 폼 스타일 */
 .mypage-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 30px;
 }
 
-/* 프로필 이미지 */
-.profile-image-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.profile-image {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #ccc;
-  margin-bottom: 12px;
-}
-
-.upload-btn {
-  padding: 8px 16px;
-  background-color: #3498db;
-  color: white;
-  font-size: 15px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.upload-btn:hover {
-  background-color: #2980b9;
-}
-
-/* 라벨 */
 .mypage-form label {
-  font-size: 15px;
   font-weight: 600;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
+  margin-top: 15px;
+  font-size: 1rem;
 }
 
-/* 입력/셀렉트 */
-.mypage-form input,
+.mypage-form input[type="text"],
+.mypage-form input[type="password"],
+.mypage-form input[type="email"],
+.mypage-form input[type="tel"],
+.mypage-form input[type="date"],
 .mypage-form select {
-  width: 100%;
-  padding: 12px;
-  font-size: 15px;
+  padding: 10px 14px;
+  border: 1.8px solid #ccc;
   border-radius: 6px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  transition: border-color 0.2s ease;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
-.mypage-form input:focus,
+.mypage-form input[type="text"]:focus,
+.mypage-form input[type="password"]:focus,
+.mypage-form input[type="email"]:focus,
+.mypage-form input[type="tel"]:focus,
+.mypage-form input[type="date"]:focus,
 .mypage-form select:focus {
-  border-color: #3498db;
-  outline: none;
+  border-color: #52796f;
+  box-shadow: 0 0 8px rgba(82, 121, 111, 0.3);
+}
+
+.mypage-form input[readonly],
+.mypage-form select[disabled] {
+  background-color: #f5f5f5;
+  border-color: #ddd;
+  cursor: not-allowed;
+  color: #999;
+}
+
+.mypage-form small {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 3px;
 }
 
 /* 버튼 그룹 */
 .button-group {
+  margin-top: 30px;
   display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 25px;
+  gap: 15px;
+  justify-content: flex-end;
 }
 
 .cancel-btn,
 .submit-btn {
-  flex: 1;
-  padding: 12px 0;
-  font-size: 15px;
-  border: none;
+  font-size: 1rem;
+  padding: 10px 26px;
   border-radius: 6px;
+  border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
-/* 취소 버튼 */
 .cancel-btn {
-  background-color: #bdc3c7;
-  color: white;
+  background-color: #adb5bd;
+  color: #fff;
 }
 
 .cancel-btn:hover {
-  background-color: #95a5a6;
+  background-color: #868e96;
 }
 
-/* 제출 버튼 */
 .submit-btn {
-  background-color: #2ecc71;
-  color: white;
+  background-color: #2a9d8f;
+  color: #fff;
 }
 
 .submit-btn:hover {
-  background-color: #27ae60;
+  background-color: #21867a;
 }
 
-/* 메시지 */
-.error-message {
-  color: red;
-  margin-top: 12px;
-  font-weight: 500;
-}
-
-.success-message {
-  color: green;
-  margin-top: 12px;
-  font-weight: 500;
-}
-
+/* 회원 탈퇴 버튼 */
 .withdrawal-area {
-  margin-top: 30px;
+  margin-top: 35px;
   text-align: center;
 }
 
 .withdrawal-btn {
-  padding: 10px 20px;
-  background-color: #ff4d4f;
+  background-color: #e63946;
   color: white;
+  padding: 10px 26px;
+  font-size: 1rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .withdrawal-btn:hover {
-  background-color: #e04143;
+  background-color: #d62828;
 }
+
+/* 메시지 스타일 */
+.error-message {
+  margin-top: 20px;
+  color: #e63946;
+  font-weight: 600;
+  text-align: center;
+}
+
+.success-message {
+  margin-top: 20px;
+  color: #2a9d8f;
+  font-weight: 600;
+  text-align: center;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pagination button {
+  padding: 4px 8px; /* 작게 만들기 */
+  font-size: 13px;
+  border: 1px solid #ccc;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #d0d0d0;
+}
+
+.pagination button:disabled {
+  background-color: #e0e0e0;
+  cursor: not-allowed;
+}
+
+.pagination .active-page {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+

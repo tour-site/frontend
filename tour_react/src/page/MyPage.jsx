@@ -19,8 +19,27 @@ const MyPage = () => {
   const [form, setForm] = useState(initialUserData);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [activeSection, setActiveSection] = useState('edit');
+  const [posts, setPosts] = useState([
+    { id: 1, title: '첫 글입니다', content: '내용입니다.', date: '2024-06-01' },
+    { id: 2, title: '두 번째 글', content: '다른 내용입니다.', date: '2024-06-10' },
+    { id: 3, title: '세 번째 글', content: '테스트입니다.', date: '2024-06-11' },
+    { id: 4, title: '네 번째 글', content: '예시입니다.', date: '2024-06-12' },
+    { id: 5, title: '다섯 번째 글', content: '게시물입니다.', date: '2024-06-13' },
+    { id: 6, title: '여섯 번째 글', content: '추가된 내용입니다.', date: '2024-06-14' },
+  ]);
+
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
+
+  // 페이징 상태
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 5;
+
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(posts.length / postsPerPage);
 
   useEffect(() => {
     setUser(initialUserData);
@@ -74,147 +93,167 @@ const MyPage = () => {
 
   const handleLogout = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
-      navigate('/'); // ← 로그아웃 후 메인화면으로 이동
+      navigate('/');
     }
   };
 
   const handleWithdrawal = () => {
     if (window.confirm('정말로 탈퇴하시겠습니까? 탈퇴 시 모든 정보가 삭제됩니다.')) {
-      // 실제 서버 연동이 있을 경우 API 호출 필요
       alert('회원 탈퇴가 완료되었습니다.');
-      navigate('/'); // 탈퇴 후 메인 페이지로 이동
+      navigate('/');
     }
+  };
+
+  const handleDeletePost = (id) => {
+    if (window.confirm('해당 글을 삭제하시겠습니까?')) {
+      const updatedPosts = posts.filter((p) => p.id !== id);
+      setPosts(updatedPosts);
+
+      const newTotalPages = Math.ceil(updatedPosts.length / postsPerPage);
+      if (currentPage > newTotalPages) {
+        setCurrentPage(newTotalPages > 0 ? newTotalPages : 1);
+      }
+    }
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    for (let i = 1; i <= totalPages; i++) {
+      pageNumbers.push(
+        <button
+          key={i}
+          onClick={() => setCurrentPage(i)}
+          className={i === currentPage ? 'active-page' : ''}
+        >
+          {i}
+        </button>
+      );
+    }
+    return pageNumbers;
   };
 
   return (
     <div className="page-layout">
-      {/* ✅ 왼쪽 사이드 메뉴 */}
       <aside className="side-menu">
         <nav>
           <h2>마이페이지</h2>
           <ul>
             <li>
-              <details open>
-                <summary>회원정보 수정</summary>
-                <ul>
-                  <li>원서접수 안내</li>
-                  <li>원서접수 신청</li>
-                  <li>원서접수 현황</li>
-                  <li>장애유형별 편의제공안내</li>
-                </ul>
+              <details open={activeSection === 'edit'}>
+                <summary onClick={() => setActiveSection('edit')}>회원정보 수정</summary>
               </details>
             </li>
             <li>
-              <details>
-                <summary>합격자/답안발표</summary>
-                <ul>
-                  <li>합격자 조회</li>
-                  <li>답안 확인</li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <details>
-                <summary>시험일정</summary>
-                <ul>
-                  <li>필기 일정</li>
-                  <li>실기 일정</li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <details>
-                <summary>필기시험안내</summary>
-                <ul>
-                  <li>시험과목</li>
-                  <li>시험방법</li>
-                </ul>
-              </details>
-            </li>
-            <li>
-              <details>
-                <summary>실기시험안내</summary>
-                <ul>
-                  <li>시험과목</li>
-                  <li>시험방법</li>
-                </ul>
+              <details open={activeSection === 'activity'}>
+                <summary onClick={() => setActiveSection('activity')}>나의 활동</summary>
               </details>
             </li>
           </ul>
         </nav>
       </aside>
 
-      {/* ✅ 오른쪽 마이페이지 본문 */}
       <main className="mypage-main">
         <div className="mypage-container">
           <div className="logout-button-area">
-            <button className="logout-btn" onClick={handleLogout}>
-              로그아웃
-            </button>
+            <button className="logout-btn" onClick={handleLogout}>로그아웃</button>
           </div>
 
-          <h2>개인 정보 입력</h2>
-          <form onSubmit={handleSubmit} className="mypage-form">
-            <label>아이디</label>
-            <input type="text" name="id" value={form.id} onChange={handleChange} />
+          {activeSection === 'edit' && (
+            <>
+              <h2>개인 정보 입력</h2>
+              <form onSubmit={handleSubmit} className="mypage-form">
+                <label>아이디</label>
+                <input type="text" name="id" value={form.id} onChange={handleChange} />
 
-            <label>비밀번호</label>
-            <input type="password" name="password" value={form.password} onChange={handleChange} />
+                <label>비밀번호</label>
+                <input type="password" name="password" value={form.password} onChange={handleChange} />
 
-            <label>이름</label>
-            <input
-              type="text"
-              name="name"
-              value={form.name}
-              readOnly
-              style={{ backgroundColor: '#f5f5f5', borderColor: '#ccc', cursor: 'not-allowed' }}
-            />
-            <small style={{ color: 'gray' }}>이름은 변경할 수 없습니다.</small>
+                <label>이름</label>
+                <input type="text" name="name" value={form.name} readOnly style={{ backgroundColor: '#f5f5f5' }} />
+                <small style={{ color: 'gray' }}>이름은 변경할 수 없습니다.</small>
 
-            <label>닉네임</label>
-            <input type="text" name="nickname" value={form.nickname} onChange={handleChange} />
+                <label>닉네임</label>
+                <input type="text" name="nickname" value={form.nickname} onChange={handleChange} />
 
-            <label>이메일</label>
-            <input
-              type="email"
-              name="email"
-              value={form.email}
-              readOnly
-              style={{ backgroundColor: '#f5f5f5', borderColor: '#ccc', cursor: 'not-allowed' }}
-            />
-            <small style={{ color: 'gray' }}>가입 시 입력한 이메일은 변경할 수 없습니다.</small>
+                <label>이메일</label>
+                <input type="email" name="email" value={form.email} readOnly style={{ backgroundColor: '#f5f5f5' }} />
+                <small style={{ color: 'gray' }}>가입 시 입력한 이메일은 변경할 수 없습니다.</small>
 
-            <label>성별</label>
-            <select name="gender" value={form.gender} disabled>
-              <option value="남성">남성</option>
-              <option value="여성">여성</option>
-            </select>
-            <small style={{ color: 'gray' }}>가입 시 입력한 성별은 변경할 수 없습니다.</small>
+                <label>성별</label>
+                <select name="gender" value={form.gender} disabled>
+                  <option value="남성">남성</option>
+                  <option value="여성">여성</option>
+                </select>
+                <small style={{ color: 'gray' }}>가입 시 입력한 성별은 변경할 수 없습니다.</small>
 
-            <label>생년월일</label>
-            <input type="date" name="birth" value={form.birth} readOnly />
+                <label>생년월일</label>
+                <input type="date" name="birth" value={form.birth} readOnly />
 
-            <label>휴대폰 번호</label>
-            <input type="tel" name="phone" value={form.phone} onChange={handleChange} />
+                <label>휴대폰 번호</label>
+                <input type="tel" name="phone" value={form.phone} onChange={handleChange} />
 
-            <div className="button-group">
-            <button type="button" onClick={handleReset} className="cancel-btn">
-              취소
-            </button>
-            <button type="submit" className="submit-btn">
-              정보 수정
-            </button>
-          </div>
+                <div className="button-group">
+                  <button type="button" onClick={handleReset} className="cancel-btn">취소</button>
+                  <button type="submit" className="submit-btn">정보 수정</button>
+                </div>
 
-          <div className="withdrawal-area">
-            <button type="button" className="withdrawal-btn" onClick={handleWithdrawal}>
-              회원 탈퇴
-            </button>
-          </div>
+                <div className="withdrawal-area">
+                  <button type="button" className="withdrawal-btn" onClick={handleWithdrawal}>회원 탈퇴</button>
+                </div>
 
-            {error && <p className="error-message">{error}</p>}
-            {message && <p className="success-message">{message}</p>}
-          </form>
+                {error && <p className="error-message">{error}</p>}
+                {message && <p className="success-message">{message}</p>}
+              </form>
+            </>
+          )}
+
+          {activeSection === 'activity' && (
+            <div className="activity-section">
+              <h2>작성글 목록</h2>
+              <table className="activity-table">
+                <thead>
+                  <tr>
+                    <th>번호</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>작성일</th>
+                    <th>삭제</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentPosts.map((post, index) => (
+                    <tr key={post.id}>
+                      <td>{indexOfFirstPost + index + 1}</td>
+                      <td>{post.title}</td>
+                      <td>{post.content}</td>
+                      <td>{post.date}</td>
+                      <td>
+                        <button onClick={() => handleDeletePost(post.id)}>삭제</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+
+              {totalPages > 1 && (
+                <div className="pagination">
+                  <button
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                  >
+                    이전
+                  </button>
+                  {renderPageNumbers()}
+                  <button
+                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                  >
+                    다음
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </main>
     </div>
