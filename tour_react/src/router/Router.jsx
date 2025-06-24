@@ -11,6 +11,7 @@ import MyPage from '../page/MyPage/MyPage';
 import BoardList from '../components/BoardList/BoardList';
 import BoardWrite from '../components/BoardWrite/BoardWrite';
 import BoardDetail from '../components/BoardDetail/BoardDetail';
+import AdminPage from '../page/AdminPage/AdminPage';
 
 // import FestivalPage from '../page/FestivalPage';
 // import ImagePOP from '../page/ImagePOP';
@@ -29,6 +30,7 @@ export default function AppRouter() {
         <Route path="/boardlist" element={<BoardList/>} />
         <Route path="/boardwrite" element={<BoardWrite />} />
         <Route path="/board/:id" element={<BoardDetail />} />
+        <Route path="/adminpage" element={<AdminPage />} />
 
 
         {/* <Route path="/festival" element={<FestivalPage />} /> */}

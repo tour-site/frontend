@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../assets/css/AdminPage.css'; // 스타일 파일
+import styles from './AdminPage.module.css'; // 스타일 파일
 
 const AdminSidebar = ({ onSelect, selectedMenu }) => {
   const menus = [
@@ -12,14 +12,14 @@ const AdminSidebar = ({ onSelect, selectedMenu }) => {
   ];
 
   return (
-    <aside className="admin-sidebar">
+    <aside className={styles.adminsidebar}>
       <h2>관리자 페이지</h2>
       <nav>
         <ul>
           {menus.map((menu) => (
             <li
               key={menu.key}
-              className={selectedMenu === menu.key ? 'active' : ''}
+              className={`${styles.menuItem} ${selectedMenu === menu.key ? styles.active : ''}`}
               onClick={() => onSelect(menu.key)}
               style={{ cursor: 'pointer' }}
             >
@@ -388,9 +388,9 @@ const AdminPage = () => {
   };
 
   return (
-    <div className="admin-container" style={{ display: 'flex', minHeight: '100vh' }}>
+    <div className={styles.admincontainer} style={{ display: 'flex', minHeight: '100vh' }}>
       <AdminSidebar onSelect={setSelectedMenu} selectedMenu={selectedMenu} />
-      <main className="admin-main" style={{ flexGrow: 1, padding: '20px' }}>
+      <main className={styles.admin-main} style={{ flexGrow: 1, padding: '20px' }}>
         <header
           style={{
             marginBottom: '20px',
@@ -400,7 +400,7 @@ const AdminPage = () => {
           }}
         >
           <h1>{selectedMenu.toUpperCase()}</h1>
-          <button className="logout-btn" onClick={handleLogout}>
+          <button className={styles.logoutbtn} onClick={handleLogout}>
             로그아웃
           </button>
         </header>
