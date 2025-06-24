@@ -10,8 +10,9 @@ import KakaoRedirect from '../page/KakaoRedirect';
 import Mypage from '../page/Mypage';
 import FindIdPage from '../page/FindIdPage';
 import FindPasswordPage from '../page/FindPasswordPage';
-// import ImagePOP from '../page/ImagePOP';
-
+import BoardWritePage from '../page/Board/BoardWritePage';
+import BoardDetailPage from '../page/Board/BoardDetailPage';
+import BoardPage from '../page/Board/BoardPage';
 
 export default function AppRouter() {
   return (
@@ -27,10 +28,12 @@ export default function AppRouter() {
         <Route path="/find-id" element={<FindIdPage />} />
         <Route path="/find-password" element={<FindPasswordPage />} />
 
-        {/* <Route path="/imagePOP/:id" element={<ImagePOP />} />  */}
-        {/* ImagePOP 초반에 이미지 보기 용도로 만들어진거라 추후에 필요하면 쓰기 아님 삭제해도 무방 */}
-      </Route>
+        <Route path="/board" element={<BoardPage />} />
+        <Route path="/board/write" element={<BoardWritePage />} />
+        <Route path="/board/:id" element={<BoardDetailPage />} />
 
+        {/* <Route path="/imagePOP/:id" element={<ImagePOP />} /> */}
+      </Route>
     </Routes>
   );
 }
