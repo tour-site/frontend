@@ -257,7 +257,6 @@ const UserManagement = () => {
                     >
                       <option value="남성">남성</option>
                       <option value="여성">여성</option>
-                      <option value="기타">기타</option>
                     </select>
                   ) : (
                     user.gender
@@ -367,7 +366,7 @@ const AdminPage = () => {
   const handleLogout = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
       // 토큰 등 제거 작업 가능
-      navigate('/login');
+      navigate('/');
     }
   };
 
