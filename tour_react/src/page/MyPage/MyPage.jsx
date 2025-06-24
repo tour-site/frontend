@@ -1,7 +1,7 @@
 // 📁 src/pages/Mypage.jsx
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../api/axiosInstance.js'; // ✅ 공통 axios 인스턴스 사용
+import axiosInstance from '../../api/axiosInstance.js'; // ✅ 공통 axios 인스턴스 사용
 import styles from './MyPage.module.css';
 function Mypage() {
   const [user, setUser] = useState(null);

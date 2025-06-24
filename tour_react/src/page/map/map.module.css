@@ -36,7 +36,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-
+}
 /* 지도 영역 */
 .mapcard {
   border: 1px solid #4caf50;
@@ -61,7 +61,7 @@
 .tourcard {
   flex: 1;
   height: 550px;
-  overflow-y: auto;
+  overflow-y: auto;}
 .tourcard {
   /* border: 1px solid orange; */
   width: 500px;

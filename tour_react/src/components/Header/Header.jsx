@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from './UserContext';
-import Signup from './Signup';
+import UserContext from '../UserContext/UserContext';
+import Signup from '../Signup/Signup';
 // import '../assets/css/Header.css';
 // import '../assets/css/Modal.css';
 import styles from './Header.module.css';
