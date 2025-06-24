@@ -1,10 +1,10 @@
 // 📁 src/router/Router.jsx
 import { Routes, Route } from 'react-router-dom';
+import { UserProvider } from '../components/UserContext';
 import Layout from '../components/Layout';
 import MainPage from '../page/MainPage';
 import DetailPage from '../page/DetailPage';
-import Map from '../page/Map';
-import FestivalPage from '../page/FestivalPage';
+import Map from '../page/map';
 import ImageGallery from '../page/ImageGallery';
 import KakaoRedirect from '../page/KakaoRedirect';
 import Mypage from '../page/Mypage';
@@ -16,11 +16,11 @@ import BoardPage from '../page/Board/BoardPage';
 
 export default function AppRouter() {
   return (
+    <UserProvider>
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<MainPage />} />
         <Route path="/detail/:id" element={<DetailPage />} />
-        <Route path="/festival" element={<FestivalPage />} />
         <Route path="/map" element={<Map />} />
         <Route path="/image-gallery" element={<ImageGallery />} />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
@@ -35,5 +35,6 @@ export default function AppRouter() {
         {/* <Route path="/imagePOP/:id" element={<ImagePOP />} /> */}
       </Route>
     </Routes>
+    </UserProvider>
   );
 }

@@ -1,28 +1,29 @@
-/* 상세페이지 */
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import places from '../assets/js/places.js';
 import '../assets/css/Detail.css';
 
-
 const Detailpage = () => {
   const { id } = useParams();
   const place = places.find(p => p.id === parseInt(id));
+
   const [activeTab, setActiveTab] = useState("photo");
+  /* 좋아요 */
   const [likes,setLikes] = useState(0);
   const [liked, setLiked] = useState(false);
   const [showFeedback, setShowFeedback] = useState(false);
+  /* 공유 */
   const [shares, setShares] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
 
-
   if (!place) return <div>해당 여행지를 찾을 수 없습니다.</div>;
 
- const handleLike = () => {
-  setLikes(prev => prev + 1);
-  setShowFeedback(true);
-  setTimeout(() => setShowFeedback(false), 2000);
-};
+  /* 좋아요 핸들러 */
+  const handleLike = () => {
+    setLikes(prev => prev + 1);
+    setShowFeedback(true);
+    setTimeout(() => setShowFeedback(false), 2000);
+  };
 
   const handleBookmark = () => alert("즐겨찾기에 추가되었습니다.");
   const handlePrint = () => window.print();

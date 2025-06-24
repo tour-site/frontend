@@ -6,6 +6,11 @@ import './css/Modal.css';
 import LoginModal from './LoginModal.jsx';
 import SignupModal from './SignupModal.jsx';
 
+const fakeUsers = [
+  { id: 1, username: 'admin', password: '1234', role: 'admin' },
+  { id: 2, username: 'guest', password: '1234', role: 'guest' },
+];
+
 const Header = () => {
   const navigate = useNavigate();
   const [modalMode, setModalMode] = useState(null); // 'login', 'signup', null
@@ -34,6 +39,27 @@ const Header = () => {
   };
   
 
+  const handleLogin = () => {
+    if (!id || !pw) {
+      setError('아이디와 비밀번호 모두 입력해주세요');
+      return;
+    }
+
+    const matchedUser = fakeUsers.find(
+      (user) => user.username === id && user.password === pw
+    );
+
+    if (matchedUser) {
+      setCurrentUser(matchedUser);
+      localStorage.setItem('currentUser', JSON.stringify(matchedUser));
+      setError('');
+      closeModal();
+      navigate('/');
+    } else {
+      setError('아이디 또는 비밀번호가 올바르지 않습니다');
+    }
+  };
+
   return (
     <header className="navbar">
       <div className="logo" onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
@@ -44,8 +70,7 @@ const Header = () => {
         <ul className="nav-list">
           <li onClick={() => navigate('/map')}>지도로 보기</li>
           <li onClick={() => navigate('/image-gallery')}>이미지로 보기</li>
-          <li onClick={() => navigate('/festival')}>축제</li>
-          <li onClick={() => navigate('/recommend')}>최적 코스 추천</li>
+          <li onClick={() => navigate('/board')}>게시판</li>
         </ul>
       </nav>
 

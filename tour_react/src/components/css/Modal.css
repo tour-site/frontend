@@ -16,8 +16,12 @@
   background: white;
   padding: 2rem;
   border-radius: 8px;
-  min-width: 300px;
+  width: 90%;
+  max-width: 600px;              
+  max-height: 80vh;
+  overflow-y: auto;
   text-align: center;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2); /* 선택사항: 입체감 추가 */
 }
 
 .button-group {

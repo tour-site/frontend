@@ -1,161 +1,89 @@
 /* ImageGallery.css */
 
+/* 전체 컨테이너 */
 .gallery-container {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 0 20px;
-  font-family: 'Noto Sans KR', sans-serif;
-  color: #333;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: 'Arial', sans-serif;
   background-color: white;
+  color: black;
 }
 
+/* 타이틀 */
 .gallery-title {
-  font-size: 2.4rem;
-  font-weight: 700;
+  font-size: 42px;
+  margin-top: 30px;
   text-align: center;
-  margin-bottom: 30px;
-  color: #222;
-  user-select: none;
+  /* border: 1px solid red; */
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
 }
 
-.category-slider-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 25px;
-  position: relative;
-  gap: 10px; /* 버튼 간 간격 균일하게 */
-}
-
-.menu-box {
-  display: flex;
-  overflow-x: auto;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none;  /* IE, Edge */
-  max-width: 90%;
-  gap: 10px;
-}
-
-.menu-box::-webkit-scrollbar {
-  display: none;
-}
-
-.menu-btn {
-  flex: 0 0 auto;
-  padding: 10px 18px;
-  border: 1.5px solid #bbb;
-  border-radius: 25px;
-  background: white;
-  color: #555;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  user-select: none;
-}
-
-.menu-btn:hover {
-  border-color: #007bff;
-  color: #007bff;
-}
-
-.menu-btn.active {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: white;
-  font-weight: 700;
-}
-
-.arrow-btn {
-  background-color: #007bff;
-  border: none;
-  color: white;
-  font-size: 24px;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s ease;
-  display: flex;           /* 추가 */
-  align-items: center;     /* 추가 */
-  justify-content: center; /* 추가 */
-  margin: 0;
-}              
-
-.arrow-btn:hover {
-  background-color: #0056b3;
-}
-
-.arrow-btn.left {
-  margin-right: 10px; /* 오른쪽 마진만 줘서 균일 */
-}
-
-.arrow-btn.right {
-  margin-left: 10px; /* 왼쪽 마진만 줘서 균일 */
-}
-
+/* 이미지 카드 */
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4개 고정 */
-  gap: 18px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
 }
 
 .image-card {
-  border-radius: 10px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid black;
-  background: white;
-  transition: transform 0.3s ease;
-  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
 }
 
 .image-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 15px rgb(0 0 0 / 0.2);
+  transform: scale(1.02);
 }
 
 .image-card img {
   width: 100%;
-  height: 140px;
+  height: 180px;
   object-fit: cover;
-  display: block;
 }
 
-.image-card p {
-  padding: 10px 12px;
-  font-size: 16px;
-  text-align: center;
-  color: #444;
-  user-select: none;
+/* 이미지 하단 설명 및 좋아요 */
+.image-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  font-size: 14px;
+  background-color: #fafafa;
+  border-top: 1px solid #eee;
 }
 
-.load-more-btn {
-  padding: 10px 28px;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  font-weight: 600;
-  border-radius: 25px;
+.heart-icon {
+  font-size: 20px;
+  color: #bbb;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  user-select: none;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.heart-icon:hover {
+  transform: scale(1.2);
+}
+
+.heart-icon.liked {
+  color: red;
+}
+
+/* 더보기 버튼 */
+.load-more-btn {
+  padding: 10px 20px;
+  font-size: 15px;
+  border: none;
+  border-radius: 20px;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .load-more-btn:hover {
-  background-color: #0056b3;
-}
-
-/* 반응형 */
-
-@media (max-width: 900px) {
-  .image-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 600px) {
-  .image-grid {
-    grid-template-columns: 1fr;
-  }
+  background-color: #388e3c;
 }

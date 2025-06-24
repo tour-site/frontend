@@ -1,16 +1,16 @@
-/* htaml 전반 스크롤  */
-html{
-  scroll-behavior: smooth;
+@font-face {
+  font-family: "myfont_bold";
+  src: url("../font/MaruBuri-semiBold.ttf");
 }
-/* 전체 콘텐츠 박스 */
+
 #content {
   max-width: 940px;
   margin: 0 auto;
   padding: 30px 20px;
-  font-family: 'Noto Sans KR', sans-serif;
   color: #222;
-  background-color: white;
+  /* background-color: white; */
   align-content: center;
+  font-family: "myfont_bold";
 }
 
 /* 상단 제목 */
