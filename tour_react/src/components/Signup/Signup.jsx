@@ -20,12 +20,28 @@ const Signup = ({ closeModal }) => {
   const [emailSent, setEmailSent] = useState(false);
   const [emailVerified, setEmailVerified] = useState(false);
   const [serverCode, setServerCode] = useState('');
+  const [passwordError, setPasswordError] = useState('');
 
   const handleChange = (e) => {
     const { id, value } = e.target;
     setForm((prev) => ({ ...prev, [id]: value }));
 
-    if (id === 'password') checkPasswordStrength(value);
+    if (id === 'password') {
+      checkPasswordStrength(value);
+      if (form.passwordConfirm && value !== form.passwordConfirm) {
+        setPasswordError('비밀번호가 다릅니다.');
+      } else {
+        setPasswordError('');
+      }
+    }
+
+    if (id === 'passwordConfirm') {
+      if (value !== form.password) {
+        setPasswordError('비밀번호가 다릅니다.');
+      } else {
+        setPasswordError('');
+      }
+    }
   };
 
   const checkPasswordStrength = (password) => {
@@ -110,8 +126,10 @@ const Signup = ({ closeModal }) => {
       <form className={styles.signupform} onSubmit={handleSubmit}>
         <div className={styles.formgroup}>
           <label htmlFor="username">아이디</label>
-          <input id="username" type="text" value={form.username} onChange={handleChange} required />
-          <button type="button" onClick={handleCheckId}>중복 확인</button>
+          <div className="input-row">
+            <input id="username" type="text" value={form.username} onChange={handleChange} required />
+            <button type="button" onClick={handleCheckId}>중복 확인</button>
+          </div>
         </div>
 
         <div className={styles.formgroup}>
@@ -125,6 +143,7 @@ const Signup = ({ closeModal }) => {
         <div className={styles.formgroup}>
           <label htmlFor="passwordConfirm">비밀번호 확인</label>
           <input id="passwordConfirm" type="password" value={form.passwordConfirm} onChange={handleChange} required />
+          {passwordError && <small style={{ color: 'red' }}>{passwordError}</small>}
         </div>
 
         <div className={styles.formgroup}>
@@ -139,15 +158,19 @@ const Signup = ({ closeModal }) => {
 
         <div className={styles.formgroup}>
           <label htmlFor="email">이메일</label>
-          <input id="email" type="email" value={form.email} onChange={handleChange} required />
-          <button type="button" onClick={handleSendEmail}>인증 코드 발송</button>
+          <div className="input-row">
+            <input id="email" type="email" value={form.email} onChange={handleChange} required />
+            <button type="button" onClick={handleSendEmail}>인증 코드 발송</button>
+          </div>
         </div>
 
         {emailSent && (
           <div className={styles.formgroup}>
             <label htmlFor="emailCode">인증 코드 입력</label>
-            <input id="emailCode" type="text" value={form.emailCode} onChange={handleChange} required />
-            <button type="button" onClick={handleVerifyEmail}>인증 확인</button>
+            <div className="input-row">
+              <input id="emailCode" type="text" value={form.emailCode} onChange={handleChange} required />
+              <button type="button" onClick={handleVerifyEmail}>인증 확인</button>
+            </div>
           </div>
         )}
 
