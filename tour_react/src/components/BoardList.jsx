@@ -1,12 +1,10 @@
-// 게시글 목록 
-
 import React from 'react';
 import BoardItem from './BoardItem';
 import '../assets/css/BoardList.css';
 
-const BoardList = ({ posts }) => {
+const BoardList = ({ posts, total, indexOffset }) => {
   return (
-    <table className='table'>
+    <table className="table">
       <thead>
         <tr>
           <th>No</th>
@@ -16,11 +14,11 @@ const BoardList = ({ posts }) => {
         </tr>
       </thead>
       <tbody>
-        {posts.map((post, index) => (
+        {posts.map((post, idx) => (
           <BoardItem
             key={post.id}
             post={post}
-            index={posts.length - index}
+            index={total - (indexOffset + idx)}
           />
         ))}
       </tbody>

@@ -38,6 +38,7 @@ const Header = () => {
 
     if (matchedUser) {
       setCurrentUser(matchedUser);
+      localStorage.setItem('currentUser', JSON.stringify(matchedUser));
       setError('');
       closeModal();
       navigate('/');
@@ -90,6 +91,8 @@ const Header = () => {
                 const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
                 if (confirmLogout) {
                   setCurrentUser(null);
+                  localStorage.removeItem('currentUser'); // localStorage에서도 제거
+                  alert('다음에 또 만나요~ 😊');
                   navigate('/');
                 }
               }}

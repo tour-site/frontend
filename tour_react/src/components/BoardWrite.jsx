@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useSearchParams } from 'react-router-dom';
 import '../assets/css/BoardWrite.css';
 
 const BoardWrite = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const authorParam = searchParams.get('author') || '';
+  const [author, setAuthor] = useState(authorParam);
   const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
   const [content, setContent] = useState('');
 
   const handleSubmit = (e) => {
@@ -42,6 +44,12 @@ const BoardWrite = () => {
     window.close();
   };
 
+  const handleReset = () => {
+    setTitle('');
+    setContent('');
+    setAuthor(authorParam); // 작성자는 초기값으로 되돌림
+    };
+
   return (
     <div className='write-container'>
       <h2>✍️ 새 글 작성</h2>
@@ -59,10 +67,9 @@ const BoardWrite = () => {
         <label>
           작성자
           <input
-            type="text"
-            placeholder="작성자를 입력하세요"
+            name="author"
             value={author}
-            onChange={(e) => setAuthor(e.target.value)}
+            readOnly
           />
         </label>
 
@@ -89,6 +96,7 @@ const BoardWrite = () => {
               등록
             </button>
           </div>
+            <button type="button" onClick={handleReset}>초기화</button>
         </div>
       </form>
     </div>
