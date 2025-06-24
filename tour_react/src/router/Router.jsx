@@ -20,7 +20,7 @@ export default function AppRouter() {
     <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<MainPage />} />
-        <Route path="/detail/:id" element={<DetailPage />} />
+        <Route path="/detail/:category/:id" element={<DetailPage />} />
         <Route path="/map" element={<Map />} />
         <Route path="/image-gallery" element={<ImageGallery />} />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />

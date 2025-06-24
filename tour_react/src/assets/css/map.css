@@ -10,6 +10,8 @@
   margin: 0 auto;
   width: 70%;
   font-family: "myfont_bold";
+  background-color: white;
+  color: black;
   /* border: 1px solid red; */
 }
 .title {
@@ -49,7 +51,7 @@
 .tour-card {
   /* border: 1px solid orange; */
   width: 500px;
-  height: 630px;
+  height: 550px;
   box-sizing: border-box;
   padding: 10px 20px;
 }
@@ -79,17 +81,22 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 .card_img {
-  width: 170%;
+  width: 300px;
   object-fit: contain;
 }
 .tour_title {
-  padding: 0;
+  display: block;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px;
+  padding-bottom: 10px;
   margin: 3px;
 }
-.tour_add {
+/* .tour_add {
   font-size: 0.8rem;
   color: #aaa;
-}
+} */
 .btn-more {
   align-items: center;
   padding: 15px 25px;

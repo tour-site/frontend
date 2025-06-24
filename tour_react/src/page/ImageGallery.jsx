@@ -11,6 +11,12 @@ const regions = [
 
 const categories = ['여행지', '맛집', '숙소'];
 
+const categoryApiMap = {
+  여행지: 'place',
+  맛집: 'foods',
+  숙소: 'stays',
+};
+
 const imageData = regions.flatMap((region) =>
   categories.flatMap((category) =>
     Array.from({ length: 5 }, (_, i) => ({
@@ -92,39 +98,41 @@ const ImageGallery = () => {
         </div>
       </div>
 
-      {filteredImages.length === 0 ? (
-        <p style={{ textAlign: 'center', marginTop: 40, fontSize: 18, color: '#666' }}>
-          해당 이미지가 없습니다.
-        </p>
-      ) : (
-        <>
-          <div className="image-grid">
-            {visibleImages.map((img) => (
-              <div key={img.id} className="image-card">
-                <img src={img.src} alt={`${img.region} ${img.category}`} />
-                <div className="image-footer">
-                  <p>{img.region} - {img.category}</p>
-                  <span
-                    className={`heart-icon ${likedImages[img.id] ? 'liked' : ''}`}
-                    onClick={() => toggleLike(img.id)}
-                    role="button"
-                    aria-label="좋아요 버튼"
-                  >
-                    ♥
-                  </span>
+      <div className="listBox">
+        {filteredImages.length === 0 ? (
+          <p style={{ textAlign: 'center', marginTop: 40, fontSize: 18, color: '#666' }}>
+            해당 이미지가 없습니다.
+          </p>
+        ) : (
+          <>
+            <div className="image-grid">
+              {visibleImages.map((img) => (
+                <div key={img.id} className="image-card">
+                  <img src={img.src} alt={`${img.region} ${img.category}`} />
+                  <div className="image-footer">
+                    <p>{img.region} - {img.category}</p>
+                    <span
+                      className={`heart-icon ${likedImages[img.id] ? 'liked' : ''}`}
+                      onClick={() => toggleLike(img.id)}
+                      role="button"
+                      aria-label="좋아요 버튼"
+                    >
+                      ♥
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          {hasMore && (
-            <div style={{ textAlign: 'center', marginTop: 20 }}>
-              <button onClick={toggleExpanded} className="load-more-btn">
-                {expanded ? '접기' : '더보기'}
-              </button>
+              ))}
             </div>
-          )}
-        </>
-      )}
+            {hasMore && (
+              <div style={{ textAlign: 'center', marginTop: 20 }}>
+                <button onClick={toggleExpanded} className="load-more-btn">
+                  {expanded ? '접기' : '더보기'}
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
     </div>
   );
 };

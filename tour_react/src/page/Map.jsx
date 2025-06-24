@@ -14,19 +14,6 @@ const regions = [
 
 const categories = ['여행지', '맛집', '숙소'];
 
-// const imageData = regions.flatMap((region) => 
-//   categories.flatMap((category) =>
-//     Array.from({ length: 5 }, (_, i) => ({
-//       id: `${region}-${category}-${i + 1}`,
-//       src: `image_${region}_${category}_${i + 1}.jpg`,
-//       region,
-//       category,
-//       name: `${region}의 ${category} ${i + 1}번`,
-//       location: `${region} / ${category}`
-//     }))
-//   )
-// );
-
 const categoryApiMap = {
   여행지: 'place',
   맛집: 'foods',
@@ -82,6 +69,17 @@ const Map = () => {
     }
   }, [selectedRegion, selectedCategory]);
 
+  const getRandomItems = (arr, n) => {
+    const shuffled = [...arr].sort(() => 0.5 - Math.random());
+    return shuffled.slice(0, n);
+  };
+
+  const handleClick = (id) => {
+    const category = categoryApiMap[selectedCategory]; // '맛집' → 'foods'
+    if (!category) return; // 선택 안 된 경우 방어 코드
+    navigate(`/detail/${category}/${id}`);
+  };
+
   return (
     <div className="place-list">
       <h2 className="title">지도로 보기</h2>
@@ -131,12 +129,12 @@ const Map = () => {
                 <li
                   key={place.id}
                   className="tour-list"
-                  onClick={() => navigate(`/detail/${place.id}`)}
+                  onClick={() => handleClick(place.id)}
                   style={{ cursor: 'pointer', listStyle: 'none' }}
                 >
                   <img src={place.tour_img || '/img/noimg.png'} alt={place.name} className="card_img" />
                   <p className='tour_title'>{place.name}</p>
-                  <p className='tour_add'>{place.tour_add}</p>
+                  {/* <p className='tour_add'>{place.tour_add}</p> */}
                 </li>
               ))
             )}
