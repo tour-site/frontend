@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'; // useEffect 추가
+// 📁 src/pages/map.jsx
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/Map.css';
-import '../assets/css/Category.css'
-// import '../assets/css/Modal.css';
-import BarLineChar from './BarLineChart.jsx'; 
+import '../assets/css/Category.css';
+import BusanMapSvg from '../components/BusanMapSvg.jsx';
+import BarLineChar from './BarLineChart.jsx';
 import DistrictCategoryChart from './InfraPieChart.jsx';
 
 const regions = [
@@ -14,19 +15,6 @@ const regions = [
 
 const categories = ['여행지', '맛집', '숙소'];
 
-// const imageData = regions.flatMap((region) => 
-//   categories.flatMap((category) =>
-//     Array.from({ length: 5 }, (_, i) => ({
-//       id: `${region}-${category}-${i + 1}`,
-//       src: `image_${region}_${category}_${i + 1}.jpg`,
-//       region,
-//       category,
-//       name: `${region}의 ${category} ${i + 1}번`,
-//       location: `${region} / ${category}`
-//     }))
-//   )
-// );
-
 const categoryApiMap = {
   여행지: 'place',
   맛집: 'foods',
@@ -34,23 +22,16 @@ const categoryApiMap = {
 };
 
 const Map = () => {
-  const [selectedRegion, setSelectedRegion] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedRegions, setSelectedRegions] = useState(['해운대구']);
+  const [selectedCategory, setSelectedCategory] = useState('여행지');
   const [placeList, setPlaceList] = useState([]);
   const navigate = useNavigate();
-  /* 년, 월 선택 */
+
   const [year, setYear] = useState(2024);
   const [month, setMonth] = useState(12);
-  /* 구 선택 */
+
   const [districtList, setDistrictList] = useState([]);
-  const [selectedDistrict, setSelectedDistrict] = useState('부산진구'); // 변수명 수정
-
-  const years = [];
-  for (let y = 2005; y <= 2024; y++) {
-    years.push(y);
-  }
-
-  const months = Array.from({ length: 12 }, (_, i) => i + 1);
+  const [selectedDistrict, setSelectedDistrict] = useState('부산진구');
 
   useEffect(() => {
     fetch('/api/infra/districts')
@@ -60,41 +41,50 @@ const Map = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedRegion && selectedCategory) {
-      const endpoint = categoryApiMap[selectedCategory];
-      fetch(`/api/${endpoint}?city=${selectedRegion}`)
-        .then((res) => res.json())
-        .then((data) => {
-          const result = data.data || data; // 배열 바로 또는 객체.data 형태 대응
-          if (Array.isArray(result)) {
-            setPlaceList(result);
-          } else {
-            console.error("placeList 응답이 배열이 아님:", result);
-            setPlaceList([]);
-          }
-        })
-        .catch((err) => {
-          console.error("데이터 로드 실패:", err);
-          setPlaceList([]);
-        });
-    } else {
-      setPlaceList([]);
-    }
-  }, [selectedRegion, selectedCategory]);
+    const fetchAll = async () => {
+      let all = [];
+      for (const region of selectedRegions) {
+        const endpoint = categoryApiMap[selectedCategory];
+        const res = await fetch(`/api/${endpoint}?city=${region}`);
+        const data = await res.json();
+        const result = data.data || data;
+        if (Array.isArray(result)) all = [...all, ...result];
+      }
+      setPlaceList(all);
+    };
+
+    if (selectedRegions.length > 0 && selectedCategory) fetchAll();
+    else setPlaceList([]);
+  }, [selectedRegions, selectedCategory]);
+
+  const years = Array.from({ length: 20 }, (_, i) => 2005 + i);
+  const months = Array.from({ length: 12 }, (_, i) => i + 1);
+
+  const handleRegionClick = (region) => {
+    setSelectedRegions(prev =>
+      prev.includes(region)
+        ? prev.filter(r => r !== region)
+        : [...prev, region]
+    );
+  };
+
+  const clearSelectedRegions = () => {
+    setSelectedRegions([]);
+  };
 
   return (
     <div className="place-list">
       <h2 className="title">지도로 보기</h2>
 
-      {/* 카테고리 */}
+      {/* 카테고리 버튼 */}
       <div className="categorybox">
         <div className="region-wrapper">
           <div className="region-container">
             {regions.map((region) => (
               <button
                 key={region}
-                className={`region-btn ${selectedRegion === region ? 'active' : ''}`}
-                onClick={() => setSelectedRegion(region === selectedRegion ? '' : region)}
+                className={`region-btn ${selectedRegions.includes(region) ? 'active' : ''}`}
+                onClick={() => handleRegionClick(region)}
               >
                 {region}
               </button>
@@ -108,7 +98,7 @@ const Map = () => {
               <button
                 key={cat}
                 className={`menu-btn ${selectedCategory === cat ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat === selectedCategory ? '' : cat)}
+                onClick={() => setSelectedCategory(cat)}
               >
                 {cat}
               </button>
@@ -116,12 +106,19 @@ const Map = () => {
           </div>
         </div>
       </div>
-      
-      {/* 리스트 카드 */}
+
+      {/* 지도 + 카드 */}
       <div className="middle-box">
         <div className="map-card">
-          <p>지도</p>
+          <BusanMapSvg
+            selectedGuList={selectedRegions}
+            setSelectedGuList={setSelectedRegions}
+          />
+          <div style={{ textAlign: 'right', marginTop: '10px' }}>
+            <button className="region-btn clear-btn" onClick={clearSelectedRegions}>전체 해제</button>
+          </div>
         </div>
+
         <div className="tour-card">
           <ul className="tour-grid">
             {placeList.length === 0 ? (
@@ -142,15 +139,16 @@ const Map = () => {
             )}
           </ul>
           {placeList.length > 4 && (
-              <button className="btn-more" onClick={() => navigate('/image-gallery', {
-                state: { selectedRegion, selectedCategory }
-              })}>
-                더보기
-              </button>
+            <button className="btn-more" onClick={() => navigate('/image-gallery', {
+              state: { selectedRegions, selectedCategory }
+            })}>
+              더보기
+            </button>
           )}
         </div>
-      </div>    
+      </div>
 
+      {/* 시각화 영역 */}
       <div className="DataBox">
         <div className="DataArea">
           <div className="Data_select">
