@@ -7,8 +7,8 @@ export default defineConfig({
   server: {
     port: 5173,
     proxy: {
-      '/api': {
-        target: 'http://localhost:8100',// 포트 맞춰주기
+      '/api': { 
+        target: 'http://localhost:8010',// 포트 맞춰주기 기윤: 8010 , 정민 : 8100
         changeOrigin: true,
         // rewrite: path => path.replace(/^\/api/, '')
       }
