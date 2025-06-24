@@ -1,10 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../UserContext/UserContext';
-import Signup from '../Signup/Signup';
-import Modal from '../Modal/Modal';
+import { UserContext } from './UserContext';
+import Signup from './Signup';
+// import '../assets/css/Header.css';
+// import '../assets/css/Modal.css';
 import styles from './Header.module.css';
-// import styles from './Modal.module.css';
 
 const fakeUsers = [
   { id: 1, username: 'admin', password: '1234', role: 'admin' },
@@ -13,19 +13,31 @@ const fakeUsers = [
 
 const Header = () => {
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const [modalMode, setModalMode] = useState(null); // 'login', 'signup', null
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [logoutTrigger, setLogoutTrigger] = useState(false); // ✅ 로그아웃 후 재검증 유도
 
-  const [modalMode, setModalMode] = useState(null);
-  const [id, setId] = useState('');
-  const [pw, setPw] = useState('');
-  const [error, setError] = useState('');
+  // ✅ 로그인 상태 확인
+  useEffect(() => {
+    axiosInstance.get('/api/member/mypage')
+      .then(() => setIsLoggedIn(true))
+      .catch(() => setIsLoggedIn(false));
+  }, [modalMode, logoutTrigger]); // 모달 변경 또는 로그아웃 후 트리거로 상태 재확인
 
-  const closeModal = () => {
-    setModalMode(null);
-    setId('');
-    setPw('');
-    setError('');
+  const closeModal = () => setModalMode(null);
+
+  const handleLogout = async () => {
+    try {
+      await axiosInstance.post('/api/member/logout');
+      setIsLoggedIn(false); // 즉시 UI 반영
+      setLogoutTrigger(prev => !prev); // 상태 트리거
+      alert('로그아웃 되었습니다.');
+      navigate('/'); // ✅ 로그아웃 후 홈으로 이동
+    } catch {
+      alert('로그아웃 실패');
+    }
   };
+  
 
   const handleLogin = () => {
     if (!id || !pw) {
@@ -69,78 +81,31 @@ const Header = () => {
       </nav>
 
       <div className={styles.authbuttons}>
-        {currentUser ? (
-          <div className={styles.userinfo}>
-            <span>{currentUser.username}님 환영합니다!</span>
-            {currentUser?.role === 'guest' && (
-              <button
-                className={styles.mypagebtn}
-                onClick={() =>
-                  navigate('/mypage', {
-                    state: {
-                      id: currentUser.username,
-                      password: currentUser.password,
-                    },
-                  })
-                }
-              >
-                마이페이지
-              </button>
-            )}
-            <button
-              onClick={() => {
-                const confirmLogout = window.confirm('로그아웃 하시겠습니까?');
-                if (confirmLogout) {
-                  setCurrentUser(null);
-                  localStorage.removeItem('currentUser'); // localStorage에서도 제거
-                  alert('다음에 또 만나요~ 😊');
-                  navigate('/');
-                }
-              }}
-            >
-              로그아웃
-            </button>
-          </div>
+        {isLoggedIn ? (
+          <>
+            <button className={styles.mypagebtn} onClick={() => navigate('/mypage')}>마이페이지</button>
+            <button onClick={handleLogout}>로그아웃</button>
+          </>
         ) : (
           <>
-            <button className={styles.loginbtn} onClick={() => setModalMode('login')}>
-              로그인
-            </button>
-            <button className={styles.signupbtn} onClick={() => setModalMode('signup')}>
-              회원가입
-            </button>
+            <button className={styles.loginbtn} onClick={() => setModalMode('login')}>로그인</button>
+            <button className={styles.signupbtn} onClick={() => setModalMode('signup')}>회원가입</button>
           </>
         )}
-
-        <Modal isOpen={!!modalMode} onClose={closeModal}>
-              {modalMode === 'signup' ? (
-                <Signup closeModal={closeModal} />
-              ) : (
-                <>
-                  <h2>로그인</h2>
-                  <input
-                    type="text"
-                    className={styles.inputfield}
-                    placeholder="아이디"
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
-                  />
-                  <input
-                    type="password"
-                    className={styles.inputfield}
-                    placeholder="비밀번호"
-                    value={pw}
-                    onChange={(e) => setPw(e.target.value)}
-                  />
-                  {error && <p className={styles.errormessage}>{error}</p>}
-                  <div className={styles.buttongroup}>
-                    <button onClick={handleLogin}>로그인</button>
-                    <button onClick={() => setModalMode('signup')}>회원가입</button>
-                  </div>
-                </>
-              )}
-        </Modal>
       </div>
+
+      {modalMode === 'login' && (
+        <LoginModal
+          closeModal={closeModal}
+          switchToSignup={() => setModalMode('signup')}
+        />
+      )}
+      {modalMode === 'signup' && (
+        <SignupModal
+          closeModal={closeModal}
+          switchToLogin={() => setModalMode('login')}
+        />
+      )}
     </header>
   );
 };

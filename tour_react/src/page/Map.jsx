@@ -1,13 +1,11 @@
 // 📁 src/pages/map.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './map.module.css';
-// import '../assets/css/Map.css';
-// import '../assets/css/Modal.css';
-import places from '../assets/js/places.js';
+import '../assets/css/Map.css';
+import '../assets/css/Category.css';
 import BusanMapSvg from '../components/BusanMapSvg.jsx';
-import BarLineChar from '../../components/BarLineChart/BarLineChart.jsx';
-import DistrictCategoryChart from '../../components/InfraPieChart/InfraPieChart.jsx';
+import BarLineChar from './BarLineChart.jsx';
+import DistrictCategoryChart from './InfraPieChart.jsx';
 
 const regions = [
   '강서구', '금정구', '기장군', '남구', '동구',
@@ -75,17 +73,17 @@ const Map = () => {
   };
 
   return (
-    <div className={styles.placelist}>
-      <h2 className={styles.title}>지도로 보기</h2>
+    <div className="place-list">
+      <h2 className="title">지도로 보기</h2>
 
-      <div className={styles.categorybox}>
-        <div className={styles.regionwrapper}>
-          <div className={styles.regioncontainer}>
+      {/* 카테고리 버튼 */}
+      <div className="categorybox">
+        <div className="region-wrapper">
+          <div className="region-container">
             {regions.map((region) => (
               <button
                 key={region}
-                className={ `${styles.filterbtn}
-                  ${selectedRegion === region ? styles.active : ''}`}
+                className={`region-btn ${selectedRegions.includes(region) ? 'active' : ''}`}
                 onClick={() => handleRegionClick(region)}
               >
                 {region}
@@ -94,15 +92,13 @@ const Map = () => {
           </div>
         </div>
 
-        <div className={styles.categorycontainer}>
-          <div className={styles.categorybuttons}>
+        <div className="category-container">
+          <div className="category-buttons">
             {categories.map(cat => (
               <button
                 key={cat}
-                className={`
-                    ${styles.filterbtn}
-                    ${selectedCategory === cat ? styles.active : ''}`.trim()}
-                onClick={() => setSelectedCategory(cat === selectedCategory ? '' : cat)}
+                className={`menu-btn ${selectedCategory === cat ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(cat)}
               >
                 {cat}
               </button>
@@ -123,27 +119,27 @@ const Map = () => {
           </div>
         </div>
 
-        <div className={styles.tourcard}>
-          <ul className={styles.tourgrid}>
+        <div className="tour-card">
+          <ul className="tour-grid">
             {placeList.length === 0 ? (
               <p>선택한 조건에 맞는 장소가 없습니다.</p>
             ) : (
               placeList.slice(0, 4).map((place) => (
                 <li
                   key={place.id}
-                  className={styles.tourlist}
+                  className="tour-list"
                   onClick={() => navigate(`/detail/${place.id}`)}
                   style={{ cursor: 'pointer', listStyle: 'none' }}
                 >
-                  <img src={place.tour_img || '/img/noimg.png'} alt={place.name} className={styles.cardimg} />
-                  <p className={styles.tour_title}>{place.name}</p>
-                  <p className={styles.tour_add}>{place.tour_add}</p>
+                  <img src={place.tour_img || '/img/noimg.png'} alt={place.name} className="card_img" />
+                  <p className='tour_title'>{place.name}</p>
+                  <p className='tour_add'>{place.tour_add}</p>
                 </li>
               ))
             )}
           </ul>
           {placeList.length > 4 && (
-            <button className={styles.btnmore} onClick={() => navigate('/image-gallery', {
+            <button className="btn-more" onClick={() => navigate('/image-gallery', {
               state: { selectedRegions, selectedCategory }
             })}>
               더보기
@@ -152,9 +148,10 @@ const Map = () => {
         </div>
       </div>
 
-      <div className={styles.DataBox}>
-        <div className={styles.DataArea}>
-          <div className={styles.Data_select}>
+      {/* 시각화 영역 */}
+      <div className="DataBox">
+        <div className="DataArea">
+          <div className="Data_select">
             <label>
               <select value={year} onChange={(e) => setYear(Number(e.target.value))}>
                 {years.map((y) => (
@@ -170,12 +167,12 @@ const Map = () => {
               </select>
             </label> 월
           </div>
-          <div className={styles.DataChart}>
+          <div className="DataChart">
             <BarLineChar year={year} month={month} />
           </div>
         </div>
-        <div className={styles.DataArea}>
-          <div className={styles.Data_select}>
+        <div className="DataArea">
+          <div className="Data_select">
             <label>
               <select value={selectedDistrict} onChange={(e) => setSelectedDistrict(e.target.value)}>
                 {districtList.map((d, i) => (
@@ -184,7 +181,7 @@ const Map = () => {
               </select>
             </label>
           </div>
-          <div className={styles.DataChart}>
+          <div className="DataChart">
             <DistrictCategoryChart city={selectedDistrict} />
           </div>
         </div>
