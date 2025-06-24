@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import '../assets/css/ImageGallery.css';
+import '../assets/css/Category.css'
 
 const regions = [
   '강서구', '금정구', '기장군', '남구', '동구',
@@ -61,31 +62,33 @@ const ImageGallery = () => {
     <div className="gallery-container">
       <h2 className="gallery-title">이미지로 보기</h2>
 
-      <div className="region-wrapper">
-        <div className="region-container">
-          {regions.map(region => (
-            <button
-              key={region}
-              className={`region-btn ${selectedRegion === region ? 'active' : ''}`}
-              onClick={() => setSelectedRegion(region)}
-            >
-              {region}
-            </button>
-          ))}
+      <div className="categorybox">
+        <div className="region-wrapper">
+          <div className="region-container">
+            {regions.map(region => (
+              <button
+                key={region}
+                className={`region-btn ${selectedRegion === region ? 'active' : ''}`}
+                onClick={() => setSelectedRegion(region === selectedRegion ? '' : region)}
+              >
+                {region}
+              </button>
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className="category-container">
-        <div className="category-buttons">
-          {categories.map(cat => (
-            <button
-              key={cat}
-              className={`menu-btn ${selectedCategory === cat ? 'active' : ''}`}
-              onClick={() => setSelectedCategory(cat === selectedCategory ? '' : cat)}
-            >
-              {cat}
-            </button>
-          ))}
+        <div className="category-container">
+          <div className="category-buttons">
+            {categories.map(cat => (
+              <button
+                key={cat}
+                className={`menu-btn ${selectedCategory === cat ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(cat === selectedCategory ? '' : cat)}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

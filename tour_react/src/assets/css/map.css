@@ -4,9 +4,13 @@
 }
 /* 화면 전체 */
 .place-list {
-  position: relative;
-  z-index: 1;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  width: 70%;
+  font-family: "myfont_bold";
+  /* border: 1px solid red; */
 }
 .title {
   font-size: 42px;
@@ -18,131 +22,99 @@
   line-height: 80px;
 }
 
-/* 카테고리 영역 */
-.category-box {
-  margin: 0;
-  width: 100%;
-}
-.region-wrapper {
+/* 지도, 리스트 영역 */
+.middle-box {
   display: flex;
-  width: 100%;
   justify-content: center;
-  background:lightgray;
-  /* padding: 10px; */
-  border-radius: 10px;
-  /* box-sizing: border-box; */
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-.region-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-.region-btn {
-  padding: 10px 16px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background-color: #f2f2f2;
-  color: black;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 14px;
-}
-.region-btn:hover {
-  background-color: #ddd;
-}
-.region-btn.active {
-  background-color: #3498db;
-  color: white;
-  border-color: #3498db;
+  align-items: center;
+  /* padding: 50px 0; */
+  gap: 20px;
+  width: 1200px;
+  height: 630px;
+  margin: 20px 0;
+  border: 1px solid purple;
 }
 
-/* 카테고리 왼쪽 정렬 */
-.category-container {
-  text-align: center;
-  margin-bottom: 30px;
-  
-}
-.category-buttons {
-  display: inline-flex;
-  gap: 12px;
-}
-.menu-btn {
-  padding: 8px 16px;
-  border-radius: 20px;
-  background-color: #eee;
-  border: 1px solid #ccc;
-  cursor: pointer;
-  font-size: 14px;
-  transition: 0.3s;
-  color: black;
-}
-.menu-btn.active {
-  background-color: #ff7f50;
-  color: white;
-  border-color: #ff7f50;
-}
-.filter-btn {
-  padding: 10px 16px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background-color: #f2f2f2;
-  color: black;
-  cursor: pointer;
-  transition: 0.3s;
-  font-size: 14px;
-}
-.filter-btn.active {
-  background-color: #3498db;
-  color: white;
-  border-color: #3498db;
+/* 지도 영역 */
+.map-card {
+  border: 1px solid #4caf50;
+  width: 550px;
+  height: 550px;
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
 }
 
 /* 이미지 카드 */
-.middle-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-  width: 100%;
-  height: auto; /* 고정 높이 제거 */
-  margin: 20px 0;
-}
-.map-card,
 .tour-card {
-  flex: 1;
-  height: 550px;
-  overflow-y: auto;
+  /* border: 1px solid orange; */
+  width: 500px;
+  height: 630px;
+  box-sizing: border-box;
+  padding: 10px 20px;
+}
+.tour-card ul {
+  padding: 0;
+  /* margin: 0; */
 }
 .tour-grid {
   display: flex;
+  gap: 15px;
+  justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
-  justify-content: flex-start;
+  text-align: center;
+  /* border: 1px solid blue; */
 }
 .tour-list {
-  width: calc(50% - 10px);
-  margin-bottom: 10px;
-  flex: 0 0 250px;
+  border: 1px solid #bbb;
+  background-color: #fff;
+  width: 48%;
+  /* padding: 10px; */
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: box-shadow 0.3s ease;
+  border-radius: 30px;
 }
 .tour-list:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 .card_img {
-  width: 100%;
+  width: 170%;
+  object-fit: contain;
+}
+.tour_title {
+  padding: 0;
+  margin: 3px;
+}
+.tour_add {
+  font-size: 0.8rem;
+  color: #aaa;
+}
+.btn-more {
+  align-items: center;
+  padding: 15px 25px;
+  font-size: 14px;
+  border: none;
+  border-radius: 30px;
+  background-color: #aaa;
+  color: white;
+  cursor: pointer;
+  margin: 10px auto;      
+  display: block;         
+  transition: background-color 0.3s;
+}
+.btn-more:hover {
+  background-color: #777;
 }
 
 /* 데이터 시각화 영역 */
 .DataBox {
-  /* border: 1px solid #f44336; */
-  /* display: flex; */
-  width: 80%;
-  height: 140vh;
-  margin: 20px 0;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  width: 1200px;
+  height: 1300px;
+  margin: 20px 0;
+  /* border: 1px solid #f44336; */
 }
 .DataArea {
   margin: 30px auto;
