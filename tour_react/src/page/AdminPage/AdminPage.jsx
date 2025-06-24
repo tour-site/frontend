@@ -390,7 +390,7 @@ const AdminPage = () => {
   return (
     <div className={styles.admincontainer} style={{ display: 'flex', minHeight: '100vh' }}>
       <AdminSidebar onSelect={setSelectedMenu} selectedMenu={selectedMenu} />
-      <main className={styles.admin-main} style={{ flexGrow: 1, padding: '20px' }}>
+      <main className={styles.adminmain} style={{ flexGrow: 1, padding: '20px' }}>
         <header
           style={{
             marginBottom: '20px',
