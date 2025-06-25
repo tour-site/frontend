@@ -19,7 +19,8 @@ const Member = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8010/api/members", form);
+      // await axios.post("http://localhost:8010/api/members", form); // 개발시 사용
+      await axios.post("http://localhost:8321/api/members", form);
       alert("회원 등록 성공!");
       setForm({ name: "", email: "", password: "" });
       fetchMembers(); // 등록 후 목록 갱신
@@ -32,7 +33,8 @@ const Member = () => {
   // 회원 목록 조회 요청
   const fetchMembers = async () => {
     try {
-      const res = await axios.get("http://localhost:8010/api/members");
+      // const res = await axios.get("http://localhost:8010/api/members");
+      const res = await axios.get("http://localhost:8321/api/members");
       setMembers(res.data);
     } catch (err) {
       console.error("목록 불러오기 실패:", err);
