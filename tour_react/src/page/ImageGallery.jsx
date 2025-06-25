@@ -26,7 +26,6 @@ const ImageGallery = () => {
   
   const navigate = useNavigate();
 
-  // ✅ 구 다중 선택
   const handleRegionClick = (region) => {
     setSelectedRegions(prev =>
       prev.includes(region)
@@ -35,41 +34,35 @@ const ImageGallery = () => {
     );
   };
 
-  // ✅ 카테고리 단일 선택
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
   };
 
-  // ✅ 상세페이지 이동
   const handleClick = (item) => {
     const category = categoryApiMap[selectedCategory];
     navigate(`/detail/${category}/${item.id}`);
   };
 
-  // ✅ 데이터 불러오기
   useEffect(() => {
     const fetchData = async () => {
-      // 카테고리에 맞는 API endpoint key 얻기
       const categoryKey = categoryApiMap[selectedCategory];
-      if (!categoryKey) return; // 카테고리 없으면 API 호출 안 함
+      if (!categoryKey) return;
 
-      // 선택된 지역이 없으면 전체 지역 목록 사용 (전체 조회)
       const targetRegions = selectedRegions.length > 0 ? selectedRegions : regions;
 
       try {
         let all = [];
-        // 각 지역마다 API 호출하여 데이터를 모음
+
         for (const region of targetRegions) {
           const res = await fetch(`/api/${categoryKey}?city=${region}`);
           const data = await res.json();
-          // API 응답 구조에 따라 data.data 또는 data 자체 사용
           const result = data.data || data;
           if (Array.isArray(result)) all = [...all, ...result];
         }
-        setPlaceList(all); // 모든 지역 데이터를 합쳐서 상태에 저장
+        setPlaceList(all);
       } catch (error) {
         console.error("데이터 불러오기 실패:", error);
-        setPlaceList([]); // 오류 발생 시 빈 배열로 초기화
+        setPlaceList([]);
       }
     };
 
