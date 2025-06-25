@@ -72,6 +72,18 @@ const Map = () => {
     setSelectedRegions([]);
   };
 
+  const handleClick = (id) => {
+    const category = categoryApiMap[selectedCategory]; // '맛집' → 'foods'
+    if (!category) return; // 선택 안 된 경우 방어 코드
+    navigate(`/detail/${category}/${id}`);
+  };
+
+  const handleMoreClick = () => {
+    navigate('/image-gallery', {
+      state: { selectedRegions, selectedCategory }  // 선택된 값 전달
+    });
+  };
+
   return (
     <div className="place-list">
       <h2 className="title">지도로 보기</h2>
@@ -114,8 +126,8 @@ const Map = () => {
             selectedGuList={selectedRegions}
             setSelectedGuList={setSelectedRegions}
           />
-          <div style={{ textAlign: 'right', marginTop: '10px' }}>
-            <button className="region-btn clear-btn" onClick={clearSelectedRegions}>전체 해제</button>
+          <div>
+            <button className="allclean-btn" onClick={clearSelectedRegions}>전체 해제</button>
           </div>
         </div>
 
@@ -128,20 +140,17 @@ const Map = () => {
                 <li
                   key={place.id}
                   className="tour-list"
-                  onClick={() => navigate(`/detail/${place.id}`)}
-                  style={{ cursor: 'pointer', listStyle: 'none' }}
+                  onClick={() => handleClick(place.id)}
                 >
-                  <img src={place.tour_img || '/img/noimg.png'} alt={place.name} className="card_img" />
+                  <img src={place.tour_img || place.food_img || '/img/noimg.png'} alt={place.name} className="card_img" />
                   <p className='tour_title'>{place.name}</p>
-                  <p className='tour_add'>{place.tour_add}</p>
+                  {/* <p className='tour_add'>{place.tour_add}</p> */}
                 </li>
               ))
             )}
           </ul>
           {placeList.length > 4 && (
-            <button className="btn-more" onClick={() => navigate('/image-gallery', {
-              state: { selectedRegions, selectedCategory }
-            })}>
+            <button className="btn-more" onClick={handleMoreClick}>
               더보기
             </button>
           )}

@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useLocation } from "react-router-dom";
-import '../assets/css/ImageGallery.css';
-import '../assets/css/Category.css'
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import "../assets/css/ImageGallery.css";
+import "../assets/css/Category.css";
 
 const regions = [
   '강서구', '금정구', '기장군', '남구', '동구',
@@ -11,52 +11,71 @@ const regions = [
 
 const categories = ['여행지', '맛집', '숙소'];
 
-const imageData = regions.flatMap((region) =>
-  categories.flatMap((category) =>
-    Array.from({ length: 5 }, (_, i) => ({
-      id: `${region}-${category}-${i + 1}`,
-      src: `image_${region}_${category}_${i + 1}.jpg`,
-      region,
-      category,
-    }))
-  )
-);
+const categoryApiMap = {
+  여행지: 'place',
+  맛집: 'foods',
+  숙소: 'stays',
+};
 
 const ImageGallery = () => {
-  const location = useLocation(); // ✅ 장소에서 state를 받기 위해 추가
-  const scrollRef = useRef(null);
+  const location = useLocation();
+  
+  const [selectedRegions, setSelectedRegions] = useState(location.state?.selectedRegions || []);
+  const [selectedCategory, setSelectedCategory] = useState(location.state?.selectedCategory || '여행지');
+  const [placeList, setPlaceList] = useState([]);
+  
+  const navigate = useNavigate();
 
-  // ✅ PlaceList에서 전달받은 초기값 (없으면 기본값 '')
-  const [selectedRegion, setSelectedRegion] = useState(location.state?.selectedRegion || '');
-  const [selectedCategory, setSelectedCategory] = useState(location.state?.selectedCategory || '');
-
-  const [expanded, setExpanded] = useState(false);
-  const [likedImages, setLikedImages] = useState({});
-  const IMAGES_PER_PAGE = 4;
-
-  const filteredImages = imageData.filter(
-    (img) =>
-      (!selectedRegion || img.region === selectedRegion) &&
-      (!selectedCategory || img.category === selectedCategory)
-  );
-
-  const visibleImages = expanded ? filteredImages : filteredImages.slice(0, IMAGES_PER_PAGE);
-  const hasMore = filteredImages.length > IMAGES_PER_PAGE;
-
-  const toggleExpanded = () => setExpanded(prev => !prev);
-
-  const toggleLike = (id) => {
-    const alreadyLiked = likedImages[id];
-    if (alreadyLiked) {
-      if (window.confirm("좋아요가 취소되었습니다.")) {
-        setLikedImages(prev => ({ ...prev, [id]: false }));
-      }
-    } else {
-      if (window.confirm("좋아요를 누르셨습니다.")) {
-        setLikedImages(prev => ({ ...prev, [id]: true }));
-      }
-    }
+  // ✅ 구 다중 선택
+  const handleRegionClick = (region) => {
+    setSelectedRegions(prev =>
+      prev.includes(region)
+        ? prev.filter(r => r !== region)
+        : [...prev, region]
+    );
   };
+
+  // ✅ 카테고리 단일 선택
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  // ✅ 상세페이지 이동
+  const handleClick = (item) => {
+    const category = categoryApiMap[selectedCategory];
+    navigate(`/detail/${category}/${item.id}`);
+  };
+
+  // ✅ 데이터 불러오기
+  useEffect(() => {
+    const fetchData = async () => {
+      // 카테고리에 맞는 API endpoint key 얻기
+      const categoryKey = categoryApiMap[selectedCategory];
+      if (!categoryKey) return; // 카테고리 없으면 API 호출 안 함
+
+      // 선택된 지역이 없으면 전체 지역 목록 사용 (전체 조회)
+      const targetRegions = selectedRegions.length > 0 ? selectedRegions : regions;
+
+      try {
+        let all = [];
+        // 각 지역마다 API 호출하여 데이터를 모음
+        for (const region of targetRegions) {
+          const res = await fetch(`/api/${categoryKey}?city=${region}`);
+          const data = await res.json();
+          // API 응답 구조에 따라 data.data 또는 data 자체 사용
+          const result = data.data || data;
+          if (Array.isArray(result)) all = [...all, ...result];
+        }
+        setPlaceList(all); // 모든 지역 데이터를 합쳐서 상태에 저장
+      } catch (error) {
+        console.error("데이터 불러오기 실패:", error);
+        setPlaceList([]); // 오류 발생 시 빈 배열로 초기화
+      }
+    };
+
+    fetchData();
+  }, [selectedRegions, selectedCategory]);
+
 
   return (
     <div className="gallery-container">
@@ -68,8 +87,8 @@ const ImageGallery = () => {
             {regions.map(region => (
               <button
                 key={region}
-                className={`region-btn ${selectedRegion === region ? 'active' : ''}`}
-                onClick={() => setSelectedRegion(region === selectedRegion ? '' : region)}
+                className={`region-btn ${selectedRegions.includes(region) ? 'active' : ''}`}
+                onClick={() => handleRegionClick(region)}
               >
                 {region}
               </button>
@@ -83,7 +102,7 @@ const ImageGallery = () => {
               <button
                 key={cat}
                 className={`menu-btn ${selectedCategory === cat ? 'active' : ''}`}
-                onClick={() => setSelectedCategory(cat === selectedCategory ? '' : cat)}
+                onClick={() => handleCategoryClick(cat)}
               >
                 {cat}
               </button>
@@ -92,39 +111,22 @@ const ImageGallery = () => {
         </div>
       </div>
 
-      {filteredImages.length === 0 ? (
-        <p style={{ textAlign: 'center', marginTop: 40, fontSize: 18, color: '#666' }}>
-          해당 이미지가 없습니다.
-        </p>
-      ) : (
-        <>
+      <div className="listBox">
+        {placeList.length === 0 ? (
+          <p style={{ textAlign: 'center', marginTop: 40, fontSize: 18, color: '#666' }}>
+            페이지 로딩중...
+          </p>
+        ) : (
           <div className="image-grid">
-            {visibleImages.map((img) => (
-              <div key={img.id} className="image-card">
-                <img src={img.src} alt={`${img.region} ${img.category}`} />
-                <div className="image-footer">
-                  <p>{img.region} - {img.category}</p>
-                  <span
-                    className={`heart-icon ${likedImages[img.id] ? 'liked' : ''}`}
-                    onClick={() => toggleLike(img.id)}
-                    role="button"
-                    aria-label="좋아요 버튼"
-                  >
-                    ♥
-                  </span>
-                </div>
+            {placeList.map(item => (
+              <div key={item.id} className="image-card" onClick={() => handleClick(item)}>
+                <img src={item.tour_img || item.food_img || '/img/noimg.png'} alt={item.name} />
+                <p className="image-title">{item.name}</p>
               </div>
             ))}
           </div>
-          {hasMore && (
-            <div style={{ textAlign: 'center', marginTop: 20 }}>
-              <button onClick={toggleExpanded} className="load-more-btn">
-                {expanded ? '접기' : '더보기'}
-              </button>
-            </div>
-          )}
-        </>
-      )}
+        )}
+      </div>
     </div>
   );
 };
