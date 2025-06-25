@@ -1,0 +1,265 @@
+/* 전체 레이아웃 */
+.admincontainer {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+/* 사이드바 */
+.adminsidebar {
+  width: 220px;
+  background-color: #2f3e46;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+.adminsidebar h2 {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.adminsidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.adminsidebar nav ul li {
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: 600;
+  user-select: none;
+}
+
+.adminsidebar nav ul li:hover {
+  background-color: #52796f;
+}
+
+.adminsidebar nav ul li.active {
+  background-color: #84a98c;
+  color: #1b4332;
+}
+
+/* 메인 영역 */
+.adminmain {
+  background-color: #fff;
+  box-shadow: 0 0 12px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
+  margin: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 헤더 */
+.adminmain > header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.adminmain > header h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #2f3e46;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.logoutbtn {
+  background-color: #ef233c;
+  border: none;
+  color: #fff;
+  padding: 8px 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutbtn:hover {
+  background-color: #d90429;
+}
+
+/* 검색 영역 */
+.searchcontainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+  gap: 10px;
+  padding-right: 10px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.searchcontainer input[type="text"] {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 1.5px solid #ccc;
+  width: 240px;
+  transition: border-color 0.3s ease;
+}
+
+.searchcontainer input[type="text"]:focus {
+  border-color: #52796f;
+  outline: none;
+}
+
+.searchcontainer button {
+  background-color: #52796f;
+  color: #fff;
+  padding: 8px 16px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.searchcontainer button:hover {
+  background-color: #3b5a40;
+}
+
+/* 입력 및 셀렉트 공통 스타일 */
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+select {
+  padding: 6px 10px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="tel"]:focus,
+input[type="date"]:focus,
+select:focus {
+  outline: none;
+  border-color: #52796f;
+}
+
+button {
+  font-family: inherit;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+button:hover {
+  filter: brightness(0.9);
+}
+
+button:focus,
+input:focus {
+  outline: none;
+}
+
+/* 사용자 관리 테이블 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead tr {
+  background-color: #52796f;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 10px 8px;
+  text-align: center;
+  vertical-align: middle;
+  word-break: break-word;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* 버튼 그룹 (수정, 저장, 삭제 등) */
+td > button {
+  padding: 8px 14px;        /* 패딩 확대 */
+  margin: 0 4px;            /* 버튼 간격 약간 증가 */
+  background-color: #84a98c;
+  color: black;
+  font-weight: 700;         /* 글자 굵기 증가 */
+  font-size: 15px;          /* 글자 크기 약간 키움 */
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  white-space: nowrap;      /* 버튼 텍스트 줄바꿈 방지 */
+  user-select: none;
+}
+
+td > button:hover {
+  background-color: #52796f;
+  color: #fff;
+}
+
+td > button:last-child {
+  background-color: #ef233c;
+  color: #fff;
+}
+
+td > button:last-child:hover {
+  background-color: #d90429;
+}
+
+/* 테이블 내 input, select 스타일 조정 */
+td input,
+td select {
+  font-size: 13px;
+  padding: 4px 6px;
+  border-radius: 4px;
+  border: 1.2px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* 반응형 (간단) */
+@media (max-width: 900px) {
+  .admin-container {
+    flex-direction: column;
+  }
+  .adminsidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 10px;
+  }
+  .adminsidebar nav ul {
+    display: flex;
+    gap: 10px;
+  }
+  .adminsidebar nav ul li {
+    margin-bottom: 0;
+  }
+  .adminmain {
+    margin: 10px;
+  }
+}

@@ -37,7 +37,8 @@ const BoardPage = () => {
               style={{ cursor: "pointer", marginBottom: "1rem" }}
             >
               <h4>{board.title}</h4>
-              <p>{board.content.length > 100 ? board.content.slice(0, 100) + "..." : board.content}</p>
+              {/* <p>{board.content.length > 100 ? board.content.slice(0, 100) + "..." : board.content}</p> */}
+              <p>작성자: {board.writerNickname} ({board.email})</p>
               <p>👍 {board.likeCount} / 💬 {board.commentCount}</p>
               <hr />
             </li>

@@ -1,23 +1,26 @@
 // 📁 src/pages/BoardDetailPage.jsx
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import {
   fetchBoardById,
   fetchComments,
   postComment,
   toggleLike,
+  deleteBoard,
 } from "../../api/boardApi";
+import { UserContext } from "../../components/UserContext";
 
 const BoardDetailPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { currentUser } = useContext(UserContext);
+
   const [board, setBoard] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [memberId] = useState(1); // ❗임시 memberId (나중에 로그인 사용자로 대체)
   const [liked, setLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
 
-  // 게시글 + 좋아요 + 댓글 불러오기
   useEffect(() => {
     fetchBoardById(id)
       .then((res) => {
@@ -47,7 +50,7 @@ const BoardDetailPage = () => {
 
   const handleLikeToggle = async () => {
     try {
-      const res = await toggleLike(id, memberId);
+      const res = await toggleLike(id, currentUser?.id);
       setLiked(res.data.liked);
       setLikeCount(res.data.likeCount);
     } catch (err) {
@@ -55,17 +58,38 @@ const BoardDetailPage = () => {
     }
   };
 
+  const handleDelete = async () => {
+    if (!window.confirm("정말 삭제하시겠습니까?")) return;
+    try {
+      await deleteBoard(id);
+      alert("삭제되었습니다.");
+      navigate("/board");
+    } catch (err) {
+      alert("삭제 실패");
+    }
+  };
+
   if (!board) return <p>로딩 중...</p>;
+
+  const isAuthor = currentUser && currentUser.email === board.email;
 
   return (
     <div style={{ padding: "2rem" }}>
       <h2>{board.title}</h2>
       <p>{board.content}</p>
       <p>🕒 작성일: {new Date(board.createdAt).toLocaleString()}</p>
+      <p>✍️ 작성자: {board.writerNickname} ({board.email})</p>
 
-      <button onClick={handleLikeToggle}>
-        {liked ? "💔 좋아요 취소" : "❤️ 좋아요"} ({likeCount})
-      </button>
+      {/* ✅ 좋아요 + 수정/삭제 버튼 나란히 배치 */}
+      <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "1rem" }}>
+        <button onClick={handleLikeToggle}>
+          {liked ? "💔 좋아요 취소" : "❤️ 좋아요"} ({likeCount})
+        </button>
+        <button onClick={() => navigate(`/board/edit/${id}`)}>수정</button>
+        <button onClick={handleDelete} style={{ color: "red" }}>
+          삭제
+        </button>
+      </div>
 
       <hr />
       <h3>💬 댓글</h3>

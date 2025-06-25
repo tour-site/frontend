@@ -84,6 +84,7 @@ const Header = () => {
           <>
             <button onClick={() => setModalMode('login')}>로그인</button>
             <button onClick={() => setModalMode('signup')}>회원가입</button>
+            <button onClick={()=> navigate('/admin')}>관리자</button>
           </>
         )}
       </div>

@@ -12,7 +12,9 @@ import FindIdPage from '../page/FindIdPage';
 import FindPasswordPage from '../page/FindPasswordPage';
 import BoardWritePage from '../page/Board/BoardWritePage';
 import BoardDetailPage from '../page/Board/BoardDetailPage';
+import BoardEditPage from '../page/Board/BoardEditPage';
 import BoardPage from '../page/Board/BoardPage';
+import AdminPage from '../page/AdminPage/AdminPage';
 
 export default function AppRouter() {
   return (
@@ -27,10 +29,13 @@ export default function AppRouter() {
         <Route path="/mypage" element={<Mypage />} />
         <Route path="/find-id" element={<FindIdPage />} />
         <Route path="/find-password" element={<FindPasswordPage />} />
+        <Route path="/find-password" element={<FindPasswordPage />} />
 
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="/board" element={<BoardPage />} />
         <Route path="/board/write" element={<BoardWritePage />} />
         <Route path="/board/:id" element={<BoardDetailPage />} />
+        <Route path="/board/edit/:id" element={<BoardEditPage />} />
 
         {/* <Route path="/imagePOP/:id" element={<ImagePOP />} /> */}
       </Route>
