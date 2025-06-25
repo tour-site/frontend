@@ -3,7 +3,7 @@ import '../assets/css/BoardEdit.css';
 
 const BoardEdit = ({ post, onUpdate, onCancel }) => {
   const [title, setTitle] = useState(post.title);
-  const [author, setAuthor] = useState(post.author);
+  const [author, setAuthor] = useState(post.role === 'ROLE_ADMIN' ? '관리자' : post.writerNickname);
   const [content, setContent] = useState(post.content);
 
   const handleSubmit = (e) => {
@@ -28,8 +28,8 @@ const BoardEdit = ({ post, onUpdate, onCancel }) => {
         작성자
         <input value={author} readOnly />
         <small style={{ color: '#888', fontSize: '12px', marginTop: '4px' }}>
-            작성자는 수정할 수 없습니다
-         </small>
+          작성자는 수정할 수 없습니다
+        </small>
       </label>
       <label>
         내용

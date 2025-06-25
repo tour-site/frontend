@@ -1,7 +1,7 @@
 // 📁 src/page/BoardEditPage.jsx
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axiosInstance from "../api/axiosInstance";
+import axiosInstance from "../../api/axiosInstance";
 
 export default function BoardEditPage() {
   const { id } = useParams();
