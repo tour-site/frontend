@@ -19,7 +19,7 @@ const Member = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8100/api/members", form);
+      await axios.post("http://localhost:8321/api/members", form);
       // await axios.post("http://localhost:8321/api/members", form);
       alert("회원 등록 성공!");
       setForm({ name: "", email: "", password: "" });
@@ -33,7 +33,7 @@ const Member = () => {
   // 회원 목록 조회 요청
   const fetchMembers = async () => {
     try {
-      const res = await axios.get("http://localhost:8100/api/members");
+      const res = await axios.get("http://localhost:8321/api/members");
       // const res = await axios.get("http://localhost:8321/api/members");
       setMembers(res.data);
     } catch (err) {
