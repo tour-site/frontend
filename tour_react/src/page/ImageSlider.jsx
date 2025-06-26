@@ -6,17 +6,17 @@ const images = [
   {
     src: 'https://mediahub.seoul.go.kr/uploads/mediahub/2024/07/AxsiJwjuNtecjRGqkGzHYCTGlwRIcwyG.jpg',
     subtitle: '청량감 가득 넘치는 여행지 가볼래?',
-    detailPath: '/detail/1',
+    detailPath: '/placecard',
   },
   {
     src: 'https://cdn.myportfolio.com/35d5cde5-c5ca-4160-896e-45dcc7d7c744/7bf1e6e4-e749-4941-a1f9-1223e90e696f_rw_1920.jpg?h=dc77d6133c1de6598971e02f3c24d76c',
     subtitle: '푸른 숲에서의 힐링 타임',
-    detailPath: '/detail/2',
+    detailPath: '/image-gallery',
   },
   {
     src: 'https://img3.yna.co.kr/photo/yna/YH/2022/11/29/PYH2022112907350000500_P4.jpg',
     subtitle: '역사와 만나는 순간',
-    detailPath: '/detail/3',
+    detailPath: '/image-gallery',
   },
 ];
 
