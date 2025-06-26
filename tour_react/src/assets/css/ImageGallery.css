@@ -50,36 +50,46 @@
   /* border: 1px solid brown; */
 }
 .image-card {
+  position: relative;
   border: 1px solid #bbb;
   background-color: #fff;
-  /* width: 100%; */
+  /* width: 95%; */
   /* padding: 10px; */
-  height: 300px;
+  /* text-align: center; */
+  height: 250px;
   overflow: hidden;
   box-sizing: border-box;
   transition: box-shadow 0.3s ease;
   border-radius: 30px;
   cursor: pointer; 
   list-Style: none;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .image-card:hover {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
-.image-card img {
-  width: 500px;
-  object-fit: contain;
+.image-card>img {
+  width: 300px;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
 }
 .image-title {
+  /* position: absolute; */
   display: block;
   white-space: nowrap; 
   overflow: hidden;
   text-overflow: ellipsis;
-  padding: 5px;
-  margin: 3px;
+  /* padding: 5px;
+  margin: 3px; */
 }
 
 /* 더보기 버튼 */
-.load-more-btn {
+/* .load-more-btn {
   padding: 10px 20px;
   font-size: 15px;
   border: none;
@@ -92,4 +102,5 @@
 
 .load-more-btn:hover {
   background-color: #388e3c;
-}
+} */
+
