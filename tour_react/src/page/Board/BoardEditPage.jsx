@@ -1,6 +1,7 @@
 // 📁 src/page/BoardEditPage.jsx
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import '../../assets/css/BoardEdit.css'
 import axiosInstance from "../../api/axiosInstance";
 
 export default function BoardEditPage() {
@@ -34,22 +35,30 @@ export default function BoardEditPage() {
   };
 
   return (
-    <div>
-      <h2>게시글 수정</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="edit-container">
+      <h2>✏️ 게시글 수정</h2>
+      <form onSubmit={handleSubmit} className="edit-form">
         <input
           name="title"
           value={form.title}
           onChange={handleChange}
           placeholder="제목"
+          className="edit-input"
+          required
         />
         <textarea
           name="content"
           value={form.content}
           onChange={handleChange}
           placeholder="내용"
+          className="edit-textarea"
+          rows={10}
+          required
         />
-        <button type="submit">수정하기</button>
+        <div className="edit-buttons">
+          <button type="submit" className="submit-button">수정하기</button>
+          <button type="button" onClick={() => navigate(-1)} className="cancel-button">취소</button>
+        </div>
       </form>
     </div>
   );

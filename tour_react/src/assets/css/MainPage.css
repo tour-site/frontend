@@ -1,7 +1,8 @@
-@font-face {
+/* @font-face {
   font-family: "myfont_bold";
   src: url("../font/MaruBuri-semiBold.ttf");
-}
+} */
+
 .main-page {
   font-family: "myfont_bold";
   padding: 24px;
@@ -41,16 +42,19 @@
 
 .card-list {
   display: flex;
-  flex-wrap: nowrap; /* 한 줄로 가로 정렬 */
+  flex-wrap: nowrap;
+  /* 한 줄로 가로 정렬 */
   gap: 20px;
   overflow-x: auto;
   justify-content: flex-start;
   padding-bottom: 10px;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .card-list::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
+  /* Chrome, Safari, Opera */
 }
 
 .card {
@@ -64,7 +68,8 @@
 }
 
 .card.active {
-  flex: 2; /* 클릭 시 가로로 확장 */
+  flex: 2;
+  /* 클릭 시 가로로 확장 */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
   z-index: 5;
 }
