@@ -45,7 +45,7 @@ function Mypage() {
   // ✅ 게시글 불러오기
   useEffect(() => {
     if (activeTab === 'posts') {
-      axiosInstance.get('/api/mypage/posts')
+      axiosInstance.get('/api/mypage/boards')
         .then(res => setUserPosts(res.data))
         .catch(() => alert('게시글 불러오기 실패'));
     }
@@ -89,6 +89,41 @@ function Mypage() {
     }
   };
 
+  // 닉네임만 별도 수정 (일반/관리자 회원만)
+  const handleNicknameChange = async (e) => {
+    e.preventDefault();
+    if (userType === '카카오 회원') {
+      alert('카카오 회원은 닉네임을 수정할 수 없습니다.');
+      return;
+    }
+    try {
+      await axiosInstance.patch('/api/mypage/nickname', { nickname: formData.nickname });
+      alert('닉네임이 변경되었습니다.');
+      window.location.reload();
+    } catch (error) {
+      alert(error.response?.data || '닉네임 변경에 실패했습니다.');
+    }
+  };
+
+  // 버튼 렌더링 함수
+  const renderButtons = () => {
+    if (user && user.role === 'ROLE_ADMIN') {
+      return (
+        <div className="mypage-button-group">
+          <button type="button" className="mypage-admin-btn" onClick={() => navigate('/admin')}>관리자</button>
+          <button type="button" className="mypage-logout-btn" onClick={logout}>로그아웃</button>
+        </div>
+      );
+    } else {
+      return (
+        <div className="mypage-button-group">
+          <button type="button" className="mypage-mypage-btn" onClick={() => navigate('/mypage')}>마이페이지</button>
+          <button type="button" className="mypage-logout-btn" onClick={logout}>로그아웃</button>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="mypage-wrapper">
       {/* 📌 사이드 메뉴 */}
@@ -107,7 +142,7 @@ function Mypage() {
           <>
             <h2 className="mypage-title">회원정보 수정</h2>
             {user ? (
-              <form className="mypage-form" onSubmit={handleSubmit} encType="multipart/form-data">
+              <form className="mypage-form" onSubmit={userType === '카카오 회원' ? handleSubmit : handleNicknameChange} encType="multipart/form-data">
                 <p className="mypage-type"><strong>회원 유형:</strong> {userType}</p>
                 <label className="mypage-label">이름</label>
                 <input type="text" name="name" value={formData.name} disabled className="mypage-input" />
@@ -116,13 +151,19 @@ function Mypage() {
                 <input type="email" name="email" value={formData.email} disabled className="mypage-input" />
 
                 <label className="mypage-label">닉네임</label>
-                <input type="text" name="nickname" value={formData.nickname} onChange={handleChange} className="mypage-input" />
+                <input type="text" name="nickname" value={formData.nickname} onChange={handleChange} className="mypage-input" disabled={userType === '카카오 회원'} />
+                {userType === '카카오 회원' && (
+                  <div style={{ color: 'gray', fontSize: '0.9em', marginBottom: '10px' }}>
+                    카카오 회원은 닉네임을 수정할 수 없습니다.
+                  </div>
+                )}
 
                 <div className="mypage-button-group">
                   <button type="submit" className="mypage-submit-btn">저장</button>
                   <button type="button" className="mypage-cancel-btn" onClick={() => navigate('/')}>취소</button>
-                  <button type="button" className="mypage-logout-btn" onClick={logout}>로그아웃</button>
+                  {/* 기존 로그아웃 버튼 삭제, 아래에서 분기 렌더링 */}
                 </div>
+                {renderButtons()}
               </form>
             ) : (
               <p className="mypage-loading">불러오는 중...</p>
@@ -161,7 +202,7 @@ function Mypage() {
               <ul className="mypage-comment-list">
                 {userComments.map((comment) => (
                   <li key={comment.id} className="mypage-comment-item">
-                    <p><strong>게시글:</strong> {comment.postTitle}</p>
+                    <p><strong>게시글:</strong> {comment.postTitle || '제목 정보 없음'}</p>
                     <p><strong>댓글 내용:</strong> {comment.content}</p>
                     <p className="mypage-comment-date">{new Date(comment.createdAt).toLocaleString()}</p>
                   </li>

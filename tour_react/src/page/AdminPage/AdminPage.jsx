@@ -48,10 +48,13 @@ const UserManagement = () => {
         ? `/api/admin/members/search?keyword=${keyword}`
         : `/api/admin/members`;
       const { data } = await axios.get(url, { withCredentials: true });
-      const processed = data.map((user) => ({
-        ...user,
-        role: `ROLE_${user.role}`,
-      }));
+      // 'admin' 계정(이메일 또는 닉네임이 'admin')은 목록에서 제외
+      const processed = data
+        .filter(user => user.email !== 'admin' && user.nickname !== 'admin')
+        .map((user) => ({
+          ...user,
+          role: `ROLE_${user.role}`,
+        }));
       setUsers(processed);
       setFilteredUsers(processed);
     } catch (err) {
@@ -206,7 +209,7 @@ const UserManagement = () => {
                   ) : (
                     <>
                       <button onClick={() => handleEditClick(user)}>수정</button>
-                      <button onClick={() => deleteUser(user.id)} style={{marginLeft:4, color:'red'}}>삭제</button>
+                      <button onClick={() => deleteUser(user.id)} style={{ marginLeft: 4, color: 'red' }}>삭제</button>
                     </>
                   )}
                 </td>
