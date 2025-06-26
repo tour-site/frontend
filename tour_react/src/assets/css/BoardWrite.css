@@ -1,74 +1,87 @@
-.write-container {
-  max-width: 700px;
-  margin: 40px auto;
-  padding: 24px;
-  background-color: #fff;
-  color: black;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+.board-write-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f7f9fc;
+  min-height: 100vh;
 }
 
-.write-title {
-  text-align: center;
-  margin-bottom: 24px;
-  font-size: 24px;
+.board-write-container {
+  height: 500px;
+  width: 100%;
+  max-width: 700px;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.board-write-title {
+  font-size: 1.8rem;
   font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
   color: #333;
 }
 
-.write-form {
+.board-write-form {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 1rem;
 }
 
-.write-form label {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  font-weight: 600;
-  font-size: 14px;
-}
-
-.write-form input,
-.write-form textarea {
-  padding: 10px 12px;
+.board-write-input {
+  padding: 0.8rem;
+  font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 15px;
-  width: 100%;
-  box-sizing: border-box;
+  border-radius: 6px;
+}
+
+.board-write-textarea {
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
   resize: vertical;
+  min-height: 200px;
 }
 
-/* 버튼 정렬 및 스타일 */
-.button-row {
+.board-write-buttons {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 1.5rem;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.submit-button-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 1.2rem;
-}
-
-.detail-back-button,
-.submit-button {
-  padding: 10px 16px;
-  background-color: #e0e0e0;
-  color: black;
+.board-write-button {
+  align-self: flex-end;
+  background-color: #4fa1f8;
+  color: white;
+  padding: 0.6rem 1.5rem;
   border: none;
   border-radius: 6px;
-  font-size: 15px;
-  font-weight: 600;
   cursor: pointer;
+  font-weight: bold;
   transition: background-color 0.2s ease;
 }
 
-.detail-back-button:hover,
-.submit-button:hover {
-  background-color: #cfcfcf;
+.board-write-button:hover {
+  background-color: #3e97f7;
+}
+
+.board-write-cancel-btn {
+  align-self: flex-end;
+  background-color: #72b374;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.board-write-cancel-btn:hover {
+  background-color: #49a04d;
 }

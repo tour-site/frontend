@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { createBoard } from "../../api/boardApi";
 import { useNavigate } from "react-router-dom";
+import '../../assets/css/BoardWrite.css';
 
 const BoardWritePage = () => {
   const [title, setTitle] = useState("");
@@ -26,31 +27,32 @@ const BoardWritePage = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>✍️ 글쓰기</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+    <div className="board-write-wrapper">
+      <div className="board-write-container">
+        <h2 className="board-write-title">✍️ 글쓰기</h2>
+        <form onSubmit={handleSubmit} className="board-write-form">
           <input
             type="text"
+            className="board-write-input"
             placeholder="제목을 입력하세요"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            style={{ width: "100%", padding: "0.5rem", marginBottom: "1rem" }}
           />
-        </div>
-        <div>
           <textarea
+            className="board-write-textarea"
             placeholder="내용을 입력하세요"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             rows={10}
-            style={{ width: "100%", padding: "0.5rem" }}
           ></textarea>
-        </div>
-        <button type="submit" style={{ marginTop: "1rem" }}>
-          등록
-        </button>
-      </form>
+          <div className="board-write-buttons">
+          <button type="button" className="board-write-cancel-btn" onClick={() => navigate('/board')}>
+              취소
+            </button>
+          <button type="submit" className="board-write-button">등록</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import "../assets/css/ImageGallery.css";
 import "../assets/css/Category.css";
+import Pagination from '../components/BoardPagination';
 
 const regions = [
   '강서구', '금정구', '기장군', '남구', '동구',
@@ -17,12 +18,15 @@ const categoryApiMap = {
   숙소: 'stays',
 };
 
+const ITEMS_PER_PAGE = 12
+
 const ImageGallery = () => {
   const location = useLocation();
   
   const [selectedRegions, setSelectedRegions] = useState(location.state?.selectedRegions || []);
   const [selectedCategory, setSelectedCategory] = useState(location.state?.selectedCategory || '여행지');
   const [placeList, setPlaceList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
   
   const navigate = useNavigate();
 
@@ -42,6 +46,12 @@ const ImageGallery = () => {
     const category = categoryApiMap[selectedCategory];
     navigate(`/detail/${category}/${item.id}`);
   };
+
+  const totalPages = Math.ceil(placeList.length / ITEMS_PER_PAGE);
+  const paginatedList = placeList.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -69,6 +79,9 @@ const ImageGallery = () => {
     fetchData();
   }, [selectedRegions, selectedCategory]);
 
+  useEffect(() => {
+    setCurrentPage(1); // 필터 변경 시 첫 페이지로 초기화
+  }, [selectedRegions, selectedCategory]);
 
   return (
     <div className="gallery-container">
@@ -111,15 +124,23 @@ const ImageGallery = () => {
           </p>
         ) : (
           <div className="image-grid">
-            {placeList.map(item => (
+            {paginatedList.map(item => (
               <div key={item.id} className="image-card" onClick={() => handleClick(item)}>
                 <img src={item.tour_img || item.food_img || '/img/noimg.png'} alt={item.name} />
                 <p className="image-title">{item.name}</p>
+                {/* <p className="image-add">{item.tour_add || item.food_add || item.stay_add}</p> */}
               </div>
             ))}
           </div>
         )}
       </div>
+
+      <Pagination
+        totalPosts={placeList.length}
+        postsPerPage={12}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 };

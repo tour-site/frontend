@@ -1,212 +1,212 @@
 /* 전체 레이아웃 */
-.page-layout {
+.mypage-wrapper {
   display: flex;
+  justify-content: center;
   align-items: flex-start;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #f6f7f8;
+  min-height: 100vh;
   box-sizing: border-box;
 }
 
-/* 사이드 메뉴 */
-.side-menu {
-  width: 260px;
-  background-color: #1771e6;
-  color: white;
-  padding: 20px;
+/* 사이드바 */
+.mypage-sidebar {
+  width: 200px;
+  background-color: #558fdb0e;
+  /* border:1px solid blue; */
+  color: rgb(3, 3, 3);
+  padding: 1.5rem;
   border-radius: 10px;
-  margin-right: 30px;
-  flex-shrink: 0;
-  box-sizing: border-box;
 }
 
-.side-menu h2 {
+.mypage-sidebar-title {
   font-size: 18px;
-  margin-bottom: 18px;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
-.side-menu ul {
+.mypage-sidebar-menu {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
+  margin: 0;
+  text-align: center;
 }
 
-.side-menu details {
-  margin-bottom: 12px;
-}
-
-.side-menu summary {
-  font-weight: bold;
+.mypage-sidebar-menu li {
+  padding: 10px 0;
   cursor: pointer;
-  padding: 6px 0;
-}
-
-.side-menu li ul li {
-  margin-left: 15px;
-  font-size: 14px;
-  margin-top: 5px;
-  cursor: pointer;
-}
-
-.side-menu details[open] summary {
-  color: #00c3ff;
-}
-
-/* 마이페이지 본문 */
-.mypage-main {
-  flex-grow: 1;
-  box-sizing: border-box;
-}
-
-/* 마이페이지 컨테이너 */
-.mypage-container {
-  width: 100%;
-  padding: 40px;
-  border: 1px solid #ccc;
-  border-radius: 12px;
-  background-color: #ffffff;
-  color: black;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-/* 로그아웃 버튼 */
-.logout-button-area {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-
-.logout-btn {
-  background-color: #e74c3c;
-  color: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
   font-size: 15px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.logout-btn:hover {
-  background-color: #c0392b;
+.mypage-sidebar-menu li:hover,
+.mypage-sidebar-menu .active {
+  background-color: #7878f093;
+  color: #f9fafa;
+  font-weight: bold;
+}
+
+/* 메인 컨테이너 */
+.mypage-container {
+  flex: 1;
+  max-width: 700px;
+  padding: 2rem;
+  background-color: #9eb3f72c;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* 제목과 유형 */
+.mypage-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.mypage-type {
+  text-align: center;
+  font-size: 15px;
+  margin-bottom: 1.5rem;
+}
+
+/* 공통 input, label 스타일 */
+.mypage-label {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.mypage-input {
+  padding: 10px 14px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
 }
 
 /* 폼 */
 .mypage-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  margin-top: 30px;
-}
-
-.upload-btn {
-  padding: 8px 16px;
-  background-color: #3498db;
-  color: white;
-  font-size: 15px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.upload-btn:hover {
-  background-color: #2980b9;
-}
-
-/* 라벨 */
-.mypage-form label {
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-/* 입력/셀렉트 */
-.mypage-form input,
-.mypage-form select {
-  width: 100%;
-  padding: 12px;
-  font-size: 15px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  transition: border-color 0.2s ease;
-  background-color: white;
-  color: black;
-}
-
-.mypage-form input:focus,
-.mypage-form select:focus {
-  border-color: #3498db;
-  outline: none;
+  gap: 1rem;
 }
 
 /* 버튼 그룹 */
-.button-group {
+.mypage-button-group {
   display: flex;
-  justify-content: space-between;
   gap: 10px;
-  margin-top: 25px;
+  margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
-.cancel-btn,
-.submit-btn {
+.mypage-submit-btn,
+.mypage-cancel-btn,
+.mypage-logout-btn {
   flex: 1;
-  padding: 12px 0;
-  font-size: 15px;
+  padding: 10px 16px;
   border: none;
   border-radius: 6px;
+  font-size: 15px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  font-weight: 600;
 }
 
-/* 취소 버튼 */
-.cancel-btn {
-  background-color: #bdc3c7;
+/* 버튼 색상 */
+.mypage-submit-btn {
+  background-color: #4caf50;
   color: white;
 }
 
-.cancel-btn:hover {
-  background-color: #95a5a6;
+.mypage-submit-btn:hover {
+  background-color: #45a049;
 }
 
-/* 제출 버튼 */
-.submit-btn {
-  background-color: #2ecc71;
+.mypage-cancel-btn {
+  background-color: #ccc;
+  color: #333;
+}
+
+.mypage-cancel-btn:hover {
+  background-color: #bbb;
+}
+
+.mypage-logout-btn {
+  background-color: #e74c3c;
   color: white;
 }
 
-.submit-btn:hover {
-  background-color: #27ae60;
+.mypage-logout-btn:hover {
+  background-color: #c0392b;
 }
 
-/* 메시지 */
-.error-message {
-  color: red;
-  margin-top: 12px;
-  font-weight: 500;
-}
-
-.success-message {
-  color: green;
-  margin-top: 12px;
-  font-weight: 500;
-}
-
-.withdrawal-area {
-  margin-top: 30px;
+/* 로딩 메시지 */
+.mypage-loading {
   text-align: center;
+  color: #888;
+  font-size: 15px;
 }
 
-.withdrawal-btn {
-  padding: 10px 20px;
-  background-color: #ff4d4f;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/* 탭 공통 내용 */
+.mypage-tab-content {
+  padding: 1rem 0;
+  color: #333;
 }
 
-.withdrawal-btn:hover {
-  background-color: #e04143;
+/* 게시글 카드 목록 */
+.mypage-post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mypage-post-card {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fefefe;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.mypage-post-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.mypage-post-content {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+.mypage-post-meta {
+  display: flex;
+  gap: 1rem;
+  font-size: 14px;
+  color: #777;
+}
+
+/* 댓글 카드 목록 */
+.mypage-comment-list {
+  list-style: none;
+  padding: 0;
+}
+
+.mypage-comment-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #fefefe;
+}
+
+.mypage-logout-button:hover {
+  background-color: #c0392b;
+}
+
+.mypage-comment-date {
+  font-size: 0.85rem;
+  color: gray;
+  margin-top: 0.5rem;
 }

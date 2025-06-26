@@ -19,7 +19,7 @@ const Member = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:8321/api/members", form); // 개발시 사용
+      await axios.post("http://localhost:8321/api/members", form);
       // await axios.post("http://localhost:8321/api/members", form);
       alert("회원 등록 성공!");
       setForm({ name: "", email: "", password: "" });

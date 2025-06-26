@@ -49,7 +49,7 @@
   background-color: #e69a00;
 }
 
-.pagination {
+/* .pagination {
   margin-top: 24px;
   display: flex;
   align-items: center;
@@ -69,7 +69,7 @@
 
 .pagination button:hover {
   color: #ffac4e;
-}
+} */
 
 .slider-visual {
   flex: 1.3;

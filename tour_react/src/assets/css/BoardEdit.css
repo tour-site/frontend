@@ -1,66 +1,65 @@
+.edit-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  background-color: #9eb3f72c;
+  color: black;
+}
+
 .edit-form {
-  max-width: 700px;
-  margin: 40px auto;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  padding: 24px;
-  background-color: #f9f9f9;
-  color:black;
-  border-radius: 8px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.06);
+  gap: 1rem;
 }
 
-.edit-form label {
-  display: flex;
-  flex-direction: column;
-  font-weight: bold;
-  font-size: 14px;
-  color: #333;
-  gap: 6px;
-}
-
-.edit-form input,
-.edit-form textarea {
-  padding: 10px 12px;
-  font-size: 15px;
+.edit-input {
+  padding: 0.8rem;
+  font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: #fff;
-  color:black
+  border-radius: 6px;
 }
 
-.button-group {
+.edit-textarea {
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  resize: vertical;
+
+}
+
+.edit-buttons {
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 1rem;
 }
 
-.button-group button {
-  padding: 8px 16px;
-  font-weight: bold;
+.submit-button {
+  background-color: #72b374;
+  color: white;
   border: none;
-  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.button-group button[type='submit'] {
-  background-color: #0078d4;
-  color: white;
-}
-
-.button-group button[type='submit']:hover {
-  background-color: #005fa3;
-}
-
-.button-group button[type='button'] {
+.cancel-button {
   background-color: #ccc;
+  color: #333;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-.button-group button[type='button']:hover {
-  background-color: #999;
+.submit-button:hover {
+  background-color: #49a04d;
+}
+
+.cancel-button:hover {
+  background-color: #bbb;
 }
