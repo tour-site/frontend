@@ -10,7 +10,7 @@ const KakaoRedirect = () => {
     const code = new URL(window.location.href).searchParams.get("code");
 
     if (code) {
-      axios.get(`http://localhost:8010/api/auth/kakao?code=${code}`, { //개발시 사용
+      axios.get(`http://localhost:8321/api/auth/kakao?code=${code}`, { //개발시 사용
         // axios.get(`http://localhost:8321/api/auth/kakao?code=${code}`, {
         withCredentials: true, // 쿠키를 사용하기 위해 withCredentials 설정
       })
