@@ -1,9 +1,9 @@
-// 📁 src/pages/AdminPage.jsx
-import React, { useState, useEffect } from 'react';
+// AdminPage.jsx
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import styles from './AdminPage.module.css';
+import '../../assets/css/AdminPage.css'; // 스타일
 
+/* ───────── 사이드바 ───────── */
 const AdminSidebar = ({ onSelect, selectedMenu }) => {
   const menus = [
     { key: 'dashboard', label: '대시보드' },
@@ -14,15 +14,16 @@ const AdminSidebar = ({ onSelect, selectedMenu }) => {
   ];
 
   return (
-    <aside className={styles.adminsidebar}>
+    <aside className="admin-sidebar">
       <h2>관리자 페이지</h2>
       <nav>
         <ul>
           {menus.map((menu) => (
             <li
               key={menu.key}
-              className={`${styles.menuItem} ${selectedMenu === menu.key ? styles.active : ''}`}
+              className={selectedMenu === menu.key ? 'active' : ''}
               onClick={() => onSelect(menu.key)}
+              style={{ cursor: 'pointer' }}
             >
               {menu.label}
             </li>
@@ -33,134 +34,232 @@ const AdminSidebar = ({ onSelect, selectedMenu }) => {
   );
 };
 
+/* ───────── 메뉴별 더미 컴포넌트 ───────── */
+const Dashboard = () => (
+  <div>
+    <h3>대시보드</h3>
+    <p>총 사용자 수: 100명</p>
+    <p>총 게시글 수: 500개</p>
+    <p>최근 활동 요약...</p>
+  </div>
+);
+
+const PostManagement = () => (
+  <div>
+    <h3>게시글 관리</h3>
+    {/* 게시글 목록 및 관리 UI */}
+  </div>
+);
+
+const Stats = () => (
+  <div>
+    <h3>통계 및 리포트</h3>
+    {/* 통계 차트 등 */}
+  </div>
+);
+
+const Settings = () => (
+  <div>
+    <h3>설정</h3>
+    {/* 관리자 설정 UI */}
+  </div>
+);
+
+/* ───────── 사용자 관리 ───────── */
 const UserManagement = () => {
+  const initialUsers = [
+    {
+      memberId: 1,
+      userId: 'hong1234',
+      password: 'pass1234',
+      name: '홍길동',
+      nickname: '길동이',
+      email: 'hong@example.com',
+      gender: '남성',
+      birth: '1990-01-01',
+      phone: '010-1234-5678',
+    },
+    {
+      memberId: 2,
+      userId: 'kim2024',
+      password: 'KimPass!1',
+      name: '김철수',
+      nickname: '철수짱',
+      email: 'kim@example.com',
+      gender: '남성',
+      birth: '1992-02-02',
+      phone: '010-5678-1234',
+    },
+    {
+      memberId: 3,
+      userId: 'lee_yeong',
+      password: 'Lee!9876',
+      name: '이영희',
+      nickname: '영희쨩',
+      email: 'lee@example.com',
+      gender: '여성',
+      birth: '1995-03-03',
+      phone: '010-0000-0000',
+    },
+  ];
+
   const [searchTerm, setSearchTerm] = useState('');
-  const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [users, setUsers] = useState(initialUsers);
+  const [filteredUsers, setFilteredUsers] = useState(initialUsers);
   const [editUserId, setEditUserId] = useState(null);
   const [editFormData, setEditFormData] = useState({});
 
-  // 사용자 목록 조회 (axios)
-  const fetchUsers = async (keyword = '') => {
-    try {
-      const url = keyword
-        ? `/api/admin/members/search?keyword=${keyword}`
-        : `/api/admin/members`;
-      const { data } = await axios.get(url, { withCredentials: true });
-      const processed = data.map((user) => ({
-        ...user,
-        role: `ROLE_${user.role}`,
-      }));
-      setUsers(processed);
-      setFilteredUsers(processed);
-    } catch (err) {
-      alert('사용자 목록 불러오기 실패');
-      console.error(err);
-    }
-  };
-
-  // 사용자 수정 (axios)
-  const updateUser = async (userId, updatedUser) => {
-    try {
-      const payload = {
-        ...updatedUser,
-        role: updatedUser.role.replace('ROLE_', ''),
-      };
-      const { data: updated } = await axios.put(`/api/admin/members/${userId}`, payload, {
-        withCredentials: true,
-      });
-      const updatedRole = `ROLE_${updated.role}`;
-      setUsers((prev) =>
-        prev.map((u) => (u.id === updated.id ? { ...updated, role: updatedRole } : u))
-      );
-      setFilteredUsers((prev) =>
-        prev.map((u) => (u.id === updated.id ? { ...updated, role: updatedRole } : u))
-      );
-      setEditUserId(null);
-    } catch (err) {
-      alert('수정 실패');
-      console.error(err);
-    }
-  };
-
-  // 사용자 삭제 (axios)
-  const deleteUser = async (userId) => {
-    if (!window.confirm('정말 삭제하시겠습니까?')) return;
-    try {
-      await axios.delete(`/api/admin/members/${userId}`, { withCredentials: true });
-      setUsers((prev) => prev.filter((u) => u.id !== userId));
-      setFilteredUsers((prev) => prev.filter((u) => u.id !== userId));
-    } catch (err) {
-      alert('삭제 실패');
-      console.error(err);
-    }
-  };
-
+  /* 검색 */
   const handleSearch = () => {
-    fetchUsers(searchTerm);
+    const keyword = searchTerm.toLowerCase();
+    setFilteredUsers(
+      users.filter(
+        (u) =>
+          u.name.toLowerCase().includes(keyword) ||
+          u.email.toLowerCase().includes(keyword)
+      )
+    );
+    setEditUserId(null);
   };
 
+  /* 수정 모드 진입 */
   const handleEditClick = (user) => {
-    setEditUserId(user.id);
+    setEditUserId(user.memberId);
     setEditFormData({ ...user });
   };
 
+  /* 수정 입력 */
   const handleEditChange = (e) => {
     const { name, value } = e.target;
     setEditFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  /* 저장 */
   const handleSaveClick = () => {
-    updateUser(editUserId, editFormData);
-  };
-
-  const handleCancelClick = () => {
+    setUsers((prev) =>
+      prev.map((u) => (u.memberId === editUserId ? editFormData : u))
+    );
+    setFilteredUsers((prev) =>
+      prev.map((u) => (u.memberId === editUserId ? editFormData : u))
+    );
     setEditUserId(null);
   };
 
-  useEffect(() => {
-    fetchUsers(); // 전체 목록 초기 로딩
-  }, []);
+  /* 취소 */
+  const handleCancelClick = () => setEditUserId(null);
+
+  /* 삭제 + 재인덱싱 */
+  const handleDeleteClick = (memberId) => {
+    if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+    // 1) 삭제
+    const afterDelete = users.filter((u) => u.memberId !== memberId);
+    // 2) 재인덱싱
+    const reIndexed = afterDelete.map((u, idx) => ({
+      ...u,
+      memberId: idx + 1,
+    }));
+    // 3) 상태 반영
+    setUsers(reIndexed);
+
+    const keyword = searchTerm.toLowerCase();
+    setFilteredUsers(
+      reIndexed.filter(
+        (u) =>
+          u.name.toLowerCase().includes(keyword) ||
+          u.email.toLowerCase().includes(keyword)
+      )
+    );
+
+    if (editUserId === memberId) setEditUserId(null);
+  };
 
   return (
     <div>
       <h3>사용자 관리</h3>
-      <div className={styles.searchcontainer}>
+
+      {/* 검색 */}
+      <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
         <input
           type="text"
-          placeholder="이름/이메일/전화번호"
+          placeholder="이름 또는 이메일로 검색"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
+          style={{ padding: '6px', marginRight: '8px' }}
         />
-        <button onClick={handleSearch}>검색</button>
+        <button onClick={handleSearch} style={{ padding: '6px 12px' }}>
+          검색
+        </button>
       </div>
 
-      <table>
+      {/* 테이블 */}
+      <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
         <thead>
-          <tr>
-            <th>ID</th>
-            <th>이메일</th>
+          <tr style={{ backgroundColor: '#f0f0f0' }}>
+            <th>멤버 ID</th>
+            <th>사용자 ID</th>
+            <th>비밀번호</th>
             <th>이름</th>
             <th>닉네임</th>
-            <th>전화번호</th>
-            <th>역할</th>
+            <th>이메일</th>
+            <th>성별</th>
+            <th>생년월일</th>
+            <th>휴대번호</th>
             <th>관리</th>
           </tr>
         </thead>
         <tbody>
-          {filteredUsers.length > 0 ? (
+          {filteredUsers.length ? (
             filteredUsers.map((user) => (
-              <tr key={user.id}>
-                <td>{user.id}</td>
-                <td>{user.email}</td>
-                <td>{user.name}</td>
+              <tr key={user.memberId}>
+                <td style={cellStyle}>{user.memberId}</td>
 
-                <td>
-                  {editUserId === user.id ? (
+                {/* 사용자 ID */}
+                <td style={cellStyle}>
+                  {editUserId === user.memberId ? (
                     <input
-                      type="text"
+                      name="userId"
+                      value={editFormData.userId}
+                      onChange={handleEditChange}
+                    />
+                  ) : (
+                    user.userId
+                  )}
+                </td>
+
+                {/* 비밀번호 */}
+                <td style={cellStyle}>
+                  {editUserId === user.memberId ? (
+                    <input
+                      type="password"
+                      name="password"
+                      value={editFormData.password}
+                      onChange={handleEditChange}
+                    />
+                  ) : (
+                    '*'.repeat(user.password.length)
+                  )}
+                </td>
+
+                {/* 이름 */}
+                <td style={cellStyle}>
+                  {editUserId === user.memberId ? (
+                    <input
+                      name="name"
+                      value={editFormData.name}
+                      onChange={handleEditChange}
+                    />
+                  ) : (
+                    user.name
+                  )}
+                </td>
+
+                {/* 닉네임 */}
+                <td style={cellStyle}>
+                  {editUserId === user.memberId ? (
+                    <input
                       name="nickname"
-                      value={editFormData.nickname || ''}
+                      value={editFormData.nickname}
                       onChange={handleEditChange}
                     />
                   ) : (
@@ -168,44 +267,85 @@ const UserManagement = () => {
                   )}
                 </td>
 
-                <td>
-                  {editUserId === user.id ? (
+                {/* 이메일 */}
+                <td style={cellStyle}>
+                  {editUserId === user.memberId ? (
                     <input
-                      type="tel"
-                      name="phoneNumber"
-                      value={editFormData.phoneNumber || ''}
+                      name="email"
+                      value={editFormData.email}
                       onChange={handleEditChange}
                     />
                   ) : (
-                    user.phoneNumber
+                    user.email
                   )}
                 </td>
 
-                <td>
-                  {editUserId === user.id ? (
+                {/* 성별 */}
+                <td style={cellStyle}>
+                  {editUserId === user.memberId ? (
                     <select
-                      name="role"
-                      value={editFormData.role || ''}
+                      name="gender"
+                      value={editFormData.gender}
                       onChange={handleEditChange}
                     >
-                      <option value="ROLE_USER">일반</option>
-                      <option value="ROLE_ADMIN">관리자</option>
+                      <option value="남성">남성</option>
+                      <option value="여성">여성</option>
                     </select>
                   ) : (
-                    user.role.replace('ROLE_', '')
+                    user.gender
                   )}
                 </td>
 
-                <td>
-                  {editUserId === user.id ? (
+                {/* 생년월일 */}
+                <td style={cellStyle}>
+                  {editUserId === user.memberId ? (
+                    <input
+                      type="date"
+                      name="birth"
+                      value={editFormData.birth}
+                      onChange={handleEditChange}
+                    />
+                  ) : (
+                    user.birth
+                  )}
+                </td>
+
+                {/* 휴대번호 */}
+                <td style={cellStyle}>
+                  {editUserId === user.memberId ? (
+                    <input
+                      name="phone"
+                      value={editFormData.phone}
+                      onChange={handleEditChange}
+                    />
+                  ) : (
+                    user.phone
+                  )}
+                </td>
+
+                {/* 관리 버튼 */}
+                <td style={cellStyle}>
+                  {editUserId === user.memberId ? (
                     <>
-                      <button onClick={handleSaveClick}>저장</button>
+                      <button onClick={handleSaveClick} style={{ marginRight: '5px' }}>
+                        저장
+                      </button>
                       <button onClick={handleCancelClick}>취소</button>
                     </>
                   ) : (
                     <>
-                      <button onClick={() => handleEditClick(user)}>수정</button>
-                      <button onClick={() => deleteUser(user.id)} style={{marginLeft:4}}>삭제</button>
+                      <button
+                        onClick={() => handleEditClick(user)}
+                        style={{ marginRight: '5px' }}
+                      >
+                        수정
+                      </button>
+                      <button
+                        onClick={() => handleDeleteClick(user.memberId)}
+                        style={{ backgroundColor: '#ff6b6b', color: '#fff' }}
+                      >
+                        삭제
+                      </button>
                     </>
                   )}
                 </td>
@@ -213,8 +353,8 @@ const UserManagement = () => {
             ))
           ) : (
             <tr>
-              <td colSpan="7" style={{ textAlign: 'center' }}>
-                사용자 없음
+              <td colSpan="10" style={{ textAlign: 'center', padding: '10px' }}>
+                검색 결과가 없습니다.
               </td>
             </tr>
           )}
@@ -224,47 +364,57 @@ const UserManagement = () => {
   );
 };
 
-const Dashboard = () => (
-  <div>
-    <h3>대시보드</h3>
-    <p>총 사용자 수: ...명</p>
-    <p>총 게시글 수: ...개</p>
-  </div>
-);
+const cellStyle = {
+  padding: '8px',
+  border: '1px solid #ccc',
+  textAlign: 'center',
+};
 
-const PostManagement = () => <div><h3>게시글 관리</h3></div>;
-const Stats = () => <div><h3>통계 및 리포트</h3></div>;
-const Settings = () => <div><h3>설정</h3></div>;
-
+/* ───────── 메인 AdminPage ───────── */
 const AdminPage = () => {
   const [selectedMenu, setSelectedMenu] = useState('dashboard');
   const navigate = useNavigate();
 
   const handleLogout = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
-      document.cookie = 'token=; path=/; max-age=0';
+      // 토큰 제거 등
       navigate('/');
     }
   };
 
   const renderContent = () => {
     switch (selectedMenu) {
-      case 'dashboard': return <Dashboard />;
-      case 'users': return <UserManagement />;
-      case 'posts': return <PostManagement />;
-      case 'stats': return <Stats />;
-      case 'settings': return <Settings />;
-      default: return <Dashboard />;
+      case 'dashboard':
+        return <Dashboard />;
+      case 'users':
+        return <UserManagement />;
+      case 'posts':
+        return <PostManagement />;
+      case 'stats':
+        return <Stats />;
+      case 'settings':
+        return <Settings />;
+      default:
+        return <Dashboard />;
     }
   };
 
   return (
-    <div className={styles.admincontainer}>
+    <div className="admin-container" style={{ display: 'flex', minHeight: '100vh' }}>
       <AdminSidebar onSelect={setSelectedMenu} selectedMenu={selectedMenu} />
-      <main className={styles.adminmain}>
-        <header>
+      <main className="admin-main" style={{ flexGrow: 1, padding: '20px' }}>
+        <header
+          style={{
+            marginBottom: '20px',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
           <h1>{selectedMenu.toUpperCase()}</h1>
-          <button className={styles.logoutbtn} onClick={handleLogout}>로그아웃</button>
+          <button className="logout-btn" onClick={handleLogout}>
+            로그아웃
+          </button>
         </header>
         {renderContent()}
       </main>

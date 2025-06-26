@@ -1,6 +1,10 @@
+@font-face {
+  font-family: "myfont_bold";
+  src: url("../font/MaruBuri-semiBold.ttf");
+}
 /* 전체 레이아웃 */
 .admin-container {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "myfont_bold";
   background-color: #fafafa;
   color: #333;
 }
