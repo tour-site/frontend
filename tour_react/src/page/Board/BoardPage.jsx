@@ -1,9 +1,8 @@
-// 📁 src/pages/BoardPage.jsx
 import React, { useEffect, useState } from "react";
 import { fetchBoards } from "../../api/boardApi";
 import { useNavigate } from "react-router-dom";
 import '../../assets/css/BoardPage.css';
-import Pagination from "./BoardPagination";
+import Pagination from '../../components/BoardPagination';
 
 const BoardPage = () => {
   const [boards, setBoards] = useState([]);
@@ -68,8 +67,6 @@ const BoardPage = () => {
         currentPage={currentPage}
         onPageChange={setCurrentPage}
       />
-
-
     </div>
   );
 };

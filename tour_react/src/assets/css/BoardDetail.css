@@ -1,11 +1,14 @@
-/* 📁 src/assets/css/BoardDetail.css */
-
+@font-face {
+  font-family: "myfont_bold";
+  src: url("../font/MaruBuri-semiBold.ttf");
+} 
 .board-detail-container {
   padding: 1.5rem;
   max-width: 800px;
   margin: 2rem auto;
   background-color: #9eb3f72c;
   border-radius: 8px;
+  font-family: "myfont_bold";
 }
 
 /* 게시글 헤더 (제목, 내용, 작성일) */
@@ -19,8 +22,9 @@
 }
 
 /* 제목 스타일 */
-.board-title {
-  font-size: 1.8rem;
+.board-detail-title {
+  font-size: 2rem;
+  text-align: center;
   font-weight: bold;
   color: #222;
   margin-bottom: 1.2rem;

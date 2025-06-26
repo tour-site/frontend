@@ -1,14 +1,16 @@
-/* Board.css */
-/* src/assets/css/Board.css */
-
+@font-face {
+  font-family: "myfont_bold";
+  src: url("../font/MaruBuri-semiBold.ttf");
+} 
 .board-container {
   max-width: 800px;
   margin: 2rem auto;
   padding: 1.5rem;
+  justify-items: center;
   background-color: #9eb3f72c;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-  font-family: 'Helvetica Neue', sans-serif;
+  font-family: "myfont_bold";
 }
 
 .board-title {
@@ -19,9 +21,11 @@
 }
 
 .write-button-wrapper {
+  width: 100%;
+  font-size: 1.2rem;
   display: flex;
   justify-content: flex-end;
-  margin: 10px 0;
+  /* margin: 10px 0; */
 }
 
 .write-button {
@@ -40,6 +44,7 @@
 ul {
   list-style-type: none;
   padding-left: 0;
+  width: 100%;
 }
 
 li {
@@ -65,7 +70,7 @@ li p {
   font-size: 0.95rem;
 }
 
-.pagination {
+/* .pagination {
   margin-top: 20px;
   justify-content: center;
   align-items: center;
@@ -85,4 +90,4 @@ li p {
   background-color: #007bff;
   color: white;
   border: 1px solid #007bff;
-}
+} */

@@ -1,5 +1,5 @@
 // 📁 src/pages/BoardDetailPage.jsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from '../../api/axiosInstance';
 import '../../assets/css/BoardDetail.css';
@@ -84,7 +84,7 @@ const BoardDetailPage = () => {
   return (
     <div className="board-detail-container">
       <div className="board-detail-header">
-        <h2 className="board-title"> {board.title}</h2>
+        <h2 className="board-detail-title"> {board.title}</h2>
         <p className="board-content">{board.content}</p>
         <p className="board-date">🕒 작성일: {new Date(board.createdAt).toLocaleString()}</p>
       </div>
