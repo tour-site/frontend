@@ -34,6 +34,7 @@
 /* 입력 필드 */
 .input-field {
   width: 100%;
+  height: 50px;
   padding: 10px 12px;
   margin-bottom: 14px;
   border: 1px solid #ccc;

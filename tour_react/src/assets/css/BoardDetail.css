@@ -64,8 +64,9 @@
 
 .board-buttons button {
   padding: 6px 12px;
-  border-radius: 4px;
-  border: none;
+  /* border-radius: 4px; */
+  /* border: none; */
+  height: 40px;
   cursor: pointer;
   background-color: white;
 }

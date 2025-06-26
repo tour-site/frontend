@@ -94,7 +94,7 @@ const BoardDetailPage = () => {
         <button onClick={handleDeleteBoard} style={{ color: "red" }}>🗑️ 삭제</button>
         <button onClick={() => navigate("/board")}>📄 목록으로</button>
         <button onClick={handleLikeToggle}>
-          {liked ? "💔 좋아요 취소" : "❤️ 좋아요"} ({likeCount})
+          {liked ? "❤️ 좋아요" : "❤️ 좋아요"} ({likeCount})
         </button>
       </div>
 

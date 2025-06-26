@@ -19,22 +19,6 @@ import AdminPage from '../page/AdminPage/AdminPage';
 export default function AppRouter() {
   return (
     <UserProvider>
-    {/* <Routes>
-      <Route element={<Layout />}>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/detail/:category/:id" element={<DetailPage />} />
-        <Route path="/map" element={<Map />} />
-        <Route path="/image-gallery" element={<ImageGallery />} />
-        <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
-        <Route path="/mypage" element={<Mypage />} />
-        <Route path="/find-id" element={<FindIdPage />} />
-        <Route path="/find-password" element={<FindPasswordPage />} />
-        <Route path="/find-password" element={<FindPasswordPage />} />
-
-        <Route path="/board" element={<BoardPage />} />
-        <Route path="/board/write" element={<BoardWritePage />} />
-        <Route path="/board/:id" element={<BoardDetailPage />} />
-        <Route path="/board/edit/:id" element={<BoardEditPage />} /> */}
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<MainPage />} />
