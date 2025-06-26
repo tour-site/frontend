@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../assets/css/AdminPage.css'; // 스타일 파일
 
+/* ───────── 사이드바 ───────── */
 const AdminSidebar = ({ onSelect, selectedMenu }) => {
   const menus = [
     { key: 'dashboard', label: '대시보드' },
@@ -32,6 +33,7 @@ const AdminSidebar = ({ onSelect, selectedMenu }) => {
   );
 };
 
+/* ───────── 메뉴별 더미 컴포넌트 ───────── */
 const Dashboard = () => (
   <div>
     <h3>대시보드</h3>
@@ -41,6 +43,28 @@ const Dashboard = () => (
   </div>
 );
 
+const PostManagement = () => (
+  <div>
+    <h3>게시글 관리</h3>
+    {/* 게시글 목록 및 관리 UI */}
+  </div>
+);
+
+const Stats = () => (
+  <div>
+    <h3>통계 및 리포트</h3>
+    {/* 통계 차트 등 */}
+  </div>
+);
+
+const Settings = () => (
+  <div>
+    <h3>설정</h3>
+    {/* 관리자 설정 UI */}
+  </div>
+);
+
+/* ───────── 사용자 관리 ───────── */
 const UserManagement = () => {
   const initialUsers = [
     {
@@ -84,70 +108,76 @@ const UserManagement = () => {
   const [editUserId, setEditUserId] = useState(null);
   const [editFormData, setEditFormData] = useState({});
 
-  // 검색 처리
+  /* 검색 */
   const handleSearch = () => {
     const keyword = searchTerm.toLowerCase();
-    const result = users.filter(
-      (user) =>
-        user.name.toLowerCase().includes(keyword) ||
-        user.email.toLowerCase().includes(keyword)
+    setFilteredUsers(
+      users.filter(
+        (u) =>
+          u.name.toLowerCase().includes(keyword) ||
+          u.email.toLowerCase().includes(keyword)
+      )
     );
-    setFilteredUsers(result);
-    setEditUserId(null); // 검색 시 편집 초기화
+    setEditUserId(null);
   };
 
-  // 수정 버튼 클릭
+  /* 수정 모드 진입 */
   const handleEditClick = (user) => {
     setEditUserId(user.memberId);
     setEditFormData({ ...user });
   };
 
-  // 입력값 변경 처리
+  /* 수정 입력 */
   const handleEditChange = (e) => {
     const { name, value } = e.target;
     setEditFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // 저장 버튼 클릭
+  /* 저장 */
   const handleSaveClick = () => {
-    setUsers((prevUsers) =>
-      prevUsers.map((user) =>
-        user.memberId === editUserId ? { ...editFormData } : user
-      )
+    setUsers((prev) =>
+      prev.map((u) => (u.memberId === editUserId ? editFormData : u))
     );
-    setFilteredUsers((prevUsers) =>
-      prevUsers.map((user) =>
-        user.memberId === editUserId ? { ...editFormData } : user
-      )
+    setFilteredUsers((prev) =>
+      prev.map((u) => (u.memberId === editUserId ? editFormData : u))
     );
     setEditUserId(null);
   };
 
-  // 취소 버튼 클릭
-  const handleCancelClick = () => {
-    setEditUserId(null);
-  };
+  /* 취소 */
+  const handleCancelClick = () => setEditUserId(null);
 
-  // 삭제 버튼 클릭
+  /* 삭제 + 재인덱싱 */
   const handleDeleteClick = (memberId) => {
-    if (window.confirm('정말 삭제하시겠습니까?')) {
-      const newUsers = users.filter((user) => user.memberId !== memberId);
-      setUsers(newUsers);
-      setFilteredUsers(newUsers.filter(
-        (user) =>
-          user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          user.email.toLowerCase().includes(searchTerm.toLowerCase())
-      ));
-      if (editUserId === memberId) {
-        setEditUserId(null);
-      }
-    }
+    if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+    // 1) 삭제
+    const afterDelete = users.filter((u) => u.memberId !== memberId);
+    // 2) 재인덱싱
+    const reIndexed = afterDelete.map((u, idx) => ({
+      ...u,
+      memberId: idx + 1,
+    }));
+    // 3) 상태 반영
+    setUsers(reIndexed);
+
+    const keyword = searchTerm.toLowerCase();
+    setFilteredUsers(
+      reIndexed.filter(
+        (u) =>
+          u.name.toLowerCase().includes(keyword) ||
+          u.email.toLowerCase().includes(keyword)
+      )
+    );
+
+    if (editUserId === memberId) setEditUserId(null);
   };
 
   return (
     <div>
       <h3>사용자 관리</h3>
 
+      {/* 검색 */}
       <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '10px' }}>
         <input
           type="text"
@@ -161,6 +191,7 @@ const UserManagement = () => {
         </button>
       </div>
 
+      {/* 테이블 */}
       <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '14px' }}>
         <thead>
           <tr style={{ backgroundColor: '#f0f0f0' }}>
@@ -177,16 +208,15 @@ const UserManagement = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredUsers.length > 0 ? (
+          {filteredUsers.length ? (
             filteredUsers.map((user) => (
               <tr key={user.memberId}>
                 <td style={cellStyle}>{user.memberId}</td>
 
-                {/* 수정 모드일 때는 input, 아니면 텍스트 출력 */}
+                {/* 사용자 ID */}
                 <td style={cellStyle}>
                   {editUserId === user.memberId ? (
                     <input
-                      type="text"
                       name="userId"
                       value={editFormData.userId}
                       onChange={handleEditChange}
@@ -196,6 +226,7 @@ const UserManagement = () => {
                   )}
                 </td>
 
+                {/* 비밀번호 */}
                 <td style={cellStyle}>
                   {editUserId === user.memberId ? (
                     <input
@@ -209,10 +240,10 @@ const UserManagement = () => {
                   )}
                 </td>
 
+                {/* 이름 */}
                 <td style={cellStyle}>
                   {editUserId === user.memberId ? (
                     <input
-                      type="text"
                       name="name"
                       value={editFormData.name}
                       onChange={handleEditChange}
@@ -222,10 +253,10 @@ const UserManagement = () => {
                   )}
                 </td>
 
+                {/* 닉네임 */}
                 <td style={cellStyle}>
                   {editUserId === user.memberId ? (
                     <input
-                      type="text"
                       name="nickname"
                       value={editFormData.nickname}
                       onChange={handleEditChange}
@@ -235,10 +266,10 @@ const UserManagement = () => {
                   )}
                 </td>
 
+                {/* 이메일 */}
                 <td style={cellStyle}>
                   {editUserId === user.memberId ? (
                     <input
-                      type="email"
                       name="email"
                       value={editFormData.email}
                       onChange={handleEditChange}
@@ -248,6 +279,7 @@ const UserManagement = () => {
                   )}
                 </td>
 
+                {/* 성별 */}
                 <td style={cellStyle}>
                   {editUserId === user.memberId ? (
                     <select
@@ -263,6 +295,7 @@ const UserManagement = () => {
                   )}
                 </td>
 
+                {/* 생년월일 */}
                 <td style={cellStyle}>
                   {editUserId === user.memberId ? (
                     <input
@@ -276,10 +309,10 @@ const UserManagement = () => {
                   )}
                 </td>
 
+                {/* 휴대번호 */}
                 <td style={cellStyle}>
                   {editUserId === user.memberId ? (
                     <input
-                      type="tel"
                       name="phone"
                       value={editFormData.phone}
                       onChange={handleEditChange}
@@ -289,13 +322,11 @@ const UserManagement = () => {
                   )}
                 </td>
 
+                {/* 관리 버튼 */}
                 <td style={cellStyle}>
                   {editUserId === user.memberId ? (
                     <>
-                      <button
-                        onClick={handleSaveClick}
-                        style={{ marginRight: '5px' }}
-                      >
+                      <button onClick={handleSaveClick} style={{ marginRight: '5px' }}>
                         저장
                       </button>
                       <button onClick={handleCancelClick}>취소</button>
@@ -338,34 +369,14 @@ const cellStyle = {
   textAlign: 'center',
 };
 
-const PostManagement = () => (
-  <div>
-    <h3>게시글 관리</h3>
-    {/* 게시글 목록 및 관리 UI */}
-  </div>
-);
-
-const Stats = () => (
-  <div>
-    <h3>통계 및 리포트</h3>
-    {/* 통계 차트 등 */}
-  </div>
-);
-
-const Settings = () => (
-  <div>
-    <h3>설정</h3>
-    {/* 관리자 설정 UI */}
-  </div>
-);
-
+/* ───────── 메인 AdminPage ───────── */
 const AdminPage = () => {
   const [selectedMenu, setSelectedMenu] = useState('dashboard');
   const navigate = useNavigate();
 
   const handleLogout = () => {
     if (window.confirm('로그아웃 하시겠습니까?')) {
-      // 토큰 등 제거 작업 가능
+      // 토큰 제거 등
       navigate('/');
     }
   };
