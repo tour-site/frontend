@@ -1,6 +1,7 @@
 // 📁 src/page/FindIdPage.jsx
 import { useState } from "react";
 import axios from "../api/axiosInstance";
+import "../assets/css/FindIdPage.css";
 
 export default function FindIdPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -21,25 +22,32 @@ export default function FindIdPage() {
     e.preventDefault();
     try {
       const res = await axios.post("/api/member/find-id", { phoneNumber });
-      setResult(res.data.result); // ✅ 여기를 result로 정확히!
+      setResult(res.data.result);
     } catch {
       setResult("일치하는 정보가 없습니다.");
     }
   };
 
   return (
-    <div>
-      <h2>아이디(이메일) 찾기</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="전화번호 (예: 010-1234-5678)"
-          value={phoneNumber}
-          onChange={handleChange}
-        />
-        <button type="submit">아이디 찾기</button>
-      </form>
-      <p>email: {result}</p>
+    <div className="find-id-container">
+      <div className="find-id-box">
+        <h2 className="find-id-title">아이디(이메일) 찾기</h2>
+        <form onSubmit={handleSubmit} className="find-id-form">
+          <input
+            type="text"
+            placeholder="전화번호 (예: 010-1234-5678)"
+            value={phoneNumber}
+            onChange={handleChange}
+            className="find-id-input"
+          />
+          <button type="submit" className="find-id-button">아이디 찾기</button>
+        </form>
+        {result && (
+          <div className="find-id-result">
+            <p>{result}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

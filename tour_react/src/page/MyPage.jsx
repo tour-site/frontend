@@ -115,16 +115,16 @@ function Mypage() {
                 <p className="mypage-type"><strong>회원 유형:</strong> {userType}</p>
                 <form className="mypage-form" onSubmit={handleSubmit} encType="multipart/form-data">
                   <label className="mypage-label">이름</label>
-                  <input type="text" name="name" value={formData.name} onChange={handleChange} required className="mypage-input" />
+                  <input type="text" name="name" value={formData.name} disabled className="mypage-input" />
 
-                  <label className="mypage-label">이메일 (수정 불가)</label>
+                  <label className="mypage-label">이메일</label>
                   <input type="email" name="email" value={formData.email} disabled className="mypage-input" />
 
                   <label className="mypage-label">닉네임</label>
                   <input type="text" name="nickname" value={formData.nickname} onChange={handleChange} className="mypage-input" />
 
-                  <label className="mypage-label">프로필 이미지</label>
-                  <input type="file" name="profileImage" accept="image/*" onChange={handleChange} className="mypage-input" />
+                  {/* <label className="mypage-label">프로필 이미지</label>
+                  <input type="file" name="profileImage" accept="image/*" onChange={handleChange} className="mypage-input" /> */}
 
                   <div className="mypage-button-group">
                     <button type="submit" className="mypage-submit-btn">저장</button>
