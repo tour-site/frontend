@@ -205,7 +205,7 @@ const UserManagement = () => {
                   ) : (
                     <>
                       <button onClick={() => handleEditClick(user)}>수정</button>
-                      <button onClick={() => deleteUser(user.id)} style={{marginLeft:4, color:'red'}}>삭제</button>
+                      <button onClick={() => deleteUser(user.id)} style={{marginLeft:4}}>삭제</button>
                     </>
                   )}
                 </td>
