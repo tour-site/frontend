@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ImageSlider from './ImageSlider'; // 경로 맞게 조정
 import '../assets/css/MainPage.css';

@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom'; // ✅ Link import 추가
 import '../assets/css/ImageSlider.css';
 
 const images = [
   {
     src: 'https://mediahub.seoul.go.kr/uploads/mediahub/2024/07/AxsiJwjuNtecjRGqkGzHYCTGlwRIcwyG.jpg',
     subtitle: '청량감 가득 넘치는 여행지 가볼래?',
-    detailPath: '/placecard',
+    detailPath: '/map',
   },
   {
     src: 'https://cdn.myportfolio.com/35d5cde5-c5ca-4160-896e-45dcc7d7c744/7bf1e6e4-e749-4941-a1f9-1223e90e696f_rw_1920.jpg?h=dc77d6133c1de6598971e02f3c24d76c',
