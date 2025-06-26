@@ -41,30 +41,30 @@
   background-color: #0056b3;
 }
 
-ul {
+.board-container>ul {
   list-style-type: none;
   padding-left: 0;
   width: 100%;
 }
 
-li {
+.board-container>li {
   background-color: #9fb1ca7a;
   padding: 1rem;
   border-radius: 6px;
   transition: background-color 0.2s ease;
 }
 
-li:hover {
+.board-container>li:hover {
   background-color: #f1f1f1;
 }
 
-li h4 {
+.board-container>li h4 {
   margin: 0 0 0.5rem 0;
   font-size: 1.2rem;
   color: #222;
 }
 
-li p {
+.board-container>li p {
   margin: 0.3rem 0;
   color: #666;
   font-size: 0.95rem;
