@@ -22,12 +22,10 @@ const images = [
 
 const ImageSlider = () => {
   const slideCount = images.length;
-  const [currentIndex, setCurrentIndex] = useState(1); // 1부터 시작 (0은 마지막 클론)
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(true);
-  const navigate = useNavigate();
   const sliderTrackRef = useRef(null);
 
-  // 수정: 첫 클론은 images[0] 이어야 함
   const cloneSlides = [images[slideCount - 1], ...images, images[0]];
 
   useEffect(() => {
@@ -40,12 +38,6 @@ const ImageSlider = () => {
   const nextSlide = () => {
     if (currentIndex >= slideCount + 1) return;
     setCurrentIndex((prev) => prev + 1);
-    setIsTransitioning(true);
-  };
-
-  const prevSlide = () => {
-    if (currentIndex <= 0) return;
-    setCurrentIndex((prev) => prev - 1);
     setIsTransitioning(true);
   };
 
@@ -65,13 +57,11 @@ const ImageSlider = () => {
       <div className="slider-text">
         <span className="badge">대한민국구석구석 x TMAP</span>
         <h2>{cloneSlides[currentIndex].subtitle}</h2>
-        <button
-          className="detail-btn"
-          onClick={() => navigate(cloneSlides[currentIndex].detailPath)}
-        >
+        <Link to={cloneSlides[currentIndex].detailPath} className="detail-btn">
           자세히 보기
-        </button>
+        </Link>
       </div>
+
       <div className="slider-visual">
         <div
           className="slider-track"

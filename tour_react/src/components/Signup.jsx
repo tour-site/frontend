@@ -176,7 +176,7 @@ const Signup = ({ closeModal }) => {
 
         <div className="form-group">
           <label htmlFor="gender">성별</label>
-          <select id="gender" value={form.gender} onChange={handleChange} required>
+          <select id="gender" value={form.gender} onChange={handleChange} style={{width: '100%'}} required>
             <option value="">선택</option>
             <option value="남성">남성</option>
             <option value="여성">여성</option>

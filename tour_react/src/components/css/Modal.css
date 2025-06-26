@@ -1,3 +1,4 @@
+/* 배경 오버레이 */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -5,49 +6,100 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* 모달 박스 */
 .modal-content {
-  color: black;
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 600px;              
-  max-height: 80vh;
-  overflow-y: auto;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2); /* 선택사항: 입체감 추가 */
+  background: #fff;
+  padding: 32px 28px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  position: relative;
 }
 
+.modal-content h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 입력 필드 */
+.input-field {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* 버튼 그룹 */
 .button-group {
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: 12px;
+  gap: 10px;
 }
 
 .button-group button {
   flex: 1;
-  margin: 0 4px;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
+.button-group button:hover {
+  background-color: #0056b3;
+}
 
-.input-field {
+/* 에러 메시지 */
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+/* 카카오 로그인 버튼 */
+.modal-content img {
   display: block;
-  margin: 4px; /* 아래쪽 여백을 줘서 간격 확보 */
-  padding: 8px;
-  width: 90%;
+  margin: 10px auto 0;
 }
 
-.error-message{
-  margin:auto;
-  font-size: small;
-  color:rgba(255, 0, 0, 0.651);
+/* 아이디/비밀번호 찾기 */
+.modal-content .find-links {
+  text-align: right;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
 }
 
+.find-links span {
+  color: #007bff;
+  cursor: pointer;
+  margin-left: 10px;
+}
 
-
+.find-links span:hover {
+  text-decoration: underline;
+}

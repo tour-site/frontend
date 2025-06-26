@@ -1,122 +1,123 @@
 /* Signup.css */
 .signup-container {
-  max-width: 500px;
-  margin: 50px auto;
-  padding: 30px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  background-color: #fff;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
-  font-family: 'Noto Sans KR', sans-serif;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  padding: 32px 28px;
+  box-sizing: border-box;
 }
 
 .signup-container h2 {
+  margin: 0 0 24px;
+  font-size: 1.6rem;
   text-align: center;
-  margin-bottom: 25px;
+  font-weight: 700;
   color: #333;
 }
 
 .signup-form .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
 }
 
 .signup-form label {
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #444;
   display: block;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: #444;
 }
 
 .signup-form input,
 .signup-form select {
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
   width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 0.95rem;
   box-sizing: border-box;
   transition: border-color 0.2s;
 }
 
 .signup-form input:focus,
 .signup-form select:focus {
+  border-color: #3b82f6;
   outline: none;
-  border-color: #4a90e2;
-}
-
-.signup-form small {
-  display: block;
-  margin-top: 5px;
-  font-size: 12px;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
 }
 
 .input-row {
   display: flex;
-  gap: 10px;
-  margin-top: 6px;
+  gap: 8px;
 }
 
 .input-row input {
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 .input-row button {
-  white-space: nowrap;
+  flex: 0 0 auto;
 }
 
+/* 버튼 공통 */
 .signup-form button {
-  padding: 10px 15px;
-  font-size: 14px;
   border: none;
-  border-radius: 6px;
   cursor: pointer;
-  background-color: #4a90e2;
-  color: white;
-  transition: background-color 0.3s;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  transition: background 0.25s;
 }
 
-.signup-form button:hover {
-  background-color: #357ab8;
+/* 작은 유틸 버튼 (중복 확인 / 인증발송) */
+.signup-form .input-row button {
+  padding: 10px 14px;
+  background: #6b7280;
+  color: #fff;
+}
+.signup-form .input-row button:hover {
+  background: #52565e;
 }
 
+/* 제출 & 닫기 버튼 영역 */
 .form-actions {
   display: flex;
-  justify-content: space-between;
   gap: 10px;
-  margin-top: 30px;
+  margin-top: 24px;
 }
 
 .submit-btn {
-  background-color: #4caf50;
+  flex: 1;
+  padding: 12px 0;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: 600;
 }
-
 .submit-btn:hover {
-  background-color: #3e8e41;
+  background: #2563eb;
 }
 
 .close-btn {
-  background-color: #f44336;
-}
-
-.close-btn:hover {
-  background-color: #d32f2f;
-}
-
-@media (max-width: 500px) {
-.form-actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-top: 30px;
-}
-
-.form-actions button {
-  flex: 1; /* 두 버튼 너비 균등 */
+  flex: 1;
   padding: 12px 0;
-  font-size: 15px;
+  background: #9ca3af;
+  color: #fff;
+}
+.close-btn:hover {
+  background: #6b7280;
 }
 
-  .input-row {
-    flex-direction: column;
+/* 비밀번호 강도/에러 메시지 */
+.signup-form small {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+}
+
+/* 모바일 대응 */
+@media (max-width: 480px) {
+  .signup-container {
+    padding: 24px 20px;
+    border-radius: 0;       /* 모달 풀화면일 경우 */
   }
 }
