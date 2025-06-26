@@ -28,6 +28,15 @@
   font-weight: bold;
   color: #222;
   margin-bottom: 1.2rem;
+}
+
+/* 작성자 닉네임 */
+.board-writer {
+  font-size: 1rem;
+  text-align: right;
+  color: #444;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
   border-bottom: 1px solid #ddd;
   padding-bottom: 0.5rem;
 }
@@ -139,4 +148,18 @@
 
 .comment-form button:hover {
   background-color: #4898ec;
+}
+
+/* 댓글 작성자 */
+.comment-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* 댓글 작성자 */
+.comment-nickname {
+  font-weight: 500;
 }

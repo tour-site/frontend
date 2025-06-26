@@ -85,6 +85,7 @@ const BoardDetailPage = () => {
     <div className="board-detail-container">
       <div className="board-detail-header">
         <h2 className="board-detail-title"> {board.title}</h2>
+        <p className="board-writer">✍️ 작성자: {board.writerNickname}</p>
         <p className="board-content">{board.content}</p>
         <p className="board-date">🕒 작성일: {new Date(board.createdAt).toLocaleString()}</p>
       </div>
@@ -107,6 +108,7 @@ const BoardDetailPage = () => {
           ) : (
             comments.map((c) => (
               <li key={c.id}>
+                <span className="comment-nickname">🧑 {c.writerNickname}</span>
                 <p>{c.content}</p>
                 <span style={{ fontSize: "0.8rem", color: "#666" }}>
                   {new Date(c.createdAt).toLocaleString()}
