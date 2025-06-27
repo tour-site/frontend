@@ -54,7 +54,7 @@ const DetailPage = () => {
         <div className="detail_tab">
           <ul>
             <li className={activeTab === "photo" ? "select_tab" : ""}>
-              <a href={place.tour_img || place.food_img} className="img_open" target="_blank" rel="noreferrer">사진보기</a>
+              <a href={place.tour_img || place.food_img || place.stay_img} className="img_open" target="_blank" rel="noreferrer">사진보기</a>
             </li>
             <li className={activeTab === "detail" ? "select_tab" : ""}>
               <a href="#DetailGo" onClick={() => setActiveTab("detail")}>상세정보</a>
@@ -70,7 +70,7 @@ const DetailPage = () => {
       <div id="galleryGo">
         <div className="swiper-container">
           <div className="swiper-slide">
-            <img className="swiper-lazy" src={place.tour_img || place.food_img || '/img/noimg.png'} alt={place.name} />
+            <img className="swiper-lazy" src={place.tour_img || place.food_img || place.stay_img || '/img/noimg.png'} alt={place.name} />
           </div>
         </div>
       </div>
@@ -95,7 +95,7 @@ const DetailPage = () => {
           </div>
         </div>
 
-        <div id="addContView">
+        {/* <div id="addContView">
           <div className="pamphletWide" id="pamphlet0">
             <h3>위치</h3>
             <div className="swiper-container">
@@ -109,23 +109,23 @@ const DetailPage = () => {
               </ul>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <div className="post_area">
-        <button type="button" className="btn_good" onClick={handleLike}>
+        {/* <button type="button" className="btn_good" onClick={handleLike}>
           <span className="ico">좋아요</span>
           <span className="num">{likes}</span>
         </button>
-        {showFeedback && <div className="like-feedback">좋아요가 반영됐어요 💗</div>}
+        {showFeedback && <div className="like-feedback">좋아요가 반영됐어요 💗</div>} */}
         <span className="rline">
-          <button type="button" className="btn_bookmark" onClick={handleBookmark}><span className="ico">즐겨찾기</span></button>
-          <button type="button" className="btn_print" onClick={handlePrint}><span className="ico">인쇄하기</span></button>
-          <button type="button" className="btn_cos" onClick={handleAddToCourse}><span className="ico">코스 담기</span></button>
-          <button type="button" className="btn_sharing" onClick={handleShare}>
+          {/* <button type="button" className="btn_bookmark" onClick={handleBookmark}><span className="ico">즐겨찾기</span></button> */}
+          {/* <button type="button" className="btn_print" onClick={handlePrint}><span className="ico">인쇄하기</span></button> */}
+          {/* <button type="button" className="btn_cos" onClick={handleAddToCourse}><span className="ico">코스 담기</span></button> */}
+          {/* <button type="button" className="btn_sharing" onClick={handleShare}>
             <span className="ico">공유하기</span>
             <span className="num">{shares}</span>
-          </button>
+          </button> */}
         </span>
       </div>
     </div>

@@ -126,7 +126,7 @@ const ImageGallery = () => {
           <div className="image-grid">
             {paginatedList.map(item => (
               <div key={item.id} className="image-card" onClick={() => handleClick(item)}>
-                <img src={item.tour_img || item.food_img || '/img/noimg.png'} alt={item.name} />
+                <img src={item.tour_img || item.food_img || item.stay_img || '/img/noimg.png'} alt={item.name} />
                 <p className="image-title">{item.name}</p>
                 {/* <p className="image-add">{item.tour_add || item.food_add || item.stay_add}</p> */}
               </div>
