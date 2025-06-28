@@ -92,7 +92,7 @@ const LoginModal = ({ closeModal, switchToSignup }) => {
             onClick={() => {
               const REST_API_KEY = '6072eebb0dff3eeffb672644496c0d24';
               // const REDIRECT_URI = 'http://localhost:5173/oauth/callback/kakao'; // 개발시 사용
-              const REDIRECT_URI = 'http://localhost:8321/oauth/callback/kakao';
+              const REDIRECT_URI = 'http://bjava.iptime.org:8898/oauth/callback/kakao';
               const kakaoURL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&prompt=login`;
               window.location.href = kakaoURL;
             }}
