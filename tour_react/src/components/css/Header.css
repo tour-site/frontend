@@ -1,7 +1,7 @@
-@font-face {
+/* @font-face {
   font-family: "myfont_bold";
   src: url("../font/MaruBuri-semiBold.ttf");
-}
+} */
 .navbar {
   display: flex;
   align-items: center;
@@ -67,7 +67,8 @@
   align-items: center;
   gap: 10px;
   padding: 6px 12px;
-  background-color: #ffffff20; /* 약간 투명한 흰 배경 */
+  background-color: #ffffff20;
+  /* 약간 투명한 흰 배경 */
   color: white;
   border-radius: 4px;
   font-size: 14px;

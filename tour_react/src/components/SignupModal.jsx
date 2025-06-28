@@ -161,7 +161,11 @@ const SignupModal = ({ closeModal, switchToLogin }) => {
           placeholder="전화번호 (예: 010-1234-5678)"
           value={form.phoneNumber}
           onChange={(e) => {
-            const raw = e.target.value.replace(/\D/g, '');
+            let raw = e.target.value.replace(/\D/g, ''); // 숫자만 추출
+
+            // 최대 길이 제한 (앞3 + 중간4 + 끝4 = 11자리)
+            raw = raw.slice(0, 11); 
+
             let formatted = raw;
             if (raw.length <= 3) {
               formatted = raw;
@@ -170,6 +174,7 @@ const SignupModal = ({ closeModal, switchToLogin }) => {
             } else {
               formatted = raw.replace(/(\d{3})(\d{4})(\d{1,4})/, '$1-$2-$3');
             }
+
             setForm({ ...form, phoneNumber: formatted });
           }}
         />

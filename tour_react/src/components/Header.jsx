@@ -1,3 +1,4 @@
+// 📁 src/components/Header.jsx
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../api/axiosInstance.js';
@@ -6,57 +7,38 @@ import './css/Modal.css';
 import LoginModal from './LoginModal.jsx';
 import SignupModal from './SignupModal.jsx';
 
-const fakeUsers = [
-  { id: 1, username: 'admin', password: '1234', role: 'admin' },
-  { id: 2, username: 'guest', password: '1234', role: 'guest' },
-];
-
 const Header = () => {
   const navigate = useNavigate();
   const [modalMode, setModalMode] = useState(null); // 'login', 'signup', null
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [logoutTrigger, setLogoutTrigger] = useState(false); // ✅ 로그아웃 후 재검증 유도
+  const [logoutTrigger, setLogoutTrigger] = useState(false);
+  const [user, setUser] = useState(null); // 사용자 정보
 
   // ✅ 로그인 상태 확인
   useEffect(() => {
     axiosInstance.get('/api/member/mypage')
-      .then(() => setIsLoggedIn(true))
-      .catch(() => setIsLoggedIn(false));
-  }, [modalMode, logoutTrigger]); // 모달 변경 또는 로그아웃 후 트리거로 상태 재확인
+      .then(response => {
+        setIsLoggedIn(true);
+        setUser(response.data); // 사용자 정보 저장
+      })
+      .catch(() => {
+        setIsLoggedIn(false);
+        setUser(null);
+      });
+  }, [modalMode, logoutTrigger]);
 
   const closeModal = () => setModalMode(null);
 
   const handleLogout = async () => {
     try {
       await axiosInstance.post('/api/member/logout');
-      setIsLoggedIn(false); // 즉시 UI 반영
-      setLogoutTrigger(prev => !prev); // 상태 트리거
+      setIsLoggedIn(false);
+      setLogoutTrigger(prev => !prev);
+      setUser(null);
       alert('로그아웃 되었습니다.');
-      navigate('/'); // ✅ 로그아웃 후 홈으로 이동
+      navigate('/');
     } catch {
       alert('로그아웃 실패');
-    }
-  };
-  
-
-  const handleLogin = () => {
-    if (!id || !pw) {
-      setError('아이디와 비밀번호 모두 입력해주세요');
-      return;
-    }
-
-    const matchedUser = fakeUsers.find(
-      (user) => user.username === id && user.password === pw
-    );
-
-    if (matchedUser) {
-      setCurrentUser(matchedUser);
-      localStorage.setItem('currentUser', JSON.stringify(matchedUser));
-      setError('');
-      closeModal();
-      navigate('/');
-    } else {
-      setError('아이디 또는 비밀번호가 올바르지 않습니다');
     }
   };
 
@@ -77,14 +59,22 @@ const Header = () => {
       <div className="auth-buttons">
         {isLoggedIn ? (
           <>
-            <button onClick={() => navigate('/mypage')}>마이페이지</button>
-            <button onClick={handleLogout}>로그아웃</button>
+            {user?.role === 'ROLE_ADMIN' ? (
+              <>
+                <button onClick={() => navigate('/admin')}>관리자 페이지</button>
+                <button onClick={handleLogout}>로그아웃</button>
+              </>
+            ) : (
+              <>
+                <button onClick={() => navigate('/mypage')}>마이페이지</button>
+                <button onClick={handleLogout}>로그아웃</button>
+              </>
+            )}
           </>
         ) : (
           <>
             <button onClick={() => setModalMode('login')}>로그인</button>
             <button onClick={() => setModalMode('signup')}>회원가입</button>
-            <button onClick={()=> navigate('/admin')}>관리자</button>
           </>
         )}
       </div>

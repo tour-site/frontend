@@ -1,8 +1,13 @@
+@font-face {
+  font-family: "myfont_bold";
+  src: url("../font/MaruBuri-semiBold.ttf");
+}
 /* 전체 레이아웃 */
 .admincontainer {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "myfont_bold";
   background-color: #fafafa;
   color: #333;
+  display: flex;
 }
 
 /* 사이드바 */
@@ -60,6 +65,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  padding: 30px;
 }
 
 /* 헤더 */
@@ -137,25 +143,25 @@
 }
 
 /* 입력 및 셀렉트 공통 스타일 */
-input[type="email"],
+/* input[type="email"],
 input[type="password"],
 input[type="tel"],
 input[type="date"],
-td > select {
+td>select {
   padding: 6px 10px;
   border: 1.5px solid #ccc;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 1rem;
   transition: border-color 0.3s ease;
   width: 100%;
   box-sizing: border-box;
-}
+} */
 
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="tel"]:focus,
 input[type="date"]:focus,
-select:focus {
+td>select:focus {
   outline: none;
   border-color: #52796f;
 }
@@ -242,7 +248,7 @@ td select {
 
 /* 반응형 (간단) */
 @media (max-width: 900px) {
-  .admin-container {
+  .admincontainer {
     flex-direction: column;
   }
   .adminsidebar {

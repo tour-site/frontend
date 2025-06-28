@@ -1,0 +1,72 @@
+/* 📁 src/assets/css/FindIdPage.css */
+@font-face {
+  font-family: "myfont_bold";
+  src: url("../font/MaruBuri-semiBold.ttf");
+}
+
+.find-id-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 20px;
+  background-color: #f9f9f9;
+  min-height: 70vh;
+  font-family: "myfont_bold";
+}
+
+.find-id-box {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 40px 30px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.find-id-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.find-id-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.find-id-input {
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.2s;
+}
+
+.find-id-input:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.find-id-button {
+  padding: 12px;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.find-id-button:hover {
+  background-color: #3a78c2;
+}
+
+.find-id-result {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #444;
+}

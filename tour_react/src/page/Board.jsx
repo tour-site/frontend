@@ -1,8 +1,8 @@
+import '../assets/css/Board.css';
 import React, { useState, useEffect, useContext } from 'react';
 import BoardList from "../components/BoardList";
-import Pagination from "../components/BoardPagination";
+import Pagination from "./Board/BoardPagination";
 import { UserContext } from '../components/UserContext';
-import '../assets/css/Board.css';
 
 const Board = () => {
   const [posts, setPosts] = useState([]);

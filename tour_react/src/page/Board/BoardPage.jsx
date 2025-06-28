@@ -1,17 +1,30 @@
-// 📁 src/pages/BoardPage.jsx
 import React, { useEffect, useState } from "react";
 import { fetchBoards } from "../../api/boardApi";
 import { useNavigate } from "react-router-dom";
+import '../../assets/css/BoardPage.css';
+import Pagination from '../../components/BoardPagination';
 
 const BoardPage = () => {
   const [boards, setBoards] = useState([]);
   const navigate = useNavigate();
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 5;
+  const indexOfLast = currentPage * postsPerPage;
+  const indexOfFirst = indexOfLast - postsPerPage;
+  const currentBoards = boards.slice(indexOfFirst, indexOfLast);
+
   useEffect(() => {
     fetchBoards()
-      .then((res) => setBoards(res.data))
+      .then((res) => {
+        const sorted = res.data.sort(
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+        );
+        setBoards(sorted);
+      })
       .catch((err) => console.error("게시글 조회 실패:", err));
   }, []);
+
 
   const handleWrite = () => {
     navigate("/board/write");
@@ -22,15 +35,17 @@ const BoardPage = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h2>📋 게시판</h2>
-      <button onClick={handleWrite}>글쓰기</button>
+    <div className="board-container">
+      <h2 className="board-title">📋 게시판</h2>
+      <div className="write-button-wrapper">
+        <button className="write-button" onClick={handleWrite}>글쓰기</button>
+      </div>
       <hr />
       <ul>
-        {boards.length === 0 ? (
+        {currentBoards.length === 0 ? (
           <p>등록된 게시글이 없습니다.</p>
         ) : (
-          boards.map((board) => (
+          currentBoards.map((board) => (
             <li
               key={board.id}
               onClick={() => handleDetail(board.id)}
@@ -45,6 +60,13 @@ const BoardPage = () => {
           ))
         )}
       </ul>
+
+      <Pagination
+        totalPosts={boards.length}
+        postsPerPage={postsPerPage}
+        currentPage={currentPage}
+        onPageChange={setCurrentPage}
+      />
     </div>
   );
 };

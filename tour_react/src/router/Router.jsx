@@ -29,13 +29,12 @@ export default function AppRouter() {
           <Route path="/mypage" element={<Mypage />} />
           <Route path="/find-id" element={<FindIdPage />} />
           <Route path="/find-password" element={<FindPasswordPage />} />
-          <Route path="/find-password" element={<FindPasswordPage />} />
-
           <Route path="/admin" element={<AdminPage />} />
+
           <Route path="/board" element={<BoardPage />} />
           <Route path="/board/write" element={<BoardWritePage />} />
           <Route path="/board/:id" element={<BoardDetailPage />} />
-          <Route path="/board/edit/:id" element={<BoardEditPage />} />
+          <Route path="/board/:id/edit" element={<BoardEditPage />} />
 
           {/* <Route path="/imagePOP/:id" element={<ImagePOP />} /> */}
         </Route>
