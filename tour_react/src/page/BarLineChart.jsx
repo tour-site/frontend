@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import {
   Chart as ChartJS,
+  BarController,     // ✅ 반드시 추가
   BarElement,
   LineElement,
   CategoryScale,
@@ -9,9 +9,18 @@ import {
   Legend,
   Tooltip
 } from 'chart.js';
-import { Chart } from 'react-chartjs-2';
 
-ChartJS.register(BarElement, LineElement, CategoryScale, LinearScale, PointElement, Legend, Tooltip);
+ChartJS.register(
+  BarController,     // ✅ 등록 필요
+  BarElement,
+  LineElement,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  Legend,
+  Tooltip
+);
+
 
 const BarLineChar = ({ year, month }) => {
   const [data, setData] = useState([]);
