@@ -1,25 +1,30 @@
+import React, { useState, useEffect } from 'react';
+import { Chart } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
-  BarController,     // ✅ 반드시 추가
+  BarController,
+  LineController,       // ✅ 필요함
   BarElement,
   LineElement,
+  PointElement,
   CategoryScale,
   LinearScale,
-  PointElement,
-  Legend,
-  Tooltip
+  Tooltip,
+  Legend
 } from 'chart.js';
 
 ChartJS.register(
-  BarController,     // ✅ 등록 필요
+  BarController,
+  LineController,       // ✅ 이거 반드시 필요
   BarElement,
   LineElement,
+  PointElement,
   CategoryScale,
   LinearScale,
-  PointElement,
-  Legend,
-  Tooltip
+  Tooltip,
+  Legend
 );
+
 
 
 const BarLineChar = ({ year, month }) => {
