@@ -109,7 +109,10 @@
 
 .card_img {
   width: 300px;
-  object-fit: contain;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
 }
 
 .tour_title {

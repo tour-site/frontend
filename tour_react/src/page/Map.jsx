@@ -137,12 +137,8 @@ const Map = () => {
               <p>선택한 조건에 맞는 장소가 없습니다.</p>
             ) : (
               placeList.slice(0, 4).map((place) => (
-                <li
-                  key={place.id}
-                  className="tour-list"
-                  onClick={() => handleClick(place.id)}
-                >
-                  <img src={place.tour_img || place.food_img || '/img/noimg.png'} alt={place.name} className="card_img" />
+                <li key={place.id} className="tour-list" onClick={() => handleClick(place.id)}>
+                  <img src={place.tour_img || place.food_img || place.stay_img || '/img/noimg.png'} alt={place.name} className="card_img" />
                   <p className='tour_title'>{place.name}</p>
                   {/* <p className='tour_add'>{place.tour_add}</p> */}
                 </li>
